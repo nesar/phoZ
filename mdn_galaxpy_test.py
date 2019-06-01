@@ -95,13 +95,9 @@ num_test = 5000 #10000 #params.num_test # 32
 num_train = 6500#400000 #400000 # #params.num_train # 512
 num_test = 1500 #10000 #params.num_test # 32
 #
-<<<<<<< HEAD
 
 #
 datafile = ['DES', 'COSMOS', 'Galacticus', 'GalaxPy', 'DC2'][4]
-=======
-datafile = ['DES', 'COSMOS', 'Galacticus', 'GalaxPy'][3]
->>>>>>> c03be2eae90a093564f45ed4e96cb591145645e2
 sim_obs_combine = False
 
 if sim_obs_combine: ModelName = './Model/Edward_posterior_' + datafile + '_nComp' + str(K) + \

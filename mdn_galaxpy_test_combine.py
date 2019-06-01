@@ -87,36 +87,20 @@ K = 3 # number of mixture components
 
 learning_rate = 5e-3
 
-<<<<<<< HEAD
-## galacticus ##
-=======
-
->>>>>>> c03be2eae90a093564f45ed4e96cb591145645e2
 num_train = 800000#400000 #400000 # #params.num_train # 512
 num_test = 750 #10000 #params.num_test # 32
 #
 
-<<<<<<< HEAD
-
-=======
->>>>>>> c03be2eae90a093564f45ed4e96cb591145645e2
-#
 datafile = ['DES', 'COSMOS', 'Galacticus', 'GalaxPy'][3]
 
 
 
 ############ model 1 ########################################
 
-<<<<<<< HEAD
 
-sim_obs_combine = False
-
-if sim_obs_combine: ModelName = './Model/Edward_posterior_' + datafile+ '_nComp' + str(K) + \
-=======
 sim_obs_combine = False
 
 if sim_obs_combine: ModelName = './Model/Edward_posterior_' + datafile + '_nComp' + str(K) + \
->>>>>>> c03be2eae90a093564f45ed4e96cb591145645e2
                                 '_ntrain' + str(num_train) + '_nepoch' + str(n_epoch) + '_lr' + \
                                 str(learning_rate) + '_sim_obs_combine'
 else: ModelName = './Model/Edward_posterior_' + datafile + '_nComp' + str(K) + '_ntrain' + str(
@@ -308,11 +292,7 @@ if datafile == 'GalaxPy':
     y_test = (y_test - ymin) / (ymax - ymin)
 
 
-<<<<<<< HEAD
 
-
-=======
->>>>>>> c03be2eae90a093564f45ed4e96cb591145645e2
 print("Size of features in training data: {}".format(X_train.shape))
 print("Size of output in training data: {}".format(y_train.shape))
 print("Size of features in test data: {}".format(X_test.shape))
@@ -457,10 +437,6 @@ np.random.seed(42)
 
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> c03be2eae90a093564f45ed4e96cb591145645e2
 if datafile == 'GalaxPy':
     import numpy as np
     import os
@@ -829,7 +805,6 @@ def sigmaNMAD(z_spec, z_pho):
 
 
 
-<<<<<<< HEAD
 def outlierFrac(z_spec, z_pho, threshold = 0.15):
     outliers = z_pho[ (np.abs(z_spec - z_pho)) >= threshold*z_spec ]
     return 100.0*len(outliers)/np.shape(z_pho)[0]
@@ -854,7 +829,6 @@ print( 'outFr_combine_all ', outFr_combine_all  ) ## combine
 print( 'outFr_obs_all', outFr_obs_all ) # obs only
 
 
-=======
 sigmaNMAD_obs_all =  sigmaNMAD( (ymax - ymin)*(ymin + y_test), (ymax - ymin)*(ymin +
                                                                                       y_pred) )
 
@@ -865,7 +839,6 @@ sigmaNMAD_combine_all =  sigmaNMAD( (ymax2 - ymin2)*(ymin2 + y_test2), (ymax2 - 
 print( 'sigmaNMAD_combine_all ', sigmaNMAD_combine_all  ) #
 # combine
 print( 'sigmaNMAD_obs_all', sigmaNMAD_obs_all ) # obs only
->>>>>>> c03be2eae90a093564f45ed4e96cb591145645e2
 ####################### model 2 ends ###########################
 
 
@@ -876,13 +849,10 @@ fig = plt.figure(22)
 plt.xlim(0, 1)
 plt.ylim(0, 1)
 
-<<<<<<< HEAD
 # plt.text(0.1, 0.9, r'$\sigma_{NMAD}$ = %.3f'%sigmaNMAD_obs_all, color = 'red' , size = 20)
 # plt.text(0.1, 0.85, r'$\sigma_{NMAD}$ = %.3f'%sigmaNMAD_combine_all, color = 'blue' , size = 20)
-=======
 plt.text(0.6, 0.2, r'$\sigma_{NMAD}$ = %.3f'%sigmaNMAD_obs_all, color = 'red' , size = 15)
 plt.text(0.6, 0.1, r'$\sigma_{NMAD}$ = %.3f'%sigmaNMAD_combine_all, color = 'blue' , size = 15)
->>>>>>> c03be2eae90a093564f45ed4e96cb591145645e2
 
 # plt.text(0.1, 0.9, r'GalaxPy training', color = 'red' , size = 20)
 # plt.text(0.1, 0.85, r'SDSS training', color = 'blue' , size = 20)
@@ -893,11 +863,8 @@ plt.plot([0, 1], 1.15*np.array([0, 1]), 'k-.')
 
 plt.ylabel(r'$z_{phot}$', fontsize=19)
 plt.xlabel(r'$z_{spec}$', fontsize=19)
-<<<<<<< HEAD
-#
-=======
 
->>>>>>> c03be2eae90a093564f45ed4e96cb591145645e2
+
 # plt.ylabel(r'Photometric redshift', fontsize=19)
 # plt.xlabel(r'Spectroscopic redshift', fontsize=19)
 plt.xlim(0.0, 1)
@@ -942,11 +909,8 @@ plt.show()
 
 #######################################
 
-<<<<<<< HEAD
 bins = np.linspace(0, 1, 10)
-=======
-bins = np.linspace(0, 1, 30)
->>>>>>> c03be2eae90a093564f45ed4e96cb591145645e2
+#=======
 # z_spec_bin = np.histogram( (ymax2 - ymin2)*(ymin2 + y_test2), bins)[0]
 # z_phot_bin = np.histogram( (ymax2 - ymin2)*(ymin2 + y_pred_new2), bins)[0]
 
@@ -960,7 +924,6 @@ z_spec_digitize2 = np.digitize( z_spec2, bins)
 #     print(bins[z_spec_digitize[n]-1], "<=", z_spec[n], "<", bins[z_spec_digitize[n]])
 
 
-<<<<<<< HEAD
 sigmaNMAD_combine = np.zeros(shape=10)
 outFr_combine = np.zeros(shape=10)
 
@@ -970,14 +933,6 @@ for ind in range(bins.shape[0] - 1):
     z_phot2_bin_z2 =  z_phot2[ z_spec_digitize2  == ind + 1]
     sigmaNMAD_combine[ind] =  sigmaNMAD(z_spec2_bin_z2, z_phot2_bin_z2)
     outFr_combine[ind] = outlierFrac(z_spec2_bin_z2, z_phot2_bin_z2, 0.15)
-=======
-sigmaNMAD_combine = np.zeros_like(bins)
-
-for ind in range(bins.shape[0]):
-    z_spec2_bin_z2 =  z_spec2[ z_spec_digitize2  == ind + 1]
-    z_phot2_bin_z2 =  z_phot2[ z_spec_digitize2  == ind + 1]
-    sigmaNMAD_combine[ind] =  sigmaNMAD(z_spec2_bin_z2, z_phot2_bin_z2)
->>>>>>> c03be2eae90a093564f45ed4e96cb591145645e2
 
 
 #####################
@@ -994,7 +949,6 @@ z_spec_digitize = np.digitize( z_spec, bins)
 #     print(bins[z_spec_digitize[n]-1], "<=", z_spec[n], "<", bins[z_spec_digitize[n]])
 
 
-<<<<<<< HEAD
 sigmaNMAD_obs = np.zeros(shape=10)
 outFr_obs = np.zeros(shape=10)
 
@@ -1028,7 +982,6 @@ plt.xscale('log')
 plt.title('outlier fraction')
 plt.legend()
 
-=======
 sigmaNMAD_obs = np.zeros_like(bins)
 
 for ind in range(bins.shape[0]):
@@ -1052,7 +1005,6 @@ plt.xlabel(r'$z_{spec}$', fontsize=19)
 plt.savefig('sNMAD_compare.png', bbox_inches='tight')
 
 plt.show()
->>>>>>> c03be2eae90a093564f45ed4e96cb591145645e2
 
 
 
@@ -1061,7 +1013,3 @@ plt.show()
 
 # sigmaNMAD(z_spec_bin, z_phot_bin)
 
-<<<<<<< HEAD
-=======
-
->>>>>>> c03be2eae90a093564f45ed4e96cb591145645e2
