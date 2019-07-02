@@ -1,15 +1,142 @@
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+# @title Imports and Global Variables  { display-mode: "form" }
+# !pip3 install -q observations
+from __future__ import absolute_import, division, print_function
 
-import edward as ed
-import matplotlib.pyplot as plt
+# @markdown This sets the warning status (default is `ignore`, since this notebook runs correctly)
+warning_status = "ignore"  # @param ["ignore", "always", "module", "once", "default", "error"]
+import warnings
+
+warnings.filterwarnings(warning_status)
+with warnings.catch_warnings():
+    warnings.filterwarnings(warning_status, category=DeprecationWarning)
+    warnings.filterwarnings(warning_status, category=UserWarning)
+
+import math
 import numpy as np
-import seaborn as sns
-sns.set_style(style ="white")
+import string
+from datetime import datetime
+import os
+
+# @markdown This sets the styles of the plotting (default is styled like plots from [FiveThirtyeight.com](https://fivethirtyeight.com/))
+matplotlib_style = 'fivethirtyeight'  # @param ['fivethirtyeight', 'bmh', 'ggplot', 'seaborn', 'default', 'Solarize_Light2', 'classic', 'dark_background', 'seaborn-colorblind', 'seaborn-notebook']
+import matplotlib.pyplot as plt;
+
+plt.style.use(matplotlib_style)
+import matplotlib.axes as axes;
+from matplotlib.patches import Ellipse
+# @markdown This sets the resolution of the plot outputs (`retina` is the highest resolution)
+import seaborn as sns;
+
+sns.set_context('notebook')
+from IPython.core.pylabtools import figsize
+
 import tensorflow as tf
 
-from edward.models import Categorical, Mixture, Normal
+tfe = tf.contrib.eager
+
+# Eager Execution
+# @markdown Check the box below if you want to use [Eager Execution](https://www.tensorflow.org/guide/eager)
+# @markdown Eager execution provides An intuitive interface, Easier debugging, and a control flow comparable to Numpy. You can read more about it on the [Google AI Blog](https://ai.googleblog.com/2017/10/eager-execution-imperative-define-by.html)
+use_tf_eager = False  # @param {type:"boolean"}
+
+# Use try/except so we can easily re-execute the whole notebook.
+if use_tf_eager:
+    try:
+        tf.enable_eager_execution()
+    except:
+        pass
+
+import tensorflow_probability as tfp
+
+tfd = tfp.distributions
+tfb = tfp.bijectors
+
+
+def evaluate(tensors):
+    """Evaluates Tensor or EagerTensor to Numpy `ndarray`s.
+    Args:
+    tensors: Object of `Tensor` or EagerTensor`s; can be `list`, `tuple`,
+      `namedtuple` or combinations thereof.
+
+    Returns:
+      ndarrays: Object with same structure as `tensors` except with `Tensor` or
+        `EagerTensor`s replaced by Numpy `ndarray`s.
+    """
+    if tf.executing_eagerly():
+        return tf.contrib.framework.nest.pack_sequence_as(
+            tensors,
+            [t.numpy() if tf.contrib.framework.is_tensor(t) else t
+             for t in tf.contrib.framework.nest.flatten(tensors)])
+    return sess.run(tensors)
+
+
+class _TFColor(object):
+    """Enum of colors used in TF docs."""
+    red = '#F15854'
+    blue = '#5DA5DA'
+    orange = '#FAA43A'
+    green = '#60BD68'
+    pink = '#F17CB0'
+    brown = '#B2912F'
+    purple = '#B276B2'
+    yellow = '#DECF3F'
+    gray = '#4D4D4D'
+
+    def __getitem__(self, i):
+        return [
+            self.red,
+            self.orange,
+            self.green,
+            self.blue,
+            self.pink,
+            self.brown,
+            self.purple,
+            self.yellow,
+            self.gray,
+        ][i % 9]
+
+
+TFColor = _TFColor()
+
+
+def session_options(enable_gpu_ram_resizing=False, enable_xla=False):
+    """
+    Allowing the notebook to make use of GPUs if they're available.
+
+    XLA (Accelerated Linear Algebra) is a domain-specific compiler for linear
+    algebra that optimizes TensorFlow computations.
+    """
+    config = tf.ConfigProto()
+    config.log_device_placement = True
+    if enable_gpu_ram_resizing:
+        # `allow_growth=True` makes it possible to connect multiple colabs to your
+        # GPU. Otherwise the colab malloc's all GPU ram.
+        config.gpu_options.allow_growth = True
+    if enable_xla:
+        # Enable on XLA. https://www.tensorflow.org/performance/xla/.
+        config.graph_options.optimizer_options.global_jit_level = (
+            tf.OptimizerOptions.ON_1)
+    return config
+
+
+def reset_sess(config=None):
+    """
+    Convenience function to create the TF graph & session or reset them.
+    """
+    if config is None:
+        config = session_options()
+    global sess
+    tf.reset_default_graph()
+    try:
+        sess.close()
+    except:
+        pass
+    sess = tf.InteractiveSession(config=config)
+
+
+reset_sess()
+
+# from edward.models import Categorical, Mixture, Normal
 from scipy import stats
 from sklearn.model_selection import train_test_split
 
@@ -17,6 +144,7 @@ from sklearn.model_selection import train_test_split
 # import params
 # https://github.com/cbonnett/MDN_Edward_Keras_TF/blob/master/MDN_Edward_Keras_TF.ipynb
 # http://cbonnett.github.io/MDN.html
+# https://github.com/tensorflow/probability/blob/a4d1fbc131880ed3ffa83fe83b1d2583da90f294/tensorflow_probability/examples/jupyter_notebooks/Mixture_Density_Network_TFP.ipynb
 
 ################################################################
 
@@ -78,7 +206,7 @@ print(20*'=~')
 ############## i/o ###########################################
 
 
-n_epoch = 10 #1000 #20000 #20000
+n_epoch = 100 #1000 #20000 #20000
 # N = 4000  # number of data points  -- replaced by num_trai
 D = 5 #6  # number of features  (8 for DES, 6 for COSMOS)
 K = 3 # number of mixture components
@@ -87,16 +215,16 @@ K = 3 # number of mixture components
 learning_rate = 5e-3
 
 
-num_train = 800000#400000 #400000 # #params.num_train # 512
+num_train = 8000 #800000
 num_test = 500 #10000 #params.num_test # 32
 #
 datafile = ['DES', 'COSMOS', 'Galacticus', 'GalaxPy'][3]
 sim_obs_combine = False
 
-if sim_obs_combine: ModelName = './Model/Edward_posterior_' + datafile + '_nComp' + str(K) + \
+if sim_obs_combine: ModelName = './Model/Edward_posterior_cutsomLoss_' + datafile + '_nComp' + str(K) + \
                                 '_ntrain' + str(num_train) + '_nepoch' + str(n_epoch) + '_lr' + \
                                 str(learning_rate) + '_sim_obs_combine'
-else: ModelName = './Model/Edward_posterior_' + datafile + '_nComp' + str(K) + '_ntrain' + str(
+else: ModelName = './Model/Edward_posterior_customLoss_' + datafile + '_nComp' + str(K) + '_ntrain' + str(
     num_train) + '_nepoch' + str(n_epoch)  + '_lr' + str(learning_rate)  + '_obs_only'
 
 
@@ -384,66 +512,138 @@ if PlotScatter:
 
 ######################### network arch ##############################
 
+#
+# X_ph = tf.placeholder(tf.float32, [None, D])
+# y_ph = tf.placeholder(tf.float32, [None])
 
-X_ph = tf.placeholder(tf.float32, [None, D])
-y_ph = tf.placeholder(tf.float32, [None])
+
+# def neural_network(X):
+#   """loc, scale, logits = NN(x; theta)"""
+#   # 2 hidden layers with 15 hidden units
+#   net = tf.layers.dense(X, 15, activation=tf.nn.relu)
+#   net = tf.layers.dense(net, 15, activation=tf.nn.relu)
+#   locs = tf.layers.dense(net, K, activation=None)
+#   scales = tf.layers.dense(net, K, activation=tf.exp)
+#   logits = tf.layers.dense(net, K, activation=None)
+#   return locs, scales, logits
+#
+#
+# locs, scales, logits = neural_network(X_ph)
+# # cat = ed.Categorical(logits=logits)
+# cat = tfd.Categorical(logits=logits)
+#
+# components = [ed.Normal(loc=loc, scale=scale) for loc, scale
+#               in zip(tf.unstack(tf.transpose(locs)),
+#                      tf.unstack(tf.transpose(scales)))]
+# y = ed.Mixture(cat=cat, components=components, value=tf.zeros_like(y_ph))
+# # Note: A bug exists in Mixture which prevents samples from it to have
+# # a shape of [None]. For now fix it using the value argument, as
+# # sampling is not necessary for MAP estimation anyways.
 
 
 def neural_network(X):
-  """loc, scale, logits = NN(x; theta)"""
-  # 2 hidden layers with 15 hidden units
-  net = tf.layers.dense(X, 15, activation=tf.nn.relu)
-  net = tf.layers.dense(net, 15, activation=tf.nn.relu)
-  locs = tf.layers.dense(net, K, activation=None)
-  scales = tf.layers.dense(net, K, activation=tf.exp)
-  logits = tf.layers.dense(net, K, activation=None)
-  return locs, scales, logits
+    """
+    loc, scale, logits = NN(x; theta)
+
+    Args:
+      X: Input Tensor containing input data for the MDN
+    Returns:
+      locs: The means of the normal distributions that our data is divided into.
+      scales: The scales of the normal distributions that our data is divided
+        into.
+      logits: The probabilities of ou categorical distribution that decides
+        which normal distribution our data points most probably belong to.
+    """
+    # 2 hidden layers with 15 hidden units
+    net = tf.layers.dense(X, 15, activation=tf.nn.relu)
+    net = tf.layers.dense(net, 15, activation=tf.nn.relu)
+    locs = tf.layers.dense(net, K, activation=None)
+    scales = tf.layers.dense(net, K, activation=tf.exp)
+    logits = tf.layers.dense(net, K, activation=None)
+    return locs, scales, logits
 
 
-locs, scales, logits = neural_network(X_ph)
-cat = Categorical(logits=logits)
-components = [Normal(loc=loc, scale=scale) for loc, scale
+# with tf.Session() as sess:
+#     sess.run(tf.global_variables_initializer())
+
+locs, scales, logits = neural_network(tf.convert_to_tensor(X_train))
+cat = tfd.Categorical(logits=logits)
+components = [tfd.Normal(loc=loc, scale=scale) for loc, scale
               in zip(tf.unstack(tf.transpose(locs)),
                      tf.unstack(tf.transpose(scales)))]
-y = Mixture(cat=cat, components=components, value=tf.zeros_like(y_ph))
-# Note: A bug exists in Mixture which prevents samples from it to have
-# a shape of [None]. For now fix it using the value argument, as
-# sampling is not necessary for MAP estimation anyways.
+
+y = tfd.Mixture(cat=cat, components=components)
 
 ######################### inference ##############################
+
+# # There are no latent variables to infer. Thus inference is concerned
+# # with only training model parameters, which are baked into how we
+# # specify the neural networks.
+# inference = ed.MAP(data={y: y_ph})
+# optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate)
+# inference.initialize(optimizer=optimizer, var_list=tf.trainable_variables())
+
+
 
 # There are no latent variables to infer. Thus inference is concerned
 # with only training model parameters, which are baked into how we
 # specify the neural networks.
-inference = ed.MAP(data={y: y_ph})
-optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate)
-inference.initialize(optimizer=optimizer, var_list=tf.trainable_variables())
 
-
+log_likelihood = y.log_prob(y_train)
+log_likelihood = -tf.reduce_sum(log_likelihood)
+learning_rate = 5e-2
+optimizer = tf.train.AdamOptimizer(learning_rate)
+train_op = optimizer.minimize(log_likelihood)
 
 ##################################################################
 
-sess = ed.get_session()
-tf.global_variables_initializer().run()
 
 
+# sess = ed.get_session()
+# tf.global_variables_initializer().run()
+
+#
+# train_loss = np.zeros(n_epoch)
+# test_loss = np.zeros(n_epoch)
+# for i in range(n_epoch):
+#   info_dict = inference.update(feed_dict={X_ph: X_train, y_ph: y_train})
+#   train_loss[i] = info_dict['loss']
+#   test_loss[i] = sess.run(inference.loss,
+#                           feed_dict={X_ph: X_test, y_ph: y_test})
+#   inference.print_progress(info_dict)
+
+evaluate(tf.global_variables_initializer())
+
+#
+# with tf.Session() as sess:
+#     sess.run(tf.global_variables_initializer())
+#
+#
 train_loss = np.zeros(n_epoch)
 test_loss = np.zeros(n_epoch)
 for i in range(n_epoch):
-  info_dict = inference.update(feed_dict={X_ph: X_train, y_ph: y_train})
-  train_loss[i] = info_dict['loss']
-  test_loss[i] = sess.run(inference.loss,
-                          feed_dict={X_ph: X_test, y_ph: y_test})
-  inference.print_progress(info_dict)
+    _, loss_value = evaluate([train_op, log_likelihood])
+    train_loss[i] = loss_value
 
 
+# pred_weights, pred_means, pred_std = evaluate([tf.nn.softmax(logits), locs, scales])
 
+# pred_weights, pred_means, pred_std = sess.run()
 
-pred_weights, pred_means, pred_std = sess.run(
-    [tf.nn.softmax(logits), locs, scales], feed_dict={X_ph: X_test})
+X_ph = tf.placeholder(tf.float32, [None, D])
+pred_weights, pred_means, pred_std = sess.run([tf.nn.softmax(logits), locs, scales], feed_dict={X_ph: X_test})
 
+#################################################
 
+# FailedPreconditionError
 
+#################### testing ####################
+
+X_ph_new = tf.placeholder(tf.float32, [None, D])
+locs_new, scales_new, logits_new = neural_network(X_ph_new)
+
+pred_weights, pred_means, pred_std = sess.run([tf.nn.softmax(logits_new), locs_new, scales_new], feed_dict={X_ph_new: X_test})
+# FailedPreconditionError
 
 ###################################################################
 ## Plot log likelihood or loss
@@ -512,7 +712,7 @@ plt.figure(22)
 
 
 # plt.scatter(y_test, y_pred, facecolors='k', s = 1)
-plt.errorbar((ymax - ymin)*(ymin + y_test), (ymax - ymin)*(ymin + y_pred), yerr= (ymax - ymin)*(
+plt.errorbar( (ymax - ymin)*(ymin + y_test), (ymax - ymin)*(ymin + y_pred), yerr= (ymax - ymin)*(
   ymin + y_pred_std), fmt='bo', ecolor='r', ms = 2, alpha = 0.1)
 
 
@@ -611,11 +811,11 @@ if ifTesting:
 
     locs_new, scales_new, logits_new = neural_network(X_ph_new)
 
-    cat_new = Categorical(logits=logits_new)
-    components_new = [Normal(loc=loc, scale=scale) for loc, scale
+    cat_new = ed.Categorical(logits=logits_new)
+    components_new = [ed.Normal(loc=loc, scale=scale) for loc, scale
                   in zip(tf.unstack(tf.transpose(locs_new)),
                          tf.unstack(tf.transpose(scales_new)))]
-    y_new = Mixture(cat=cat_new, components=components_new, value=tf.zeros_like(y_ph_new))
+    y_new = ed.Mixture(cat=cat_new, components=components_new, value=tf.zeros_like(y_ph_new))
     ## Note: A bug exists in Mixture which prevents samples from it to have
     ## a shape of [None]. For now fix it using the value argument, as
     ## sampling is not necessary for MAP estimation anyways.
