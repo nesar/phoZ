@@ -194,7 +194,7 @@ print(20*'=~')
 
 
 
-n_epoch = 1000 #1000 #20000 #20000
+n_epoch = 20000 #1000 #20000 #20000
 # N = 4000  # number of data points  -- replaced by num_trai
 D = 5 #6  # number of features  (8 for DES, 6 for COSMOS)
 K = 3 # number of mixture components
@@ -203,8 +203,8 @@ K = 3 # number of mixture components
 learning_rate = 5e-3
 
 
-num_train = 8000 #800000
-num_test = 500 #10000 #params.num_test # 32
+num_train = 800000 #800000
+num_test = 5000 #10000 #params.num_test # 32
 #
 datafile = ['DES', 'COSMOS', 'Galacticus', 'GalaxPy'][3]
 sim_obs_combine = True
@@ -703,9 +703,10 @@ evaluate(tf.global_variables_initializer())
 train_loss = np.zeros(n_epoch)
 test_loss = np.zeros(n_epoch)
 for i in range(n_epoch):
-#     print("epoch: ",i)
     _, loss_value = evaluate([train_op, log_likelihood])
     train_loss[i] = loss_value
+
+    print("epoch: ",i, " loss: ", train_loss[i])
 
 
 # In[10]:
@@ -721,8 +722,8 @@ pred_weights, pred_means, pred_std = evaluate([tf.nn.softmax(logits), locs, scal
 
 
 # In[ ]:
-NotWorking = True
-if NotWorking:
+Working = False
+if Working:
 
     #### THIS IS NOT WORKING RN ######
 
