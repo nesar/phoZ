@@ -721,89 +721,88 @@ pred_weights, pred_means, pred_std = evaluate([tf.nn.softmax(logits), locs, scal
 
 
 # In[ ]:
+NotWorking = True
+if NotWorking:
+
+    #### THIS IS NOT WORKING RN ######
+
+    evaluate(tf.global_variables_initializer())
 
 
-#### THIS IS NOT WORKING RN ######
+    log_likelihood_train = y.log_prob(y_train)
+    log_likelihood_train = -tf.reduce_sum(log_likelihood_train)
+    learning_rate = 5e-2
+    optimizer = tf.train.AdamOptimizer(learning_rate)
+    train_op = optimizer.minimize(log_likelihood_train)
 
-evaluate(tf.global_variables_initializer())
+    log_likelihood_test = y.log_prob(y_test)
+    log_likelihood_test = -tf.reduce_sum(log_likelihood_test)
+    train_op = optimizer.minimize(log_likelihood_test)
 
-
-log_likelihood_train = y.log_prob(y_train)
-log_likelihood_train = -tf.reduce_sum(log_likelihood_train)
-learning_rate = 5e-2
-optimizer = tf.train.AdamOptimizer(learning_rate)
-train_op = optimizer.minimize(log_likelihood_train)
-
-log_likelihood_test = y.log_prob(y_test)
-log_likelihood_test = -tf.reduce_sum(log_likelihood_test)
-train_op = optimizer.minimize(log_likelihood_test)
-
-##################################################################
+    ##################################################################
 
 
-evaluate(tf.global_variables_initializer())
+    evaluate(tf.global_variables_initializer())
 
-#
-train_loss = np.zeros(n_epoch)
-test_loss = np.zeros(n_epoch)
-for i in range(n_epoch):
-    print("epoch: ", i)
-    _, loss_value = evaluate([train_op, log_likelihood_train])
-    train_loss[i] = loss_value
-    
-    _, loss_value_test = evaluate([train_op, log_likelihood_test])
-    test_loss[i] = loss_value_test
-    
-    
-###################################################################
-## Plot log likelihood or loss
+    #
+    train_loss = np.zeros(n_epoch)
+    test_loss = np.zeros(n_epoch)
+    for i in range(n_epoch):
+        print("epoch: ", i)
+        _, loss_value = evaluate([train_op, log_likelihood_train])
+        train_loss[i] = loss_value
 
-fig, axes = plt.subplots(nrows=1, ncols=1, figsize=(16, 3.5))
-plt.plot(np.arange(n_epoch), -test_loss / len(X_test), label='Test')
-plt.plot(np.arange(n_epoch), -train_loss / len(X_train), label='Train')
-plt.legend(fontsize=20)
-plt.xlabel('Epoch', fontsize=15)
-plt.ylabel('Log-likelihood', fontsize=15)
-plt.show()
+        _, loss_value_test = evaluate([train_op, log_likelihood_test])
+        test_loss[i] = loss_value_test
 
 
-# In[ ]:
+    ###################################################################
+    ## Plot log likelihood or loss
+
+    fig, axes = plt.subplots(nrows=1, ncols=1, figsize=(16, 3.5))
+    plt.plot(np.arange(n_epoch), -test_loss / len(X_test), label='Test')
+    plt.plot(np.arange(n_epoch), -train_loss / len(X_train), label='Train')
+    plt.legend(fontsize=20)
+    plt.xlabel('Epoch', fontsize=15)
+    plt.ylabel('Log-likelihood', fontsize=15)
+    plt.show()
 
 
-### THIS ISNT WORKING RN ######
-
-#################################################
-
-# FailedPreconditionError
-###### .  Everything works with y_train, x_train
-#### including validation is rather difficult
-#### 
+    # In[ ]:
 
 
+    ### THIS ISNT WORKING RN ######
 
+    #################################################
 
-
-
-# pred_weights, pred_means, pred_std = sess.run()
-
-X_ph = tf.placeholder(tf.float32, [None, D])
-pred_weights, pred_means, pred_std = sess.run([tf.nn.softmax(logits), locs, scales], feed_dict={X_ph: X_test})
+    # FailedPreconditionError
+    ###### .  Everything works with y_train, x_train
+    #### including validation is rather difficult
+    ####
 
 
 
-#################### testing ####################
-
-X_ph_new = tf.placeholder(tf.float32, [None, D])
-locs_new, scales_new, logits_new = neural_network(X_ph_new)
-
-pred_weights, pred_means, pred_std = sess.run([tf.nn.softmax(logits_new), locs_new, scales_new], feed_dict={X_ph_new: X_test})
-# FailedPreconditionError
 
 
 
-# In[12]:
+    # pred_weights, pred_means, pred_std = sess.run()
+
+    X_ph = tf.placeholder(tf.float32, [None, D])
+    pred_weights, pred_means, pred_std = sess.run([tf.nn.softmax(logits), locs, scales], feed_dict={X_ph: X_test})
 
 
+
+    #################### testing ####################
+
+    X_ph_new = tf.placeholder(tf.float32, [None, D])
+    locs_new, scales_new, logits_new = neural_network(X_ph_new)
+
+    pred_weights, pred_means, pred_std = sess.run([tf.nn.softmax(logits_new), locs_new, scales_new], feed_dict={X_ph_new: X_test})
+    # FailedPreconditionError
+
+
+
+    # In[12]:
 
 
 
