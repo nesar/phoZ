@@ -3,9 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="7f925e6e-ecce-4da6-8fb4-3e0694de87a0" name="Default" comment="">
       <change afterPath="$PROJECT_DIR$/sNMAD_compare.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/PhoZ.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PhoZ.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mdn_galaxpy_customL.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/mdn_galaxpy_customL.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mdn_galaxpy_customLoss.py" beforeDir="false" afterPath="$PROJECT_DIR$/mdn_galaxpy_customLoss.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mdn_galaxpy_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/mdn_galaxpy_test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mdn_galaxpy_test_combine.py" beforeDir="false" afterPath="$PROJECT_DIR$/mdn_galaxpy_test_combine.py" afterDir="false" />
@@ -25,7 +24,7 @@
         <entry file="file://$PROJECT_DIR$/mdn_galaxpy.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="255">
-              <caret line="17" column="87" lean-forward="true" selection-start-line="17" selection-start-column="87" selection-end-line="17" selection-end-column="87" />
+              <caret line="17" column="87" selection-start-line="17" selection-start-column="87" selection-end-line="17" selection-end-column="87" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
                 <element signature="e#3201#4207#0" />
@@ -41,10 +40,9 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mdn_galaxpy_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6795">
-              <caret line="481" column="26" selection-start-line="481" selection-end-line="482" />
+            <state relative-caret-position="30">
+              <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
               <folding>
-                <element signature="e#0#38#0" expanded="true" />
                 <element signature="e#702#1213#0" />
                 <element signature="e#1289#1823#0" />
               </folding>
@@ -56,7 +54,7 @@
         <entry file="file://$PROJECT_DIR$/mdn_galaxpy_test_combine.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-8189">
-              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+              <caret line="10" selection-start-line="10" selection-end-line="10" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
               </folding>
@@ -520,7 +518,7 @@
     <entry file="file://$PROJECT_DIR$/mdn_galaxpy.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
-          <caret line="17" column="87" lean-forward="true" selection-start-line="17" selection-start-column="87" selection-end-line="17" selection-end-column="87" />
+          <caret line="17" column="87" selection-start-line="17" selection-start-column="87" selection-end-line="17" selection-end-column="87" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
             <element signature="e#3201#4207#0" />
@@ -540,7 +538,7 @@
     <entry file="file://$PROJECT_DIR$/mdn_galaxpy_test_combine.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-8189">
-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
           </folding>
@@ -549,10 +547,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mdn_galaxpy_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6795">
-          <caret line="481" column="26" selection-start-line="481" selection-end-line="482" />
+        <state relative-caret-position="30">
+          <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
           <folding>
-            <element signature="e#0#38#0" expanded="true" />
             <element signature="e#702#1213#0" />
             <element signature="e#1289#1823#0" />
           </folding>
