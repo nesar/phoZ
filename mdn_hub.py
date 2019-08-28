@@ -156,147 +156,136 @@ from sklearn.model_selection import train_test_split
 
 
 def plot_normal_mix(pis, mus, sigmas, ax, label='', comp=True):
-  """Plots the mixture of Normal models to axis=ax comp=True plots all
-  components of mixture model
-  """
-  # x = np.linspace(-10.5, 10.5, 250)
-  x = np.linspace(-0.1, 1.1, 250)
-  final = np.zeros_like(x)
-  for i, (weight_mix, mu_mix, sigma_mix) in enumerate(zip(pis, mus, sigmas)):
-    temp = stats.norm.pdf(x, mu_mix, sigma_mix) * weight_mix
-    final = final + temp
-    if comp:
-      ax.plot(x, temp, label='Normal ' + str(i))
-  ax.plot(x, final, label='Mixture of Normals ' + label)
-  ax.legend(fontsize=13)
+    """Plots the mixture of Normal models to axis=ax comp=True plots all
+    components of mixture model
+    """
+    # x = np.linspace(-10.5, 10.5, 250)
+    x = np.linspace(-0.1, 1.1, 250)
+    final = np.zeros_like(x)
+    for i, (weight_mix, mu_mix, sigma_mix) in enumerate(zip(pis, mus, sigmas)):
+        temp = stats.norm.pdf(x, mu_mix, sigma_mix) * weight_mix
+        final = final + temp
+        if comp:
+            ax.plot(x, temp, label='Normal ' + str(i))
+    ax.plot(x, final, label='Mixture of Normals ' + label)
+    ax.legend(fontsize=13)
+
 
 def sample_from_mixture(x, pred_weights, pred_means, pred_std, amount):
-  """Draws samples from mixture model.
+    """Draws samples from mixture model.
 
-  Returns 2 d array with input X and sample from prediction of mixture model.
-  """
-  samples = np.zeros((amount, 2))
-  n_mix = len(pred_weights[0])
-  to_choose_from = np.arange(n_mix)
-  for j, (weights, means, std_devs) in enumerate(
-          zip(pred_weights, pred_means, pred_std)):
-    index = np.random.choice(to_choose_from, p=weights)
-    samples[j, 1] = np.random.normal(means[index], std_devs[index], size=1)
-    samples[j, 0] = x[j]
-    if j == amount - 1:
-      break
-  return samples
+    Returns 2 d array with input X and sample from prediction of mixture model.
+    """
+    samples = np.zeros((amount, 2))
+    n_mix = len(pred_weights[0])
+    to_choose_from = np.arange(n_mix)
+    for j, (weights, means, std_devs) in enumerate(
+            zip(pred_weights, pred_means, pred_std)):
+        index = np.random.choice(to_choose_from, p=weights)
+        samples[j, 1] = np.random.normal(means[index], std_devs[index], size=1)
+        samples[j, 0] = x[j]
+        if j == amount - 1:
+            break
+    return samples
 
 
-print(20*'=~')
+print(20 * '=~')
 sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))
-print(20*'=~')
+print(20 * '=~')
 
-
-
-n_epoch = 1000 #1000 #20000 #20000
+n_epoch = 1000  # 1000 #20000 #20000
 # N = 4000  # number of data points  -- replaced by num_trai
-D = 5 #6  # number of features  (8 for DES, 6 for COSMOS)
-K = 3 # number of mixture components
-
+D = 5  # 6  # number of features  (8 for DES, 6 for COSMOS)
+K = 3  # number of mixture components
 
 learning_rate = 5e-3
 
-
-num_train = 8000 #800000
-num_test = 500 #10000 #params.num_test # 32
+num_train = 8000  # 800000
+num_test = 500  # 10000 #params.num_test # 32
 #
 datafile = ['DES', 'COSMOS', 'Galacticus', 'GalaxPy'][3]
 sim_obs_combine = True
 
-if sim_obs_combine: ModelName = './Model/Edward_posterior_cutsomLoss_' + datafile + '_nComp' + str(K) +                                 '_ntrain' + str(num_train) + '_nepoch' + str(n_epoch) + '_lr' +                                 str(learning_rate) + '_sim_obs_combine'
-else: ModelName = './Model/Edward_posterior_customLoss_' + datafile + '_nComp' + str(K) + '_ntrain' + str(
-    num_train) + '_nepoch' + str(n_epoch)  + '_lr' + str(learning_rate)  + '_obs_only'
-
+if sim_obs_combine:
+    ModelName = './Model/Edward_posterior_cutsomLoss_' + datafile + '_nComp' + str(K) + '_ntrain' + str(
+        num_train) + '_nepoch' + str(n_epoch) + '_lr' + str(learning_rate) + '_sim_obs_combine'
+else:
+    ModelName = './Model/Edward_posterior_customLoss_' + datafile + '_nComp' + str(K) + '_ntrain' + str(
+        num_train) + '_nepoch' + str(n_epoch) + '_lr' + str(learning_rate) + '_obs_only'
 
 np.random.seed(42)
-
-
 
 # In[2]:
 
 
+if datafile == 'DES':
+    dirIn = '../data/'
+    allfiles = ['DES.train.dat', './DES5yr.nfits.dat']
 
-if datafile == 'DES' :
-  dirIn = '../data/'
-  allfiles = ['DES.train.dat', './DES5yr.nfits.dat']
+    Trainfiles = np.loadtxt(dirIn + allfiles[0])
+    Testfiles = np.loadtxt(dirIn + allfiles[1])
 
-  Trainfiles = np.loadtxt(dirIn + allfiles[0])
-  Testfiles = np.loadtxt(dirIn + allfiles[1])
+    TrainshuffleOrder = np.arange(Trainfiles.shape[0])
+    np.random.shuffle(TrainshuffleOrder)
 
-  TrainshuffleOrder = np.arange(Trainfiles.shape[0])
-  np.random.shuffle(TrainshuffleOrder)
+    TestshuffleOrder = np.arange(Testfiles.shape[0])
+    np.random.shuffle(TestshuffleOrder)
 
-  TestshuffleOrder = np.arange(Testfiles.shape[0])
-  np.random.shuffle(TestshuffleOrder)
+    Trainfiles = Trainfiles[TrainshuffleOrder]
+    Testfiles = Testfiles[TestshuffleOrder]
 
-  Trainfiles = Trainfiles[TrainshuffleOrder]
-  Testfiles = Testfiles[TestshuffleOrder]
+    X_train = Trainfiles[:num_train, 2:10]  # color mag
+    X_test = Testfiles[:num_test, 2:10]  # color mag
 
-  X_train = Trainfiles[:num_train, 2:10]  # color mag
-  X_test = Testfiles[:num_test, 2:10]  # color mag
+    xmax = np.max([X_train.max(), X_test.max()])
+    xmin = np.min([X_train.min(), X_test.min()])
 
-  xmax = np.max( [X_train.max(), X_test.max()] )
-  xmin = np.min( [X_train.min(), X_test.min()] )
+    X_train = (X_train - xmin) / (xmax - xmin)
+    X_test = (X_test - xmin) / (xmax - xmin)
 
-  X_train = (X_train - xmin)/(xmax - xmin)
-  X_test = (X_test - xmin)/(xmax - xmin)
+    y_train = Trainfiles[:num_train, 0]  # spec z
+    y_test = Testfiles[:num_test, 0]  # spec z
 
+    ymax = np.max([y_train.max(), y_test.max()])
+    ymin = np.min([y_train.min(), y_test.min()])
 
-  y_train = Trainfiles[:num_train, 0]  # spec z
-  y_test = Testfiles[:num_test, 0]  # spec z
+    y_train = (y_train - ymin) / (ymax - ymin)
+    y_test = (y_test - ymin) / (ymax - ymin)
 
+if datafile == 'COSMOS':
+    dirIn = '../../Data/fromJonas/'
+    allfiles = ['catalog_v0.txt', 'catalog_v1.txt', 'catalog_v2a.txt', 'catalog_v2.txt',
+                'catalog_v2b.txt', 'catalog_v3.txt'][3]
 
-  ymax = np.max( [y_train.max(), y_test.max()] )
-  ymin = np.min( [y_train.min(), y_test.min()] )
+    Trainfiles = np.loadtxt(dirIn + allfiles)
 
-  y_train = (y_train - ymin)/(ymax - ymin)
-  y_test = (y_test - ymin)/(ymax - ymin)
+    TrainshuffleOrder = np.arange(Trainfiles.shape[0])
+    np.random.shuffle(TrainshuffleOrder)
 
+    Trainfiles = Trainfiles[TrainshuffleOrder]
 
+    X_train = Trainfiles[:num_train, 2:8]  # color mag
+    X_test = Trainfiles[num_train + 1: num_train + num_test, 2:8]  # color mag
 
-if datafile == 'COSMOS' :
-  dirIn = '../../Data/fromJonas/'
-  allfiles = ['catalog_v0.txt', 'catalog_v1.txt', 'catalog_v2a.txt', 'catalog_v2.txt',
-              'catalog_v2b.txt', 'catalog_v3.txt'][3]
+    ifFlux = True
+    if ifFlux:
+        X_train = -2.5 * np.log(X_train)
+        X_test = -2.5 * np.log(X_test)
 
+    xmax = np.max([X_train.max(), X_test.max()])
+    xmin = np.min([X_train.min(), X_test.min()])
 
-  Trainfiles = np.loadtxt(dirIn + allfiles)
+    X_train = (X_train - xmin) / (xmax - xmin)
+    X_test = (X_test - xmin) / (xmax - xmin)
 
-  TrainshuffleOrder = np.arange(Trainfiles.shape[0])
-  np.random.shuffle(TrainshuffleOrder)
+    y_train = Trainfiles[:num_train, 0]  # spec z
+    y_test = Trainfiles[num_train + 1: num_train + num_test, 0]  # spec z
 
-  Trainfiles = Trainfiles[TrainshuffleOrder]
+    ymax = np.max([y_train.max(), y_test.max()])
+    ymin = np.min([y_train.min(), y_test.min()])
 
-  X_train = Trainfiles[:num_train, 2:8]  # color mag
-  X_test = Trainfiles[num_train + 1: num_train + num_test, 2:8]  # color mag
-
-  ifFlux = True
-  if ifFlux:
-      X_train = -2.5*np.log(X_train)
-      X_test = -2.5*np.log(X_test)
-
-  xmax = np.max( [X_train.max(), X_test.max()] )
-  xmin = np.min( [X_train.min(), X_test.min()] )
-
-  X_train = (X_train - xmin)/(xmax - xmin)
-  X_test = (X_test - xmin)/(xmax - xmin)
-
-  y_train = Trainfiles[:num_train, 0]  # spec z
-  y_test = Trainfiles[num_train + 1: num_train + num_test, 0]  # spec z
-
-  ymax = np.max( [y_train.max(), y_test.max()] )
-  ymin = np.min( [y_train.min(), y_test.min()] )
-
-  y_train = (y_train - ymin)/(ymax - ymin)
-  y_test = (y_test - ymin)/(ymax - ymin)
-
-
+    y_train = (y_train - ymin) / (ymax - ymin)
+    y_test = (y_test - ymin) / (ymax - ymin)
 
 if datafile == 'GalaxPy':
     import numpy as np
@@ -307,6 +296,7 @@ if datafile == 'GalaxPy':
 
     # path_program = os.path.dirname(os.path.dirname(os.path.realpath(__file__))) + '/'
     path_program = '../../Data/fromGalaxev/photozs/datasets/'
+
 
     class Curated_sample():
         ''' Class to store the redshift and colors of observed galaxies,
@@ -390,23 +380,18 @@ if datafile == 'GalaxPy':
 
     sim_q, sim_s, obs_q, obs_s = read_curated_data()
 
-
-
-
     if sim_obs_combine:
         train_datafile = 'GalaxPy'
-        
 
-    # 2.0 ####### TRAIN USING SIMULATION, TEST OBSERVATION ####
+        # 2.0 ####### TRAIN USING SIMULATION, TEST OBSERVATION ####
 
-        Trainfiles =np.append( sim_q.arr_c, sim_s.arr_c, axis = 0)
-        TrainZ = np.append( sim_q.arr_z, sim_s.arr_z, axis = 0)
+        Trainfiles = np.append(sim_q.arr_c, sim_s.arr_c, axis=0)
+        TrainZ = np.append(sim_q.arr_z, sim_s.arr_z, axis=0)
 
-        Trainfiles = np.delete(Trainfiles,(4), axis=1)   ## deleting z-Y
+        Trainfiles = np.delete(Trainfiles, (4), axis=1)  ## deleting z-Y
 
-        Testfiles =np.append( obs_q.arr_c, obs_s.arr_c, axis = 0)
-        TestZ = np.append( obs_q.arr_z, obs_s.arr_z, axis = 0)
-
+        Testfiles = np.append(obs_q.arr_c, obs_s.arr_c, axis=0)
+        TestZ = np.append(obs_q.arr_z, obs_s.arr_z, axis=0)
 
         TrainshuffleOrder = np.arange(Trainfiles.shape[0])
         np.random.shuffle(TrainshuffleOrder)
@@ -419,7 +404,6 @@ if datafile == 'GalaxPy':
 
         Testfiles = Testfiles[TestshuffleOrder]
         TestZ = TestZ[TestshuffleOrder]
-
 
         X_train = Trainfiles[:num_train]  # color mag
         X_test = Trainfiles[:num_test]  # color mag
@@ -438,11 +422,10 @@ if datafile == 'GalaxPy':
         # Trainfiles =np.append( sim_q.arr_c, sim_s.arr_c, axis = 0)
         # TrainZ = np.append( sim_q.arr_z, sim_s.arr_z, axis = 0)
 
-
         # 1.3 ####### OBSERVED: QUENCHED + STAR FORMATION ####
 
-        Trainfiles =np.append( obs_q.arr_c, obs_s.arr_c, axis = 0)
-        TrainZ = np.append( obs_q.arr_z, obs_s.arr_z, axis = 0)
+        Trainfiles = np.append(obs_q.arr_c, obs_s.arr_c, axis=0)
+        TrainZ = np.append(obs_q.arr_z, obs_s.arr_z, axis=0)
 
         TrainshuffleOrder = np.arange(Trainfiles.shape[0])
         np.random.shuffle(TrainshuffleOrder)
@@ -461,13 +444,11 @@ if datafile == 'GalaxPy':
         y_train = TrainZ[:num_train]  # spec z
         y_test = TrainZ[num_train + 1: num_train + num_test]  # spec z
 
-
-
     ############## THINGS ARE SAME AFTER THIS ###########
 
     ## rescaling xmax/xmin
-    xmax = np.max([np.max(X_train, axis = 0), np.max(X_test, axis=0)], axis = 0)
-    xmin = np.min([np.min(X_train, axis = 0), np.min(X_test, axis=0)], axis = 0)
+    xmax = np.max([np.max(X_train, axis=0), np.max(X_test, axis=0)], axis=0)
+    xmin = np.min([np.min(X_train, axis=0), np.min(X_test, axis=0)], axis=0)
 
     X_train = (X_train - xmin) / (xmax - xmin)
     X_test = (X_test - xmin) / (xmax - xmin)
@@ -480,27 +461,21 @@ if datafile == 'GalaxPy':
     y_train = (y_train - ymin) / (ymax - ymin)
     y_test = (y_test - ymin) / (ymax - ymin)
 
-
 HubTry = True
 
 if HubTry:
     import tensorflow_hub as hub
-
-
 
 print("Size of features in training data: {}".format(X_train.shape))
 print("Size of output in training data: {}".format(y_train.shape))
 print("Size of features in test data: {}".format(X_test.shape))
 print("Size of output in test data: {}".format(y_test.shape))
 
-
-
 PlotScatter = False
 
 if PlotScatter:
     for ind in range(D):
-
-        sns.regplot(X_train[:,ind], y_train, fit_reg=False, scatter_kws={'s':8})
+        sns.regplot(X_train[:, ind], y_train, fit_reg=False, scatter_kws={'s': 8})
         # sns.regplot(X_train[:,1], y_train, fit_reg=False, color='blue', scatter_kws={'s':8})
         # sns.regplot(X_train[:,2], y_train, fit_reg=False, color='green', scatter_kws={'s':8})
         # sns.regplot(X_train[:,3], y_train, fit_reg=False, color='black', scatter_kws={'s':8})
@@ -511,7 +486,6 @@ if PlotScatter:
 
 
 # In[3]:
-
 
 
 ######################### network arch ##############################
@@ -567,6 +541,7 @@ def neural_network_1(X):
 
     return locs, scales, logits
 
+
 def neural_network_mod():
     """
     loc, scale, logits = NN(x; theta)
@@ -591,21 +566,18 @@ def neural_network_mod():
     logits = tf.layers.dense(net, K, activation=None)
 
     if HubTry:
-        outdict= {'locs':locs, 'scales':scales, 'logits':logits}
-        hub.add_signature(inputs=X,outputs=outdict)
-
+        outdict = {'locs': locs, 'scales': scales, 'logits': logits}
+        hub.add_signature(inputs=X, outputs=outdict)
 
     return locs, scales, logits
+
 
 # with tf.Session() as sess:
 #     sess.run(tf.global_variables_initializer())
 
 if HubTry:
-
     net_spec = hub.create_module_spec(neural_network_mod)
     neural_network = hub.Module(net_spec, name='neural_network', trainable=True)
-
-
 
 locs, scales, logits = neural_network(tf.convert_to_tensor(X_train))
 cat = tfd.Categorical(logits=logits)
@@ -615,9 +587,7 @@ components = [tfd.Normal(loc=loc, scale=scale) for loc, scale
 
 y = tfd.Mixture(cat=cat, components=components)
 
-
 # In[4]:
-
 
 
 # ######################### inference ##############################
@@ -628,7 +598,6 @@ y = tfd.Mixture(cat=cat, components=components)
 # # inference = ed.MAP(data={y: y_ph})
 # # optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate)
 # # inference.initialize(optimizer=optimizer, var_list=tf.trainable_variables())
-
 
 
 # # There are no latent variables to infer. Thus inference is concerned
@@ -644,9 +613,7 @@ y = tfd.Mixture(cat=cat, components=components)
 # ##################################################################
 
 
-
 # In[5]:
-
 
 
 ######################### inference ##############################
@@ -654,8 +621,7 @@ y = tfd.Mixture(cat=cat, components=components)
 
 log_likelihood = y.log_prob(y_train)
 # log_likelihood = -tf.reduce_sum(log_likelihood/(1. + y_train)**2 )
-log_likelihood = -tf.reduce_sum(log_likelihood/(1. + y_train) )
-
+log_likelihood = -tf.reduce_sum(log_likelihood / (1. + y_train))
 
 learning_rate = 5e-2
 optimizer = tf.train.AdamOptimizer(learning_rate)
@@ -667,11 +633,7 @@ train_op = optimizer.minimize(log_likelihood)
 # In[ ]:
 
 
-
-
-
 # In[6]:
-
 
 
 # ######################### inference ##############################
@@ -719,10 +681,7 @@ train_op = optimizer.minimize(log_likelihood)
 
 evaluate(tf.global_variables_initializer())
 
-
 # In[9]:
-
-
 
 
 # sess = ed.get_session()
@@ -747,34 +706,27 @@ evaluate(tf.global_variables_initializer())
 train_loss = np.zeros(n_epoch)
 test_loss = np.zeros(n_epoch)
 for i in range(n_epoch):
-#     print("epoch: ",i)
+    #     print("epoch: ",i)
     _, loss_value = evaluate([train_op, log_likelihood])
     train_loss[i] = loss_value
-
 
 # In[10]:
 
 
 plt.plot(np.arange(n_epoch), -train_loss / len(X_train), label='Train Loss')
 
-
 # In[11]:
 
 
 pred_weights, pred_means, pred_std = evaluate([tf.nn.softmax(logits), locs, scales])
 
-
-
 if HubTry:
-    save_mod = './lr'+str(learning_rate)+'_dr'+'_k'+str(K)+'_nt'+str(num_train)
+    save_mod = './lr' + str(learning_rate) + '_dr' + '_k' + str(K) + '_nt' + str(num_train)
 
-    neural_network.export(save_mod,sess)
+    neural_network.export(save_mod, sess)
 
-    #load saved network
+    # load saved network
     neural_network_t = hub.Module(save_mod)
-
-
-
 
 # In[ ]:
 NotWorking = True
@@ -783,7 +735,6 @@ if NotWorking:
     #### THIS IS NOT WORKING RN ######
 
     evaluate(tf.global_variables_initializer())
-
 
     log_likelihood_train = y.log_prob(y_train)
     log_likelihood_train = -tf.reduce_sum(log_likelihood_train)
@@ -796,7 +747,6 @@ if NotWorking:
     train_op = optimizer.minimize(log_likelihood_test)
 
     ##################################################################
-
 
     evaluate(tf.global_variables_initializer())
 
@@ -811,7 +761,6 @@ if NotWorking:
         _, loss_value_test = evaluate([train_op, log_likelihood_test])
         test_loss[i] = loss_value_test
 
-
     ###################################################################
     ## Plot log likelihood or loss
 
@@ -823,9 +772,7 @@ if NotWorking:
     plt.ylabel('Log-likelihood', fontsize=15)
     plt.show()
 
-
     # In[ ]:
-
 
     ### THIS ISNT WORKING RN ######
 
@@ -836,105 +783,84 @@ if NotWorking:
     #### including validation is rather difficult
     ####
 
-
-
-
-
-
     # pred_weights, pred_means, pred_std = sess.run()
 
     X_ph = tf.placeholder(tf.float32, [None, D])
     pred_weights, pred_means, pred_std = sess.run([tf.nn.softmax(logits), locs, scales], feed_dict={X_ph: X_test})
-
-
 
     #################### testing ####################
 
     X_ph_new = tf.placeholder(tf.float32, [None, D])
     locs_new, scales_new, logits_new = neural_network(X_ph_new)
 
-    pred_weights, pred_means, pred_std = sess.run([tf.nn.softmax(logits_new), locs_new, scales_new], feed_dict={X_ph_new: X_test})
+    pred_weights, pred_means, pred_std = sess.run([tf.nn.softmax(logits_new), locs_new, scales_new],
+                                                  feed_dict={X_ph_new: X_test})
     # FailedPreconditionError
-
-
 
     # In[12]:
 
-
-
 obj = [93, 402, 120]
-fig, axes = plt.subplots(nrows=3, ncols=1, sharex = True, figsize=(8, 7))
+fig, axes = plt.subplots(nrows=3, ncols=1, sharex=True, figsize=(8, 7))
 
 plot_normal_mix(pred_weights[obj][0], pred_means[obj][0],
                 pred_std[obj][0], axes[0], comp=False)
 axes[0].axvline(x=y_test[obj][0], color='black', alpha=0.5)
-axes[0].text(0.3, 4.0, 'ID: ' +str(obj[0]), horizontalalignment='center',
+axes[0].text(0.3, 4.0, 'ID: ' + str(obj[0]), horizontalalignment='center',
              verticalalignment='center')
-
 
 plot_normal_mix(pred_weights[obj][1], pred_means[obj][1],
                 pred_std[obj][1], axes[1], comp=False)
 axes[1].axvline(x=y_test[obj][1], color='black', alpha=0.5)
-axes[1].text(0.3, 4.0, 'ID: ' +str(obj[1]), horizontalalignment='center',
+axes[1].text(0.3, 4.0, 'ID: ' + str(obj[1]), horizontalalignment='center',
              verticalalignment='center')
 
 plot_normal_mix(pred_weights[obj][2], pred_means[obj][2],
                 pred_std[obj][2], axes[2], comp=False)
 axes[2].axvline(x=y_test[obj][2], color='black', alpha=0.5)
-axes[2].text(0.3, 4.0, 'ID: ' +str(obj[2]), horizontalalignment='center',
+axes[2].text(0.3, 4.0, 'ID: ' + str(obj[2]), horizontalalignment='center',
              verticalalignment='center')
 
-plt.xlabel(r' rescaled[$z_{pred}]$', fontsize = 19)
+plt.xlabel(r' rescaled[$z_{pred}]$', fontsize=19)
 
 plt.show()
-
-
 
 # In[ ]:
 
 
-
-
-
-a = sample_from_mixture(X_test[:,1], pred_weights, pred_means,
+a = sample_from_mixture(X_test[:, 1], pred_weights, pred_means,
                         pred_std, amount=len(X_test))
 sns.jointplot(a[:, 0], a[:, 1], kind="hex", color="#4CB391")
 plt.show()
 
-
-
 # In[13]:
-
 
 
 #############################################################################3
 
 import SetPub
-SetPub.set_pub()
 
+SetPub.set_pub()
 
 ## Overall mean --- weight * mean
 
-y_pred = np.sum(pred_means*pred_weights, axis = 1)
-y_pred_std = np.sum(pred_std*pred_weights, axis = 1)
+y_pred = np.sum(pred_means * pred_weights, axis=1)
+y_pred_std = np.sum(pred_std * pred_weights, axis=1)
 
-plt.figure(22, figsize=(9,8))
-
+plt.figure(22, figsize=(9, 8))
 
 # plt.scatter(y_test, y_pred, facecolors='k', s = 1)
-plt.errorbar( (ymax - ymin)*(ymin + y_train), (ymax - ymin)*(ymin + y_pred), yerr= (ymax - ymin)*(ymin + y_pred_std), fmt='bo', ecolor='r', ms = 2, alpha = 0.1)
-
+plt.errorbar((ymax - ymin) * (ymin + y_train), (ymax - ymin) * (ymin + y_pred),
+             yerr=(ymax - ymin) * (ymin + y_pred_std), fmt='bo', ecolor='r', ms=2, alpha=0.1)
 
 plt.text(0.2, 0.9, train_datafile + ' trained', horizontalalignment='center', verticalalignment='center')
-plt.plot((ymax - ymin)*(ymin + y_train), (ymax - ymin)*(ymin + y_train), 'k')
-plt.ylabel(r'$z_{pred}$', fontsize = 19)
-plt.xlabel(r'$z_{true}$', fontsize = 19)
-plt.xlim([0,1])
-plt.ylim([0,1])
+plt.plot((ymax - ymin) * (ymin + y_train), (ymax - ymin) * (ymin + y_train), 'k')
+plt.ylabel(r'$z_{pred}$', fontsize=19)
+plt.xlabel(r'$z_{true}$', fontsize=19)
+plt.xlim([0, 1])
+plt.ylim([0, 1])
 plt.title('weight x mean')
 plt.tight_layout()
 plt.show()
-
 
 ###################################################################
 
@@ -942,42 +868,37 @@ plt.show()
 # In[14]:
 
 
-
 ###########################################################################
 ##  mean --- highest weight
 
 
-
-weight_max = np.argmax(pred_weights, axis = 1)  ## argmax or max???
-weight_max = np.max(pred_weights, axis = 1)  ## argmax or max???
+weight_max = np.argmax(pred_weights, axis=1)  ## argmax or max???
+weight_max = np.max(pred_weights, axis=1)  ## argmax or max???
 from keras.utils import np_utils
+
 weight_max = np_utils.to_categorical(weight_max)
 
-
-y_pred = np.max(pred_weights*weight_max*pred_means, axis=1)
-y_pred_std = np.max(pred_weights*weight_max*pred_std, axis = 1)
+y_pred = np.max(pred_weights * weight_max * pred_means, axis=1)
+y_pred_std = np.max(pred_weights * weight_max * pred_std, axis=1)
 
 # y_pred = pred_weights[weight_max]*pred_means[weight_max]
 # y_pred_std = pred_weights[weight_max]*pred_std[weight_max]
 
 plt.figure(24, figsize=(9, 8))
 
-
 # plt.scatter(y_test, y_pred, facecolors='k', s = 1)
-plt.errorbar((ymax - ymin)*(ymin + y_train), (ymax - ymin)*(ymin + y_pred), yerr= (ymax - ymin)*(
-  ymin + y_pred_std), fmt='bo', ecolor='r', ms = 2, alpha = 0.1)
-
+plt.errorbar((ymax - ymin) * (ymin + y_train), (ymax - ymin) * (ymin + y_pred), yerr=(ymax - ymin) * (
+        ymin + y_pred_std), fmt='bo', ecolor='r', ms=2, alpha=0.1)
 
 plt.text(0.2, 0.9, train_datafile + ' trained', horizontalalignment='center', verticalalignment='center')
-plt.plot((ymax - ymin)*(ymin + y_test), (ymax - ymin)*(ymin + y_test), 'k')
-plt.ylabel(r'$z_{pred}$', fontsize = 19)
-plt.xlabel(r'$z_{true}$', fontsize = 19)
-plt.xlim([0,1])
-plt.ylim([0,1])
+plt.plot((ymax - ymin) * (ymin + y_test), (ymax - ymin) * (ymin + y_test), 'k')
+plt.ylabel(r'$z_{pred}$', fontsize=19)
+plt.xlabel(r'$z_{true}$', fontsize=19)
+plt.xlim([0, 1])
+plt.ylim([0, 1])
 plt.title('highest weight')
 plt.tight_layout()
 plt.show()
-
 
 ###################################################################
 
@@ -985,32 +906,29 @@ plt.show()
 # In[ ]:
 
 
-
 #############################################################################3
 
 import SetPub
-SetPub.set_pub()
 
+SetPub.set_pub()
 
 ## Overall mean --- weight * mean
 
-y_pred = np.sum(pred_means*pred_weights, axis = 1)
-y_pred_std = np.sum(pred_std*pred_weights, axis = 1)
+y_pred = np.sum(pred_means * pred_weights, axis=1)
+y_pred_std = np.sum(pred_std * pred_weights, axis=1)
 
 plt.figure(22)
-
 
 # plt.scatter(y_test, y_pred, facecolors='k', s = 1)
 # plt.errorbar( (ymax - ymin)*(ymin + y_test), (ymax - ymin)*(ymin + y_pred), yerr= (ymax - ymin)*(ymin + y_pred_std), fmt='bo', ecolor='r', ms = 2, alpha = 0.1)
 
-plt.errorbar( (ymax - ymin)*(ymin + y_test), (ymax - ymin)*(ymin + y_pred), yerr= (ymax - ymin)*(ymin + y_pred_std), fmt='bo', ecolor='r', ms = 2, alpha = 0.1)
-
-
+plt.errorbar((ymax - ymin) * (ymin + y_test), (ymax - ymin) * (ymin + y_pred), yerr=(ymax - ymin) * (ymin + y_pred_std),
+             fmt='bo', ecolor='r', ms=2, alpha=0.1)
 
 plt.text(0.8, 2.0, datafile, horizontalalignment='center', verticalalignment='center')
-plt.plot((ymax - ymin)*(ymin + y_test), (ymax - ymin)*(ymin + y_test), 'k')
-plt.ylabel(r'$z_{pred}$', fontsize = 19)
-plt.xlabel(r'$z_{true}$', fontsize = 19)
+plt.plot((ymax - ymin) * (ymin + y_test), (ymax - ymin) * (ymin + y_test), 'k')
+plt.ylabel(r'$z_{pred}$', fontsize=19)
+plt.xlabel(r'$z_{true}$', fontsize=19)
 # plt.xscale([0,1])
 # plt.yscale([0,1])
 plt.title('weight x mean')
@@ -1021,44 +939,39 @@ plt.show()
 ##  mean --- highest weight
 
 
-
-weight_max = np.argmax(pred_weights, axis = 1)  ## argmax or max???
-weight_max = np.max(pred_weights, axis = 1)  ## argmax or max???
+weight_max = np.argmax(pred_weights, axis=1)  ## argmax or max???
+weight_max = np.max(pred_weights, axis=1)  ## argmax or max???
 from keras.utils import np_utils
+
 weight_max = np_utils.to_categorical(weight_max)
 
-
-y_pred = np.max(pred_weights*weight_max*pred_means, axis=1)
-y_pred_std = np.max(pred_weights*weight_max*pred_std, axis = 1)
+y_pred = np.max(pred_weights * weight_max * pred_means, axis=1)
+y_pred_std = np.max(pred_weights * weight_max * pred_std, axis=1)
 
 # y_pred = pred_weights[weight_max]*pred_means[weight_max]
 # y_pred_std = pred_weights[weight_max]*pred_std[weight_max]
 
 plt.figure(24)
 
-
 # plt.scatter(y_test, y_pred, facecolors='k', s = 1)
-plt.errorbar((ymax - ymin)*(ymin + y_test), (ymax - ymin)*(ymin + y_pred), yerr= (ymax - ymin)*(
-  ymin + y_pred_std), fmt='bo', ecolor='r', ms = 2, alpha = 0.1)
-
+plt.errorbar((ymax - ymin) * (ymin + y_test), (ymax - ymin) * (ymin + y_pred), yerr=(ymax - ymin) * (
+        ymin + y_pred_std), fmt='bo', ecolor='r', ms=2, alpha=0.1)
 
 plt.text(0.8, 2.0, datafile, horizontalalignment='center', verticalalignment='center')
-plt.plot((ymax - ymin)*(ymin + y_test), (ymax - ymin)*(ymin + y_test), 'k')
-plt.ylabel(r'$z_{pred}$', fontsize = 19)
-plt.xlabel(r'$z_{true}$', fontsize = 19)
+plt.plot((ymax - ymin) * (ymin + y_test), (ymax - ymin) * (ymin + y_test), 'k')
+plt.ylabel(r'$z_{pred}$', fontsize=19)
+plt.xlabel(r'$z_{true}$', fontsize=19)
 # plt.xscale([0,1])a
 # plt.yscale([0,1])
 plt.title('highest weight')
 plt.tight_layout()
 plt.show()
 
-
 ###################################################################
 ###################################################################
 
 
 # In[15]:
-
 
 
 ########## SAVE sess ###########
@@ -1080,8 +993,6 @@ saver = tf.train.Saver()
 save_path = saver.save(sess, ModelName)
 print("Inference model saved in file: %s" % save_path)
 
-
-
 ###################################################################
 ###################################################################
 
@@ -1091,17 +1002,14 @@ print("Inference model saved in file: %s" % save_path)
 
 print(ModelName + '.meta')
 
-
 # In[25]:
 
 
-
 with tf.Session() as sess_load:
-  new_saver = tf.train.import_meta_graph(ModelName + '.meta')
-#   new_saver.restore(sess, tf.train.latest_checkpoint('./'))
-  new_saver.restore(sess_load, ModelName)
-  print('Model restored')
-
+    new_saver = tf.train.import_meta_graph(ModelName + '.meta')
+    #   new_saver.restore(sess, tf.train.latest_checkpoint('./'))
+    new_saver.restore(sess_load, ModelName)
+    print('Model restored')
 
 # In[ ]:
 
@@ -1116,7 +1024,6 @@ with tf.Session() as sess_load:
 # for i in range(len(weight)):
 #    file.create_dataset('weight' + str(i), data=weight[i])
 # file.close()
-
 
 
 # file = h5py.File('models/{}.h5'.format(model_name), 'r')
@@ -1136,18 +1043,17 @@ locs_new, scales_new, logits_new = neural_network(tf.convert_to_tensor(X_test))
 
 cat_new = tfd.Categorical(logits=logits_new)
 components_new = [tfd.Normal(loc=loc, scale=scale) for loc, scale
-              in zip(tf.unstack(tf.transpose(locs_new)),
-                     tf.unstack(tf.transpose(scales_new)))]
+                  in zip(tf.unstack(tf.transpose(locs_new)),
+                         tf.unstack(tf.transpose(scales_new)))]
 
 y_new = tfd.Mixture(cat=cat_new, components=components_new)
 
-
-
-sess_load = tf.Session() 
+sess_load = tf.Session()
 new_saver = tf.train.import_meta_graph(ModelName + '.meta')
 #   new_saver.restore(sess, tf.train.latest_checkpoint('./'))
 new_saver.restore(sess_load, ModelName)
 print('Model restored')
+
 
 # print(sess_load.run('w1:0'))
 
@@ -1183,14 +1089,10 @@ def neural_network(X):
 # locs, scales, logits = neural_network(tf.convert_to_tensor(X_test))
 
 
-
-
 print('good so far')
 
-
 pred_weights_new, pred_means_new, pred_std_new = sess_load.run(
-            [tf.nn.softmax(logits_new), locs_new, scales_new], feed_dict={X_ph_new: X_test})
-
+    [tf.nn.softmax(logits_new), locs_new, scales_new], feed_dict={X_ph_new: X_test})
 
 # In[ ]:
 
@@ -1200,42 +1102,38 @@ x_test = np.expand_dims(X_test[idx], axis=0)
 y_test_prob = []
 feed_dict = {x: x_test, n: 1}
 for i in range(n_samples):
-  y_test_prob.append(sess.run(probs, feed_dict=feed_dict))
+    y_test_prob.append(sess.run(probs, feed_dict=feed_dict))
 
 y_test_prob = np.squeeze(np.array(y_test_prob))
-
 
 # In[ ]:
 
 
-
-
 ifTesting = False
 if ifTesting:
-##########  TESTING SCRIPT ################
-
+    ##########  TESTING SCRIPT ################
 
     X_ph_new = tf.placeholder(tf.float32, [None, D])
     y_ph_new = tf.placeholder(tf.float32, [None])
 
 
     def neural_network(X):
-      """loc, scale, logits = NN(x; theta)"""
-      # 2 hidden layers with 15 hidden units
-      net = tf.layers.dense(X, 15, activation=tf.nn.relu)
-      net = tf.layers.dense(net, 15, activation=tf.nn.relu)
-      locs = tf.layers.dense(net, K, activation=None)
-      scales = tf.layers.dense(net, K, activation=tf.exp)
-      logits = tf.layers.dense(net, K, activation=None)
-      return locs, scales, logits
+        """loc, scale, logits = NN(x; theta)"""
+        # 2 hidden layers with 15 hidden units
+        net = tf.layers.dense(X, 15, activation=tf.nn.relu)
+        net = tf.layers.dense(net, 15, activation=tf.nn.relu)
+        locs = tf.layers.dense(net, K, activation=None)
+        scales = tf.layers.dense(net, K, activation=tf.exp)
+        logits = tf.layers.dense(net, K, activation=None)
+        return locs, scales, logits
 
 
     locs_new, scales_new, logits_new = neural_network(X_ph_new)
 
     cat_new = ed.Categorical(logits=logits_new)
     components_new = [ed.Normal(loc=loc, scale=scale) for loc, scale
-                  in zip(tf.unstack(tf.transpose(locs_new)),
-                         tf.unstack(tf.transpose(scales_new)))]
+                      in zip(tf.unstack(tf.transpose(locs_new)),
+                             tf.unstack(tf.transpose(scales_new)))]
     y_new = ed.Mixture(cat=cat_new, components=components_new, value=tf.zeros_like(y_ph_new))
     ## Note: A bug exists in Mixture which prevents samples from it to have
     ## a shape of [None]. For now fix it using the value argument, as
@@ -1247,19 +1145,15 @@ if ifTesting:
     # with only training model parameters, which are baked into how we
     # specify the neural networks.
 
-
-
     inference_new = ed.MAP(data={y_new: y_ph_new})
     optimizer_new = tf.train.AdamOptimizer(learning_rate=learning_rate)
     inference.initialize(optimizer=optimizer_new, var_list=tf.trainable_variables())
 
-
     # new_saver = tf.train.Saver()
-    new_saver = tf.train.import_meta_graph(ModelName+'.meta')
+    new_saver = tf.train.import_meta_graph(ModelName + '.meta')
 
     sess_load = ed.get_session()
     # tf.global_variables_initializer().run()
-
 
     # ModelName = './Model/Edward_posterior'
     # new_saver = tf.train.Saver()
@@ -1267,37 +1161,31 @@ if ifTesting:
     new_saver.restore(sess_load, ModelName)
     print("Model restored.")
 
-
     pred_weights_new, pred_means_new, pred_std_new = sess_load.run(
         [tf.nn.softmax(logits_new), locs_new, scales_new], feed_dict={X_ph_new: X_test})
 
-
-
-
-
     obj = [93, 402, 120]
-    fig, axes = plt.subplots(nrows=3, ncols=1, sharex = True, figsize=(8, 7))
+    fig, axes = plt.subplots(nrows=3, ncols=1, sharex=True, figsize=(8, 7))
 
     plot_normal_mix(pred_weights_new[obj][0], pred_means_new[obj][0],
                     pred_std_new[obj][0], axes[0], comp=False)
     axes[0].axvline(x=y_test[obj][0], color='black', alpha=0.5)
-    axes[0].text(0.3, 4.0, 'ID: ' +str(obj[0]), horizontalalignment='center',
+    axes[0].text(0.3, 4.0, 'ID: ' + str(obj[0]), horizontalalignment='center',
                  verticalalignment='center')
-
 
     plot_normal_mix(pred_weights_new[obj][1], pred_means_new[obj][1],
                     pred_std_new[obj][1], axes[1], comp=False)
     axes[1].axvline(x=y_test[obj][1], color='black', alpha=0.5)
-    axes[1].text(0.3, 4.0, 'ID: ' +str(obj[1]), horizontalalignment='center',
+    axes[1].text(0.3, 4.0, 'ID: ' + str(obj[1]), horizontalalignment='center',
                  verticalalignment='center')
 
     plot_normal_mix(pred_weights_new[obj][2], pred_means_new[obj][2],
                     pred_std_new[obj][2], axes[2], comp=False)
     axes[2].axvline(x=y_test[obj][2], color='black', alpha=0.5)
-    axes[2].text(0.3, 4.0, 'ID: ' +str(obj[2]), horizontalalignment='center',
+    axes[2].text(0.3, 4.0, 'ID: ' + str(obj[2]), horizontalalignment='center',
                  verticalalignment='center')
 
-    plt.xlabel(r' rescaled[$z_{pred}]$', fontsize = 19)
+    plt.xlabel(r' rescaled[$z_{pred}]$', fontsize=19)
 
     plt.show()
 
