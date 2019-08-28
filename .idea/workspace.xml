@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7f925e6e-ecce-4da6-8fb4-3e0694de87a0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/sNMAD_compare.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/checkpoint" beforeDir="false" afterPath="$PROJECT_DIR$/Model/checkpoint" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mdn_galaxpy_customL.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/mdn_galaxpy_customL.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mdn_galaxpy_customL.py" beforeDir="false" afterPath="$PROJECT_DIR$/mdn_galaxpy_customL.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mdn_galaxpy_customLoss.py" beforeDir="false" afterPath="$PROJECT_DIR$/mdn_galaxpy_customLoss.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mdn_galaxpy_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/mdn_galaxpy_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mdn_galaxpy_test_combine.py" beforeDir="false" afterPath="$PROJECT_DIR$/mdn_galaxpy_test_combine.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mixture_density_network.ipynb" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/observations/src/r/gen_src_test_files.sh" beforeDir="false" afterPath="$PROJECT_DIR$/observations/src/r/gen_src_test_files.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phoz_compare.png" beforeDir="false" afterPath="$PROJECT_DIR$/phoz_compare.png" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,10 +15,9 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mdn_galaxpy.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2775">
-              <caret line="440" selection-start-line="440" selection-end-line="440" />
+            <state>
+              <caret column="18" selection-start-column="18" selection-end-column="18" />
               <folding>
-                <element signature="e#0#38#0" expanded="true" />
                 <element signature="e#3201#4207#0" />
                 <element signature="e#4239#5318#0" />
                 <element signature="e#5352#11371#0" />
@@ -41,7 +30,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mdn_galaxpy_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
+            <state relative-caret-position="7815">
               <caret line="521" selection-start-line="521" selection-end-line="521" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
@@ -50,11 +39,28 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mdn_galaxpy_customL.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1242">
-              <caret line="897" lean-forward="true" selection-end-line="1303" />
+            <state relative-caret-position="337">
+              <caret line="365" column="40" lean-forward="true" selection-start-line="365" selection-start-column="40" selection-end-line="365" selection-end-column="40" />
+              <folding>
+                <element signature="e#2119#2731#0" />
+                <element signature="e#2762#3274#0" />
+                <element signature="e#3374#4085#0" />
+                <element signature="e#4121#4411#0" />
+                <element signature="e#5013#5524#0" />
+                <element signature="e#22521#24764#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mdn_hub.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="6161">
+              <caret line="1097" lean-forward="true" selection-start-line="1097" selection-end-line="1097" />
               <folding>
                 <element signature="e#2119#2731#0" />
                 <element signature="e#2762#3274#0" />
@@ -63,18 +69,10 @@
                 <element signature="e#5013#5524#0" />
                 <element signature="e#7133#8139#0" />
                 <element signature="e#8171#9250#0" />
-                <element signature="e#9284#15379#0" />
-                <element signature="e#15688#16285#0" />
-                <element signature="e#17558#18497#0" />
-                <element signature="e#22521#24764#0" />
+                <element signature="e#35528#38829#0" />
               </folding>
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/mdn_hub.py">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -213,8 +211,8 @@
         <option value="$PROJECT_DIR$/mdn_galaxpy_test_combine.py" />
         <option value="$PROJECT_DIR$/mdn_galaxpy_test.py" />
         <option value="$PROJECT_DIR$/mdn_galaxpy_customLoss.py" />
-        <option value="$PROJECT_DIR$/mdn_galaxpy_customL.py" />
         <option value="$PROJECT_DIR$/mdn_hub.py" />
+        <option value="$PROJECT_DIR$/mdn_galaxpy_customL.py" />
       </list>
     </option>
   </component>
@@ -403,7 +401,7 @@
       <window_info anchor="right" id="Commander" order="1" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
-      <window_info anchor="right" id="Python Console" internal_type="SLIDING" order="4" visible="true" weight="0.19894099" />
+      <window_info anchor="right" id="Python Console" internal_type="SLIDING" order="4" weight="0.19894099" />
       <window_info anchor="right" id="R Graphics" order="5" />
       <window_info anchor="right" id="R Packages" order="6" />
     </layout>
@@ -571,10 +569,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mdn_galaxpy.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2775">
-          <caret line="440" selection-start-line="440" selection-end-line="440" />
+        <state>
+          <caret column="18" selection-start-column="18" selection-end-column="18" />
           <folding>
-            <element signature="e#0#38#0" expanded="true" />
             <element signature="e#3201#4207#0" />
             <element signature="e#4239#5318#0" />
             <element signature="e#5352#11371#0" />
@@ -585,7 +582,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mdn_galaxpy_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
+        <state relative-caret-position="7815">
           <caret line="521" selection-start-line="521" selection-end-line="521" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
@@ -593,10 +590,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mdn_galaxpy_customL.py">
+    <entry file="file://$PROJECT_DIR$/mdn_hub.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1242">
-          <caret line="897" lean-forward="true" selection-end-line="1303" />
+        <state relative-caret-position="6161">
+          <caret line="1097" lean-forward="true" selection-start-line="1097" selection-end-line="1097" />
           <folding>
             <element signature="e#2119#2731#0" />
             <element signature="e#2762#3274#0" />
@@ -605,16 +602,25 @@
             <element signature="e#5013#5524#0" />
             <element signature="e#7133#8139#0" />
             <element signature="e#8171#9250#0" />
-            <element signature="e#9284#15379#0" />
-            <element signature="e#15688#16285#0" />
-            <element signature="e#17558#18497#0" />
-            <element signature="e#22521#24764#0" />
+            <element signature="e#35528#38829#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mdn_hub.py">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/mdn_galaxpy_customL.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="337">
+          <caret line="365" column="40" lean-forward="true" selection-start-line="365" selection-start-column="40" selection-end-line="365" selection-end-column="40" />
+          <folding>
+            <element signature="e#2119#2731#0" />
+            <element signature="e#2762#3274#0" />
+            <element signature="e#3374#4085#0" />
+            <element signature="e#4121#4411#0" />
+            <element signature="e#5013#5524#0" />
+            <element signature="e#22521#24764#0" />
+          </folding>
+        </state>
+      </provider>
     </entry>
   </component>
 </project>
