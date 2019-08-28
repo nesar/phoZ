@@ -194,7 +194,7 @@ print(20*'=~')
 
 
 
-n_epoch = 20000 #1000 #20000 #20000
+n_epoch = 1000 #1000 #20000 #20000
 # N = 4000  # number of data points  -- replaced by num_trai
 D = 5 #6  # number of features  (8 for DES, 6 for COSMOS)
 K = 3 # number of mixture components
@@ -203,8 +203,8 @@ K = 3 # number of mixture components
 learning_rate = 5e-3
 
 
-num_train = 800000 #800000
-num_test = 5000 #10000 #params.num_test # 32
+num_train = 8000 #800000
+num_test = 500 #10000 #params.num_test # 32
 #
 datafile = ['DES', 'COSMOS', 'Galacticus', 'GalaxPy'][3]
 sim_obs_combine = True
@@ -395,7 +395,7 @@ if datafile == 'GalaxPy':
 
     if sim_obs_combine:
         train_datafile = 'GalaxPy'
-        
+
 
     # 2.0 ####### TRAIN USING SIMULATION, TEST OBSERVATION ####
 
@@ -481,13 +481,6 @@ if datafile == 'GalaxPy':
     y_test = (y_test - ymin) / (ymax - ymin)
 
 
-HubTry = True
-
-if HubTry:
-    import tensorflow_hub as hub
-
-
-
 print("Size of features in training data: {}".format(X_train.shape))
 print("Size of output in training data: {}".format(y_train.shape))
 print("Size of features in test data: {}".format(X_test.shape))
@@ -545,7 +538,7 @@ if PlotScatter:
 # # sampling is not necessary for MAP estimation anyways.
 
 
-def neural_network_1(X):
+def neural_network(X):
     """
     loc, scale, logits = NN(x; theta)
 
@@ -564,48 +557,11 @@ def neural_network_1(X):
     locs = tf.layers.dense(net, K, activation=None)
     scales = tf.layers.dense(net, K, activation=tf.exp)
     logits = tf.layers.dense(net, K, activation=None)
-
     return locs, scales, logits
 
-def neural_network_mod():
-    """
-    loc, scale, logits = NN(x; theta)
-
-    Args:
-      X: Input Tensor containing input data for the MDN
-    Returns:
-      locs: The means of the normal distributions that our data is divided into.
-      scales: The scales of the normal distributions that our data is divided
-        into.
-      logits: The probabilities of ou categorical distribution that decides
-        which normal distribution our data points most probably belong to.
-    """
-    # 2 hidden layers with 15 hidden units
-
-    X = tf.placeholder(tf.float64, name='X', shape=(None, D))
-
-    net = tf.layers.dense(X, 15, activation=tf.nn.relu)
-    net = tf.layers.dense(net, 15, activation=tf.nn.relu)
-    locs = tf.layers.dense(net, K, activation=None)
-    scales = tf.layers.dense(net, K, activation=tf.exp)
-    logits = tf.layers.dense(net, K, activation=None)
-
-    if HubTry:
-        outdict= {'locs':locs, 'scales':scales, 'logits':logits}
-        hub.add_signature(inputs=X,outputs=outdict)
-
-
-    return locs, scales, logits
 
 # with tf.Session() as sess:
 #     sess.run(tf.global_variables_initializer())
-
-if HubTry:
-
-    net_spec = hub.create_module_spec(neural_network_mod)
-    neural_network = hub.Module(net_spec, name='neural_network', trainable=True)
-
-
 
 locs, scales, logits = neural_network(tf.convert_to_tensor(X_train))
 cat = tfd.Categorical(logits=logits)
@@ -747,10 +703,9 @@ evaluate(tf.global_variables_initializer())
 train_loss = np.zeros(n_epoch)
 test_loss = np.zeros(n_epoch)
 for i in range(n_epoch):
+#     print("epoch: ",i)
     _, loss_value = evaluate([train_op, log_likelihood])
     train_loss[i] = loss_value
-
-    print("epoch: ",i, " loss: ", train_loss[i])
 
 
 # In[10]:
@@ -765,21 +720,9 @@ plt.plot(np.arange(n_epoch), -train_loss / len(X_train), label='Train Loss')
 pred_weights, pred_means, pred_std = evaluate([tf.nn.softmax(logits), locs, scales])
 
 
-
-if HubTry:
-    save_mod = './lr'+str(learning_rate)+'_dr'+'_k'+str(K)+'_nt'+str(num_train)
-
-    neural_network.export(save_mod,sess)
-
-    #load saved network
-    neural_network_t = hub.Module(save_mod)
-
-
-
-
 # In[ ]:
-Working = False
-if Working:
+NotWorking = True
+if NotWorking:
 
     #### THIS IS NOT WORKING RN ######
 
