@@ -579,6 +579,8 @@ if HubTry:
     net_spec = hub.create_module_spec(neural_network_mod)
     neural_network = hub.Module(net_spec, name='neural_network', trainable=True)
 
+
+
 locs, scales, logits = neural_network(tf.convert_to_tensor(X_train))
 cat = tfd.Categorical(logits=logits)
 components = [tfd.Normal(loc=loc, scale=scale) for loc, scale
@@ -721,7 +723,7 @@ plt.plot(np.arange(n_epoch), -train_loss / len(X_train), label='Train Loss')
 pred_weights, pred_means, pred_std = evaluate([tf.nn.softmax(logits), locs, scales])
 
 if HubTry:
-    save_mod = './lr' + str(learning_rate) + '_dr' + '_k' + str(K) + '_nt' + str(num_train)
+    save_mod = './hub_save_' + str(learning_rate) + '_dr' + '_k' + str(K) + '_nt' + str(num_train)
 
     neural_network.export(save_mod, sess)
 
