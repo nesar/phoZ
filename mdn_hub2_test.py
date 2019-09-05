@@ -446,13 +446,32 @@ def plot_cum_sigma(pred_weights,pred_std,ymax,ymin):
     #y_pred_std = np.sum(pred_std*pred_weights, axis = 1)
 
     weight_max = np.argmax(pred_weights, axis = 1)  ## argmax or max???
-    y_pred_std = np.array([pred_std[i,weight_max[i]] for i in range(len(y_train))])
+    y_pred_std = np.array( [pred_std[i,weight_max[i] ] for i in range(len(pred_weights[0]))])
     y_pred_std = (ymax - ymin)*(y_pred_std)
     plt.figure(222)
     plt.hist(y_pred_std,100, density=True, histtype='step',
                            cumulative=True,color='k')
     plt.xlabel('Sigma')
     plt.show()
+
+
+
+n_epochs = 2000 #1000 #20000 #20000
+# N = 4000  # number of data points  -- replaced by num_trai
+D = 5 #6  # number of features  (8 for DES, 6 for COSMOS)
+K = 3 # number of mixture components
+
+
+learning_rate = 5e-3
+decay_rate= 0.0
+step=100
+
+
+num_train = 800000 #800000
+num_test = 5000 #10000 #params.num_test # 32
+
+
+save_mod = 'hub_mod_lr_1'+str(learning_rate)+'_dr'+str(decay_rate)+'_step'+str(step)+'_ne'+str(n_epochs)+'_k'+str(K)+'_nt'+str(num_train)
 
 
 
@@ -463,15 +482,16 @@ K = 3 # number of mixture components
 
 
 learning_rate = 5e-3
-decay_rate= .8
+decay_rate= 0.0
 step=100
 
 
-num_train = 8000 #800000
+num_train = 100000 #800000
 num_test = 5000 #10000 #params.num_test # 32
 
 
 save_mod = 'hub_mod_lr_1'+str(learning_rate)+'_dr'+str(decay_rate)+'_step'+str(step)+'_ne'+str(n_epochs)+'_k'+str(K)+'_nt'+str(num_train)
+
 
 
 
@@ -491,24 +511,24 @@ neural_network = hub.Module(net_spec,name='neural_network',trainable=True)
 
 log_likelihood, train_op, logits, locs, scales  = mixture_model(X_train,y_train,learning_rate=learning_rate,decay_rate=decay_rate)
 
-train_loss = train(log_likelihood,train_op,n_epochs)
+# train_loss = train(log_likelihood,train_op,n_epochs)
 #save network
-neural_network.export(save_mod,sess)
+# neural_network.export(save_mod,sess)
 
-pred_weights, pred_means, pred_std = get_predictions(logits, locs, scales)
-print(pred_means)
-
-plot_pdfs(pred_means,pred_weights,pred_std)
-
-plot_pred_mean(pred_means,pred_weights,pred_std,ymax,ymin,y_train)
-
-mean_diff, med_diff, std_diff, mean_sigma, med_sigma, std_sigma = per_stats(pred_means,pred_weights,pred_std,ymax,ymin,y_train)
-
-plot_cum_sigma(pred_weights,pred_std,ymax,ymin)
-
-
-plot_pred_peak(pred_means,pred_weights,pred_std,ymax,ymin,y_train)
-plot_pred_weight(pred_means,pred_weights,pred_std,ymax,ymin,y_train)
+# pred_weights, pred_means, pred_std = get_predictions(logits, locs, scales)
+# print(pred_means)
+#
+# plot_pdfs(pred_means,pred_weights,pred_std)
+#
+# plot_pred_mean(pred_means,pred_weights,pred_std,ymax,ymin,y_train)
+#
+# mean_diff, med_diff, std_diff, mean_sigma, med_sigma, std_sigma = per_stats(pred_means,pred_weights,pred_std,ymax,ymin,y_train)
+#
+# plot_cum_sigma(pred_weights,pred_std,ymax,ymin)
+#
+#
+# plot_pred_peak(pred_means,pred_weights,pred_std,ymax,ymin,y_train)
+# plot_pred_weight(pred_means,pred_weights,pred_std,ymax,ymin,y_train)
 
 #load network
 neural_network_t = hub.Module(save_mod)

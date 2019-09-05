@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7f925e6e-ecce-4da6-8fb4-3e0694de87a0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/mdn_hub2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mdn_hub2_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mdn_hub.py" beforeDir="false" afterPath="$PROJECT_DIR$/mdn_hub.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mdn_hub2.py" beforeDir="false" afterPath="$PROJECT_DIR$/mdn_hub2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mdn_hub2_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/mdn_hub2_test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/observations/src/r/gen_src_test_files.sh" beforeDir="false" afterPath="$PROJECT_DIR$/observations/src/r/gen_src_test_files.sh" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -67,10 +65,22 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mdn_hub2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="343">
-              <caret line="516" column="9" lean-forward="true" selection-end-line="531" />
+            <state relative-caret-position="272">
+              <caret line="457" selection-start-line="457" selection-end-line="474" />
               <folding>
                 <element signature="e#45#56#0" expanded="true" />
+                <element signature="e#795#6815#0" />
+                <element signature="e#6845#7457#0" />
+                <element signature="e#7525#8051#0" />
+                <element signature="e#8085#9115#0" />
+                <element signature="e#10642#10984#0" />
+                <element signature="e#11032#11162#0" />
+                <element signature="e#11234#12019#0" />
+                <element signature="e#12109#13228#0" />
+                <element signature="e#13318#14381#0" />
+                <element signature="e#14473#15480#0" />
+                <element signature="e#15554#16089#0" />
+                <element signature="e#16125#16386#0" />
               </folding>
             </state>
           </provider>
@@ -79,10 +89,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mdn_hub2_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="616">
-              <caret line="531" selection-start-line="531" selection-end-line="531" />
+            <state relative-caret-position="386">
+              <caret line="475" lean-forward="true" selection-start-line="475" selection-end-line="475" />
               <folding>
                 <element signature="e#45#56#0" expanded="true" />
+                <element signature="e#795#6815#0" />
               </folding>
             </state>
           </provider>
@@ -183,9 +194,9 @@
       <find>train</find>
       <find>neural_network</find>
       <find>layers.</find>
-      <find>step</find>
       <find>n_epoch</find>
       <find>params</find>
+      <find>step</find>
     </findStrings>
     <replaceStrings>
       <replace>specz</replace>
@@ -416,7 +427,7 @@
       <window_info anchor="right" id="Commander" order="1" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
-      <window_info anchor="right" id="Python Console" internal_type="SLIDING" order="4" weight="0.27685326" />
+      <window_info anchor="right" id="Python Console" internal_type="SLIDING" order="4" visible="true" weight="0.27685326" />
       <window_info anchor="right" id="R Graphics" order="5" />
       <window_info anchor="right" id="R Packages" order="6" />
     </layout>
@@ -639,20 +650,33 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mdn_hub2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="516" column="9" lean-forward="true" selection-end-line="531" />
+        <state relative-caret-position="272">
+          <caret line="457" selection-start-line="457" selection-end-line="474" />
           <folding>
             <element signature="e#45#56#0" expanded="true" />
+            <element signature="e#795#6815#0" />
+            <element signature="e#6845#7457#0" />
+            <element signature="e#7525#8051#0" />
+            <element signature="e#8085#9115#0" />
+            <element signature="e#10642#10984#0" />
+            <element signature="e#11032#11162#0" />
+            <element signature="e#11234#12019#0" />
+            <element signature="e#12109#13228#0" />
+            <element signature="e#13318#14381#0" />
+            <element signature="e#14473#15480#0" />
+            <element signature="e#15554#16089#0" />
+            <element signature="e#16125#16386#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mdn_hub2_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="616">
-          <caret line="531" selection-start-line="531" selection-end-line="531" />
+        <state relative-caret-position="386">
+          <caret line="475" lean-forward="true" selection-start-line="475" selection-end-line="475" />
           <folding>
             <element signature="e#45#56#0" expanded="true" />
+            <element signature="e#795#6815#0" />
           </folding>
         </state>
       </provider>

@@ -446,7 +446,7 @@ def plot_cum_sigma(pred_weights,pred_std,ymax,ymin):
     #y_pred_std = np.sum(pred_std*pred_weights, axis = 1)
 
     weight_max = np.argmax(pred_weights, axis = 1)  ## argmax or max???
-    y_pred_std = np.array([pred_std[i,weight_max[i]] for i in range(len(y_train))])
+    y_pred_std = np.array([pred_std[i,weight_max[i]] for i in range(len(pred_weights[0]))])
     y_pred_std = (ymax - ymin)*(y_pred_std)
     plt.figure(222)
     plt.hist(y_pred_std,100, density=True, histtype='step',
@@ -456,18 +456,18 @@ def plot_cum_sigma(pred_weights,pred_std,ymax,ymin):
 
 
 
-n_epochs = 1000 #1000 #20000 #20000
+n_epochs = 2000 #1000 #20000 #20000
 # N = 4000  # number of data points  -- replaced by num_trai
 D = 5 #6  # number of features  (8 for DES, 6 for COSMOS)
 K = 3 # number of mixture components
 
 
 learning_rate = 5e-3
-decay_rate= .8
+decay_rate= 0.0
 step=100
 
 
-num_train = 8000 #800000
+num_train = 800000 #800000
 num_test = 5000 #10000 #params.num_test # 32
 
 
