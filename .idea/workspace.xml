@@ -89,7 +89,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mdn_hub2_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="386">
+            <state relative-caret-position="-222">
               <caret line="475" lean-forward="true" selection-start-line="475" selection-end-line="475" />
               <folding>
                 <element signature="e#45#56#0" expanded="true" />
@@ -427,7 +427,7 @@
       <window_info anchor="right" id="Commander" order="1" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
-      <window_info anchor="right" id="Python Console" internal_type="SLIDING" order="4" visible="true" weight="0.27685326" />
+      <window_info anchor="right" id="Python Console" internal_type="SLIDING" order="4" weight="0.27685326" />
       <window_info anchor="right" id="R Graphics" order="5" />
       <window_info anchor="right" id="R Packages" order="6" />
     </layout>
@@ -672,7 +672,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mdn_hub2_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="386">
+        <state relative-caret-position="-222">
           <caret line="475" lean-forward="true" selection-start-line="475" selection-end-line="475" />
           <folding>
             <element signature="e#45#56#0" expanded="true" />
