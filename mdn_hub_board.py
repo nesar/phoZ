@@ -28,7 +28,7 @@ tfb = tfp.bijectors
 print(20*'=~')
 sess = tf.Session(config=tf.ConfigProto(log_device_placement=False))
 # writer = tf.summary.FileWriter('./log_dir', sess.graph)
-# tf.contrib.summary.create_file_writer('./log_dir', sess.graph)
+tf.contrib.summary.create_file_writer('./log_dir', sess.graph)
 print(20*'=~')
 
 # if datafile == 'GalaxPy':
@@ -305,14 +305,14 @@ def train(log_likelihood,train_op,n_epoch):
     train_loss = np.zeros(n_epoch)
     test_loss = np.zeros(n_epoch)
     for i in range(n_epoch):
-        _, loss_value = evaluate([train_op, log_likelihood])
-        # summary, loss_value = evaluate([train_op, log_likelihood])
+        # _, loss_value = evaluate([train_op, log_likelihood])
+        summary, loss_value = evaluate([train_op, log_likelihood])
 
         train_loss[i] = loss_value
         # writer.add_summary(summary, i)
     plt.plot(np.arange(n_epoch), -train_loss / len(X_train), label='Train Loss')
     # plt.savefig('../Plots/T_loss_function.pdf')
-    return train_loss
+    return summary, train_loss
 
 
 def get_predictions(logits,locs,scales):
@@ -472,11 +472,30 @@ decay_rate= 0.0
 step=100
 
 
+num_train = 800000 #800000
+num_test = 5000 #10000 #params.num_test # 32
+
+
+save_mod = 'hub_mod_lr_1'+str(learning_rate)+'_dr'+str(decay_rate)+'_step'+str(step)+'_ne'+str(n_epochs)+'_k'+str(K)+'_nt'+str(num_train)
+
+
+n_epochs = 2000 #1000 #20000 #20000
+# N = 4000  # number of data points  -- replaced by num_trai
+D = 5 #6  # number of features  (8 for DES, 6 for COSMOS)
+K = 3 # number of mixture components
+
+
+learning_rate = 5e-3
+decay_rate= 0.0
+step=100
+
+
 num_train = 8000 #800000
 num_test = 5000 #10000 #params.num_test # 32
 
 
-save_mod = 'hub_mod_lr_4'+str(learning_rate)+'_dr'+str(decay_rate)+'_step'+str(step)+'_ne'+str(n_epochs)+'_k'+str(K)+'_nt'+str(num_train)
+save_mod = 'hub_board_lr_1'+str(learning_rate)+'_dr'+str(decay_rate)+'_step'+str(step)+'_ne'+str(n_epochs)+'_k'+str(K)+'_nt'+str(num_train)
+
 
 
 
@@ -496,7 +515,7 @@ neural_network = hub.Module(net_spec,name='neural_network',trainable=True)
 
 log_likelihood, train_op, logits, locs, scales  = mixture_model(X_train,y_train,learning_rate=learning_rate,decay_rate=decay_rate)
 
-train_loss = train(log_likelihood,train_op,n_epochs)
+train_summary, train_loss = train(log_likelihood,train_op,n_epochs)
 #save network
 neural_network.export(save_mod,sess)
 
