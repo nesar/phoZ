@@ -2,29 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7f925e6e-ecce-4da6-8fb4-3e0694de87a0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/mdn_test_compare.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sNMAD_compare.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/checkpoint" beforeDir="false" afterPath="$PROJECT_DIR$/Model/checkpoint" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/log_dir/events.out.tfevents.1567731428.macB.local" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log_dir/events.out.tfevents.1567731465.macB.local" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log_dir/events.out.tfevents.1567731890.macB.local" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log_dir/events.out.tfevents.1567731987.macB.local" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log_dir/events.out.tfevents.1567732110.macB.local" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log_dir/events.out.tfevents.1567732194.macB.local" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log_dir/events.out.tfevents.1567732410.macB.local" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log_dir/events.out.tfevents.1567732555.macB.local" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log_dir/events.out.tfevents.1567733021.macB.local" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log_dir/events.out.tfevents.1567733042.macB.local" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mdn_galaxpy_customLoss.py" beforeDir="false" afterPath="$PROJECT_DIR$/mdn_galaxpy_customLoss.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mdn_galaxpy_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/mdn_galaxpy_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mdn_galaxpy_test_combine.py" beforeDir="false" afterPath="$PROJECT_DIR$/mdn_galaxpy_test_combine.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mdn_hub2.py" beforeDir="false" afterPath="$PROJECT_DIR$/mdn_hub2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mdn_hub2_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/mdn_hub2_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mdn_hub_board.py" beforeDir="false" afterPath="$PROJECT_DIR$/mdn_hub_board.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mixture_density_network.ipynb" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/observations/src/r/gen_src_test_files.sh" beforeDir="false" afterPath="$PROJECT_DIR$/observations/src/r/gen_src_test_files.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phoz_compare.png" beforeDir="false" afterPath="$PROJECT_DIR$/phoz_compare.png" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,8 +16,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mdn_galaxpy_customL.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1740">
-              <caret line="196" selection-start-line="196" selection-end-line="206" selection-end-column="43" />
+            <state relative-caret-position="96">
+              <caret line="189" selection-start-line="189" selection-end-line="189" />
               <folding>
                 <element signature="e#2119#2731#0" />
                 <element signature="e#2762#3274#0" />
@@ -52,19 +31,34 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mdn_hub_board.py">
+        <entry file="file://$PROJECT_DIR$/mdn_galaxpy_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1376">
-              <caret line="389" column="14" lean-forward="true" selection-start-line="389" selection-start-column="14" selection-end-line="389" selection-end-column="14" />
+            <state relative-caret-position="624">
+              <caret line="521" selection-start-line="521" selection-end-line="521" />
+              <folding>
+                <element signature="e#0#38#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mdn_hub_board.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1376">
+              <caret line="389" column="14" selection-start-line="389" selection-start-column="14" selection-end-line="389" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mdn_hub2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="9" lean-forward="true" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
+            <state relative-caret-position="245">
+              <caret line="286" column="37" selection-start-line="286" selection-start-column="37" selection-end-line="286" selection-end-column="37" />
+              <folding>
+                <element signature="e#45#56#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -72,46 +66,32 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mdn_hub2_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" column="36" lean-forward="true" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="36" />
+            <state relative-caret-position="319">
+              <caret line="472" selection-start-line="472" selection-end-line="472" />
               <folding>
                 <element signature="e#45#56#0" expanded="true" />
                 <element signature="e#795#6815#0" />
+                <element signature="e#8085#9115#0" />
+                <element signature="e#9201#10592#0" />
+                <element signature="e#10642#10984#0" />
+                <element signature="e#11032#11162#0" />
+                <element signature="e#11234#12019#0" />
+                <element signature="e#12109#13228#0" />
+                <element signature="e#13318#14381#0" />
+                <element signature="e#14473#15480#0" />
+                <element signature="e#15554#16089#0" />
+                <element signature="e#16125#16386#0" />
+                <element signature="e#16445#16882#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mdn_test_compare.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1483">
-              <caret line="491" lean-forward="true" selection-start-line="491" selection-end-line="491" />
-              <folding>
-                <element signature="e#45#56#0" expanded="true" />
-                <element signature="e#795#6815#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/simple_nn.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3390">
-              <caret line="238" column="68" selection-start-line="238" selection-start-column="68" selection-end-line="238" selection-end-column="68" />
-              <folding>
-                <element signature="e#0#12#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mdn_galaxpy_test_combine.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
+            <state relative-caret-position="603">
+              <caret line="726" column="14" lean-forward="true" selection-start-line="724" selection-start-column="62" selection-end-line="726" selection-end-column="14" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
               </folding>
@@ -234,13 +214,13 @@
         <option value="$PROJECT_DIR$/mdn_galaxpy_customL.py" />
         <option value="$PROJECT_DIR$/mdn_hub.py" />
         <option value="$PROJECT_DIR$/mdn_hub_board.py" />
-        <option value="$PROJECT_DIR$/mdn_hub2_test.py" />
         <option value="$PROJECT_DIR$/mdn_test_compare.py" />
         <option value="$PROJECT_DIR$/mdn_hub2.py" />
+        <option value="$PROJECT_DIR$/mdn_hub2_test.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="x" value="57" />
     <option name="y" value="65" />
     <option name="width" value="1322" />
@@ -405,10 +385,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="57" y="65" width="1322" height="764" extended-state="1" />
+    <frame x="57" y="65" width="1322" height="764" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15733737" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15733737" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Event Log" order="0" side_tool="true" />
@@ -557,16 +537,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mdn_galaxpy_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7815">
-          <caret line="521" selection-start-line="521" selection-end-line="521" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mdn_hub.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
@@ -584,37 +554,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mdn_galaxpy_customL.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1740">
-          <caret line="196" selection-start-line="196" selection-end-line="206" selection-end-column="43" />
-          <folding>
-            <element signature="e#2119#2731#0" />
-            <element signature="e#2762#3274#0" />
-            <element signature="e#3374#4085#0" />
-            <element signature="e#4121#4411#0" />
-            <element signature="e#5013#5524#0" />
-            <element signature="e#9284#15371#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/simple_nn.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3390">
           <caret line="238" column="68" selection-start-line="238" selection-start-column="68" selection-end-line="238" selection-end-column="68" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mdn_galaxpy_test_combine.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -646,39 +591,101 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/mdn_hub_board.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1376">
+          <caret line="389" column="14" selection-start-line="389" selection-start-column="14" selection-end-line="389" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/mdn_test_compare.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1483">
-          <caret line="491" lean-forward="true" selection-start-line="491" selection-end-line="491" />
+        <state relative-caret-position="402">
+          <caret line="486" selection-start-line="486" selection-end-line="486" />
           <folding>
             <element signature="e#45#56#0" expanded="true" />
             <element signature="e#795#6815#0" />
+            <element signature="e#6845#7457#0" />
+            <element signature="e#7525#8051#0" />
+            <element signature="e#8085#9115#0" />
+            <element signature="e#9201#10592#0" />
+            <element signature="e#10642#10984#0" />
+            <element signature="e#11032#11162#0" />
+            <element signature="e#11234#12019#0" />
+            <element signature="e#12109#13371#0" />
+            <element signature="e#13461#14678#0" />
+            <element signature="e#14770#15929#0" />
+            <element signature="e#16003#16538#0" />
+            <element signature="e#16574#16835#0" />
+            <element signature="e#16894#17331#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mdn_hub2_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="36" lean-forward="true" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="36" />
+        <state relative-caret-position="319">
+          <caret line="472" selection-start-line="472" selection-end-line="472" />
           <folding>
             <element signature="e#45#56#0" expanded="true" />
             <element signature="e#795#6815#0" />
+            <element signature="e#8085#9115#0" />
+            <element signature="e#9201#10592#0" />
+            <element signature="e#10642#10984#0" />
+            <element signature="e#11032#11162#0" />
+            <element signature="e#11234#12019#0" />
+            <element signature="e#12109#13228#0" />
+            <element signature="e#13318#14381#0" />
+            <element signature="e#14473#15480#0" />
+            <element signature="e#15554#16089#0" />
+            <element signature="e#16125#16386#0" />
+            <element signature="e#16445#16882#0" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mdn_hub_board.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1376">
-          <caret line="389" column="14" lean-forward="true" selection-start-line="389" selection-start-column="14" selection-end-line="389" selection-end-column="14" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mdn_hub2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="9" lean-forward="true" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
+        <state relative-caret-position="245">
+          <caret line="286" column="37" selection-start-line="286" selection-start-column="37" selection-end-line="286" selection-end-column="37" />
+          <folding>
+            <element signature="e#45#56#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mdn_galaxpy_customL.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="189" selection-start-line="189" selection-end-line="189" />
+          <folding>
+            <element signature="e#2119#2731#0" />
+            <element signature="e#2762#3274#0" />
+            <element signature="e#3374#4085#0" />
+            <element signature="e#4121#4411#0" />
+            <element signature="e#5013#5524#0" />
+            <element signature="e#9284#15371#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mdn_galaxpy_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="624">
+          <caret line="521" selection-start-line="521" selection-end-line="521" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mdn_galaxpy_test_combine.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="603">
+          <caret line="726" column="14" lean-forward="true" selection-start-line="724" selection-start-column="62" selection-end-line="726" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
