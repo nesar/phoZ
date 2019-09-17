@@ -476,12 +476,12 @@ def plot_cum_sigma(pred_weights,pred_std,ymax,ymin):
 # num_test = 5000 #10000 #params.num_test # 32
 #
 #
-# save_mod = 'hub_mod_lr_4'+str(learning_rate)+'_dr'+str(decay_rate)+'_step'+str(step)+'_ne'+str(n_epochs)+'_k'+str(K)+'_nt'+str(num_train)
+# save_mod = 'hub_mod_lr_1'+str(learning_rate)+'_dr'+str(decay_rate)+'_step'+str(step)+'_ne'+str(n_epochs)+'_k'+str(K)+'_nt'+str(num_train)
 #
 
 
 
-n_epochs = 1000 #1000 #20000 #20000
+n_epochs = 100 #1000 #20000 #20000
 # N = 4000  # number of data points  -- replaced by num_trai
 D = 5 #6  # number of features  (8 for DES, 6 for COSMOS)
 K = 3 # number of mixture components
@@ -492,7 +492,7 @@ decay_rate= 0.0
 step=100
 
 
-num_train = 100000 #800000
+num_train = 800000 #800000
 num_test = 5000 #10000 #params.num_test # 32
 
 
