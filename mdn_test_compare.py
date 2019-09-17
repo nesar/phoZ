@@ -1,10 +1,21 @@
 # import matplotlib as mpl
 # mpl.use('Agg')
 
+import math
 import numpy as np
+import string
+from datetime import datetime
+import os
+from astropy.table import Table
 import matplotlib.pyplot as plt;
 import random
+
+
+import matplotlib.axes as axes;
+from matplotlib.patches import Ellipse
+import seaborn as sns;
 from scipy import stats
+from sklearn.model_selection import train_test_split
 import tensorflow as tf
 import tensorflow_hub as hub
 
@@ -17,6 +28,8 @@ tfb = tfp.bijectors
 print(20*'=~')
 sess = tf.Session(config=tf.ConfigProto(log_device_placement=False))
 print(20*'=~')
+
+# if datafile == 'GalaxPy':
 
 def ReadGalaxPy(path_program = '../../Data/fromGalaxev/photozs/datasets/', sim_obs_combine = True):
     import os
@@ -192,6 +205,7 @@ def ReadGalaxPy(path_program = '../../Data/fromGalaxev/photozs/datasets/', sim_o
 
     return X_train, y_train, X_test, y_test, ymax, ymin, xmax, xmin
 
+
 def evaluate(tensors):
     """Evaluates Tensor or EagerTensor to Numpy `ndarray`s.
     Args:
@@ -225,6 +239,8 @@ def plot_normal_mix(pis, mus, sigmas, ax, label='', comp=True):
   ax.legend(fontsize=13)
   return final
 
+
+
 def neural_network_mod():
     """
     loc, scale, logits = NN(x; theta)
@@ -251,6 +267,7 @@ def neural_network_mod():
 
     return locs, scales, logits
 
+
 def mixture_model(X,Y,learning_rate=1e-3,decay_rate=.95,step=1000,train=True):
     if train:
         dict = neural_network(tf.convert_to_tensor(X),as_dict=True)
@@ -264,72 +281,33 @@ def mixture_model(X,Y,learning_rate=1e-3,decay_rate=.95,step=1000,train=True):
 
     y = tfd.Mixture(cat=cat, components=components)
     #define loss function
-
-    with tf.name_scope("loss"):
-
-        log_likelihood = y.log_prob(Y)
-        # log_likelihood = -tf.reduce_sum(log_likelihood/(1. + y_train)**2 )
-        y_mean = np.median(Y)
-        log_likelihood = -tf.reduce_sum(log_likelihood)
-        #log_likelihood = -tf.reduce_sum(log_likelihood*(y_mean-y_train)**4 )
-
-        tf.summary.scalar('loglike', log_likelihood)
-
-    # with tf.name_scope("loss1"):
-    #     log_likelihood1 = log_likelihood/(1. + y_train)**2
-    #     tf.summary.scalar('loglike_rescaled', log_likelihood1)
-
+    log_likelihood = y.log_prob(Y)
+    # log_likelihood = -tf.reduce_sum(log_likelihood/(1. + y_train)**2 )
+    y_mean = np.median(Y)
+    log_likelihood = -tf.reduce_sum(log_likelihood)
+    #log_likelihood = -tf.reduce_sum(log_likelihood*(y_mean-y_train)**4 )
     if train:
         global_step = tf.Variable(0, trainable=False)
         decayed_lr = tf.train.exponential_decay(learning_rate,
                                         global_step, step,
                                         decay_rate, staircase=True)
         optimizer = tf.train.AdamOptimizer(decayed_lr)
-
-
-        with tf.name_scope("train"):
-            train_op = optimizer.minimize(log_likelihood)
-
-        summary_op = tf.summary.merge_all()
-
+        train_op = optimizer.minimize(log_likelihood)
         evaluate(tf.global_variables_initializer())
-        return log_likelihood, train_op, logits, locs, scales, summary_op
+        return log_likelihood, train_op, logits, locs, scales
     else:
         evaluate(tf.global_variables_initializer())
         return log_likelihood, logits, locs, scales
 
-# def train(log_likelihood,train_op,n_epoch):
-#     train_loss = np.zeros(n_epoch)
-#     test_loss = np.zeros(n_epoch)
-#     for i in range(n_epoch):
-#         _, loss_value = evaluate([train_op, log_likelihood])
-#         # summary, loss_value = evaluate([train_op, log_likelihood])
-#
-#         train_loss[i] = loss_value
-#         # writer.add_summary(summary, i)
-#     plt.plot(np.arange(n_epoch), -train_loss / len(X_train), label='Train Loss')
-#     # plt.savefig('../Plots/T_loss_function.pdf')
-#     return train_loss
-
-def train(log_likelihood, train_op, summary_op,n_epoch):
-
-    logs_path = "./log_dir"
-    writer = tf.summary.FileWriter(logs_path, graph=tf.get_default_graph())
-
-
+def train(log_likelihood,train_op,n_epoch):
     train_loss = np.zeros(n_epoch)
     test_loss = np.zeros(n_epoch)
     for i in range(n_epoch):
-        # _, loss_value = evaluate([train_op, log_likelihood])
-        _, summary = evaluate([train_op, summary_op])
-
-        writer.add_summary(summary, n_epoch)
-
-        # train_loss[i] = loss_value
-    # plt.plot(np.arange(n_epoch), -train_loss / len(X_train), label='Train Loss')
+        _, loss_value = evaluate([train_op, log_likelihood])
+        train_loss[i] = loss_value
+    plt.plot(np.arange(n_epoch), -train_loss / len(X_train), label='Train Loss')
     # plt.savefig('../Plots/T_loss_function.pdf')
-    # return train_loss
-    return summary
+    return train_loss
 
 
 def get_predictions(logits,locs,scales):
@@ -372,7 +350,8 @@ def plot_pred_mean(pred_means,pred_weights,pred_std,ymax,ymin,y_train,select='no
 
     # plt.scatter(y_test, y_pred, facecolors='k', s = 1)
 
-    plt.errorbar( (ymax - ymin)*(y_train)+ymin, (ymax - ymin)*(y_pred)+ymin, yerr= (ymax - ymin)*(y_pred_std), fmt='bo', ecolor='r', ms = 2, alpha = 0.1)
+    # plt.errorbar( (ymax - ymin)*(y_train)+ymin, (ymax - ymin)*(y_pred)+ymin, yerr= (ymax - ymin)*(y_pred_std), fmt='bo', ecolor='r', ms = 2, alpha = 0.1)
+    plt.errorbar( (ymax - ymin)*(y_train)+ymin, (ymax - ymin)*(y_pred)+ymin, yerr= (ymax - ymin)*(y_pred_std), fmt='o', ms = 2, alpha = 0.1)
 
     #switched
     #plt.errorbar(  (ymax - ymin)*(y_pred)+ymin, (ymax - ymin)*(y_train)+ymin, yerr= (ymax - ymin)*(y_pred_std), fmt='bo', ecolor='r', ms = 2, alpha = 0.1)
@@ -402,8 +381,13 @@ def plot_pred_peak(pred_means,pred_weights,pred_std,ymax,ymin,y_train,select='no
     #     y_train = y_train[obj]
     #     y_pred_std = y_pred_std[obj]
     # plt.scatter(y_test, y_pred, facecolors='k', s = 1)
+    # plt.errorbar((ymax - ymin)*(y_train)+ymin, (ymax - ymin)*(y_pred)+ymin, yerr= (ymax - ymin)*(
+    #   y_pred_std), fmt='bo', ecolor='r', ms = 2, alpha = 0.1)
+
     plt.errorbar((ymax - ymin)*(y_train)+ymin, (ymax - ymin)*(y_pred)+ymin, yerr= (ymax - ymin)*(
-      y_pred_std), fmt='bo', ecolor='r', ms = 2, alpha = 0.1)
+      y_pred_std), fmt='o', ms = 2, alpha = 0.1)
+
+
     #plt.text(0.2, 0.9, train_datafile + ' trained', horizontalalignment='center', verticalalignment='center')
     plt.plot((ymax - ymin)*(y_test)+ymin, (ymax - ymin)*(y_test)+ymin, 'k')
     plt.ylabel(r'$z_{pred}$', fontsize = 19)
@@ -427,8 +411,11 @@ def plot_pred_weight(pred_means,pred_weights,pred_std,ymax,ymin,y_train,select='
     #     y_pred_std = y_pred_std[obj]
 
     # plt.scatter(y_test, y_pred, facecolors='k', s = 1)
+    # plt.errorbar((ymax - ymin)*(y_train)+ymin, (ymax - ymin)*(y_pred)+ymin, yerr= (ymax - ymin)*(
+    #   y_pred_std), fmt='bo', ecolor='r', ms = 2, alpha = 0.1)
+
     plt.errorbar((ymax - ymin)*(y_train)+ymin, (ymax - ymin)*(y_pred)+ymin, yerr= (ymax - ymin)*(
-      y_pred_std), fmt='bo', ecolor='r', ms = 2, alpha = 0.1)
+      y_pred_std), fmt='o', ms = 2, alpha = 0.1)
 
     #plt.text(0.2, 0.9, train_datafile + ' trained', horizontalalignment='center', verticalalignment='center')
     plt.plot((ymax - ymin)*(y_test)+ymin, (ymax - ymin)*(y_test)+ymin, 'k')
@@ -439,6 +426,7 @@ def plot_pred_weight(pred_means,pred_weights,pred_std,ymax,ymin,y_train,select='
     plt.title('highest weight')
     plt.tight_layout()
     plt.show()
+
 
 def per_stats(pred_means,pred_weights,pred_std,ymax,ymin,y_train):
     y_pred = np.sum(pred_means*pred_weights, axis = 1)
@@ -455,6 +443,7 @@ def per_stats(pred_means,pred_weights,pred_std,ymax,ymin,y_train):
     std_sigma = np.std(y_pred_std)
     return mean_diff, med_diff, std_diff, mean_sigma, med_sigma, std_sigma
 
+
 def testing(X_test,y_test):
 
     log_likelihood,  logits, locs, scales = mixture_model(X_test,y_test,train=False)
@@ -466,7 +455,7 @@ def plot_cum_sigma(pred_weights,pred_std,ymax,ymin):
     #y_pred_std = np.sum(pred_std*pred_weights, axis = 1)
 
     weight_max = np.argmax(pred_weights, axis = 1)  ## argmax or max???
-    y_pred_std = np.array([pred_std[i,weight_max[i]] for i in range(len(pred_weights[0]))])
+    y_pred_std = np.array( [pred_std[i,weight_max[i] ] for i in range(len(pred_weights[0]))])
     y_pred_std = (ymax - ymin)*(y_pred_std)
     plt.figure(222)
     plt.hist(y_pred_std,100, density=True, histtype='step',
@@ -476,15 +465,26 @@ def plot_cum_sigma(pred_weights,pred_std,ymax,ymin):
 
 
 
-n_epochs = 3000
-D = 5
-K = 3
+
+#### MODEL 1 ######
+
+n_epochs = 1000 #1000 #20000 #20000
+# N = 4000  # number of data points  -- replaced by num_trai
+D = 5 #6  # number of features  (8 for DES, 6 for COSMOS)
+K = 3 # number of mixture components
+
+
 learning_rate = 5e-3
 decay_rate= 0.0
 step=100
-num_train = 12000
-num_test = 5000
-save_mod = 'hub_mod_lr_334'+str(learning_rate)+'_dr'+str(decay_rate)+'_step'+str(step)+'_ne'+str(n_epochs)+'_k'+str(K)+'_nt'+str(num_train)
+
+
+num_train = 100000 #800000
+num_test = 10000 #10000 #params.num_test # 32
+
+
+save_mod = 'hub_mod_lr_1'+str(learning_rate)+'_dr'+str(decay_rate)+'_step'+str(step)+'_ne'+str(n_epochs)+'_k'+str(K)+'_nt'+str(num_train)
+
 
 
 
@@ -501,35 +501,126 @@ print("Size of output in test data: {}".format(y_test.shape))
 
 net_spec = hub.create_module_spec(neural_network_mod)
 neural_network = hub.Module(net_spec,name='neural_network',trainable=True)
-log_likelihood, train_op, logits, locs, scales, summary_op  = mixture_model(X_train,y_train,learning_rate=learning_rate,decay_rate=decay_rate)
+
+# log_likelihood, train_op, logits, locs, scales  = mixture_model(X_train,y_train,learning_rate=learning_rate,decay_rate=decay_rate)
+
 # train_loss = train(log_likelihood,train_op,n_epochs)
-train(log_likelihood, train_op, summary_op,n_epochs)
-
-print ('lalalala')
-
-
 #save network
-neural_network.export(save_mod,sess)
-pred_weights, pred_means, pred_std = get_predictions(logits, locs, scales)
-print(pred_means)
+# neural_network.export(save_mod,sess)
 
-plot_pdfs(pred_means,pred_weights,pred_std)
-plot_pred_mean(pred_means,pred_weights,pred_std,ymax,ymin,y_train)
-mean_diff, med_diff, std_diff, mean_sigma, med_sigma, std_sigma = per_stats(pred_means,pred_weights,pred_std,ymax,ymin,y_train)
-plot_cum_sigma(pred_weights,pred_std,ymax,ymin)
-plot_pred_peak(pred_means,pred_weights,pred_std,ymax,ymin,y_train)
-plot_pred_weight(pred_means,pred_weights,pred_std,ymax,ymin,y_train)
+# pred_weights, pred_means, pred_std = get_predictions(logits, locs, scales)
+# print(pred_means)
+#
+# plot_pdfs(pred_means,pred_weights,pred_std)
+#
+# plot_pred_mean(pred_means,pred_weights,pred_std,ymax,ymin,y_train)
+#
+# mean_diff, med_diff, std_diff, mean_sigma, med_sigma, std_sigma = per_stats(pred_means,pred_weights,pred_std,ymax,ymin,y_train)
+#
+# plot_cum_sigma(pred_weights,pred_std,ymax,ymin)
+#
+#
+# plot_pred_peak(pred_means,pred_weights,pred_std,ymax,ymin,y_train)
+# plot_pred_weight(pred_means,pred_weights,pred_std,ymax,ymin,y_train)
 
 #load network
 neural_network_t = hub.Module(save_mod)
+
+
 ##testing
 
 
 test_weights, test_means, test_std = testing(X_test,y_test)
 plot_pdfs(test_means,test_weights,test_std,train=False)
+
 plot_pred_mean(test_means,test_weights,test_std,ymax,ymin,y_test)
+
 plot_cum_sigma(test_weights,test_std,ymax,ymin)
+
 test_mean_diff, test_med_diff, test_std_diff, test_mean_sigma, test_med_sigma, test_std_sigma = per_stats(test_means,test_weights,test_std,ymax,ymin,y_test)
+
 plot_pred_peak(test_means,test_weights,test_std,ymax,ymin,y_test)
 plot_pred_weight(test_means,test_weights,test_std,ymax,ymin,y_test)
+
+
+
+##### MODEL 2 ####
+
+
+
+n_epochs = 1000 #1000 #20000 #20000
+# N = 4000  # number of data points  -- replaced by num_trai
+D = 5 #6  # number of features  (8 for DES, 6 for COSMOS)
+K = 3 # number of mixture components
+
+
+learning_rate = 5e-3
+decay_rate= 0.0
+step=100
+
+
+num_train = 100000 #800000
+num_test = 10000 #10000 #params.num_test # 32
+
+
+save_mod = 'hub_mod_lr_2'+str(learning_rate)+'_dr'+str(decay_rate)+'_step'+str(step)+'_ne'+str(n_epochs)+'_k'+str(K)+'_nt'+str(num_train)
+
+
+
+
+
+############training
+
+# X_train, y_train, X_test, y_test, ymax, ymin, xmax, xmin = ReadGalaxPy(path_program = '../../Data/fromGalaxev/photozs/datasets/', sim_obs_combine = False)
+#
+# print("Size of features in training data: {}".format(X_train.shape))
+# print("Size of output in training data: {}".format(y_train.shape))
+# print("Size of features in test data: {}".format(X_test.shape))
+# print("Size of output in test data: {}".format(y_test.shape))
+
+
+
+net_spec = hub.create_module_spec(neural_network_mod)
+neural_network = hub.Module(net_spec,name='neural_network',trainable=True)
+
+# log_likelihood_2, train_op_2, logits_2, locs_2, scales_2  = mixture_model(X_train,y_train,learning_rate=learning_rate,decay_rate=decay_rate)
+
+# train_loss = train(log_likelihood,train_op,n_epochs)
+#save network
+# neural_network.export(save_mod,sess)
+
+# pred_weights, pred_means, pred_std = get_predictions(logits, locs, scales)
+# print(pred_means)
+#
+# plot_pdfs(pred_means,pred_weights,pred_std)
+#
+# plot_pred_mean(pred_means,pred_weights,pred_std,ymax,ymin,y_train)
+#
+# mean_diff, med_diff, std_diff, mean_sigma, med_sigma, std_sigma = per_stats(pred_means,pred_weights,pred_std,ymax,ymin,y_train)
+#
+# plot_cum_sigma(pred_weights,pred_std,ymax,ymin)
+#
+#
+# plot_pred_peak(pred_means,pred_weights,pred_std,ymax,ymin,y_train)
+# plot_pred_weight(pred_means,pred_weights,pred_std,ymax,ymin,y_train)
+
+#load network
+neural_network_t = hub.Module(save_mod)
+
+
+##testing
+
+
+test_weights, test_means, test_std = testing(X_test,y_test)
+plot_pdfs(test_means,test_weights,test_std,train=False)
+
+plot_pred_mean(test_means,test_weights,test_std,ymax,ymin,y_test)
+
+plot_cum_sigma(test_weights,test_std,ymax,ymin)
+
+test_mean_diff, test_med_diff, test_std_diff, test_mean_sigma, test_med_sigma, test_std_sigma = per_stats(test_means,test_weights,test_std,ymax,ymin,y_test)
+
+plot_pred_peak(test_means,test_weights,test_std,ymax,ymin,y_test)
+plot_pred_weight(test_means,test_weights,test_std,ymax,ymin,y_test)
+
 

@@ -456,22 +456,23 @@ def plot_cum_sigma(pred_weights,pred_std,ymax,ymin):
 
 
 
-n_epochs = 2000 #1000 #20000 #20000
-# N = 4000  # number of data points  -- replaced by num_trai
-D = 5 #6  # number of features  (8 for DES, 6 for COSMOS)
-K = 3 # number of mixture components
+# n_epochs = 2000 #1000 #20000 #20000
+# # N = 4000  # number of data points  -- replaced by num_trai
+# D = 5 #6  # number of features  (8 for DES, 6 for COSMOS)
+# K = 3 # number of mixture components
+#
+#
+# learning_rate = 5e-3
+# decay_rate= 0.0
+# step=100
+#
+#
+# num_train = 800000 #800000
+# num_test = 5000 #10000 #params.num_test # 32
+#
+#
+# save_mod = 'hub_mod_lr_1'+str(learning_rate)+'_dr'+str(decay_rate)+'_step'+str(step)+'_ne'+str(n_epochs)+'_k'+str(K)+'_nt'+str(num_train)
 
-
-learning_rate = 5e-3
-decay_rate= 0.0
-step=100
-
-
-num_train = 800000 #800000
-num_test = 5000 #10000 #params.num_test # 32
-
-
-save_mod = 'hub_mod_lr_1'+str(learning_rate)+'_dr'+str(decay_rate)+'_step'+str(step)+'_ne'+str(n_epochs)+'_k'+str(K)+'_nt'+str(num_train)
 
 
 
@@ -490,7 +491,8 @@ num_train = 100000 #800000
 num_test = 5000 #10000 #params.num_test # 32
 
 
-save_mod = 'hub_mod_lr_1'+str(learning_rate)+'_dr'+str(decay_rate)+'_step'+str(step)+'_ne'+str(n_epochs)+'_k'+str(K)+'_nt'+str(num_train)
+save_mod = 'hub_mod_lr_2'+str(learning_rate)+'_dr'+str(decay_rate)+'_step'+str(step)+'_ne'+str(n_epochs)+'_k'+str(K)+'_nt'+str(num_train)
+
 
 
 
@@ -509,7 +511,7 @@ print("Size of output in test data: {}".format(y_test.shape))
 net_spec = hub.create_module_spec(neural_network_mod)
 neural_network = hub.Module(net_spec,name='neural_network',trainable=True)
 
-log_likelihood, train_op, logits, locs, scales  = mixture_model(X_train,y_train,learning_rate=learning_rate,decay_rate=decay_rate)
+# log_likelihood, train_op, logits, locs, scales  = mixture_model(X_train,y_train,learning_rate=learning_rate,decay_rate=decay_rate)
 
 # train_loss = train(log_likelihood,train_op,n_epochs)
 #save network
