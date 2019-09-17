@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7f925e6e-ecce-4da6-8fb4-3e0694de87a0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/mdn_test-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/mdn_test-checkpoint.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/README.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/README.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Testing/mdn_test.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/mdn_test.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/observations/src/r/gen_src_test_files.sh" beforeDir="false" afterPath="$PROJECT_DIR$/observations/src/r/gen_src_test_files.sh" afterDir="false" />
     </list>
@@ -92,8 +90,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mdn_galaxpy_test_combine.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1065">
-              <caret line="785" column="92" lean-forward="true" selection-start-line="732" selection-end-line="785" selection-end-column="92" />
+            <state relative-caret-position="262">
+              <caret line="800" selection-start-line="800" selection-end-line="811" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
               </folding>
@@ -683,8 +681,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mdn_galaxpy_test_combine.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1065">
-          <caret line="785" column="92" lean-forward="true" selection-start-line="732" selection-end-line="785" selection-end-column="92" />
+        <state relative-caret-position="262">
+          <caret line="800" selection-start-line="800" selection-end-line="811" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
           </folding>
