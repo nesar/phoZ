@@ -492,11 +492,11 @@ decay_rate= 0.0
 step=100
 
 
-num_train = 800000 #800000
-num_test = 5000 #10000 #params.num_test # 32
+num_train = 12000000 #800000
+num_test = 5000 #params.num_test # 32
 
 
-syntheticTrain = True ## (sim_obs_combine) True -- train using GalaxyPy, False -- train using
+syntheticTrain = True #False ## (sim_obs_combine) True -- train using GalaxyPy, False -- train using
 
 save_mod = 'hub_mod_Synthetic_'+str(syntheticTrain)+'_lr_'+str(learning_rate)+'_dr'+str(decay_rate)+'_step'+str(step)+'_ne'+str(n_epochs)+'_k'+str(K)+'_nt'+str(num_train)
 
