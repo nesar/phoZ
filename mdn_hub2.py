@@ -481,14 +481,14 @@ def plot_cum_sigma(pred_weights,pred_std,ymax,ymin):
 
 
 
-n_epochs = 10000 #100000 #1000 #20000 #20000
+n_epochs = 20000 #100000 #1000 #20000 #20000
 # N = 4000  # number of data points  -- replaced by num_trai
 D = 5 #6  # number of features  (8 for DES, 6 for COSMOS)
 K = 3 # number of mixture components
 
 
-learning_rate = 1e-3 #5e-3
-decay_rate= 0.05 #0.0
+learning_rate = 1e-4 #5e-3
+decay_rate= 0.01 #0.0
 step=100
 
 
@@ -496,7 +496,7 @@ num_train = 800000 #12000000 #800000
 num_test = 5000 #params.num_test # 32
 
 
-syntheticTrain = False # True # (sim_obs_combine) True -- train using GalaxyPy, False -- train using
+syntheticTrain = True # True # (sim_obs_combine) True -- train using GalaxyPy, False -- train using
 
 save_mod = 'hub_mod_Synthetic_'+str(syntheticTrain)+'_lr_'+str(learning_rate)+'_dr'+str(decay_rate)+'_step'+str(step)+'_ne'+str(n_epochs)+'_k'+str(K)+'_nt'+str(num_train)
 
