@@ -1,6 +1,10 @@
 import numpy as np
 import matplotlib.pylab as plt
 from matplotlib import ticker
+from itertools import cycle
+from cycler import cycler
+
+
 np.set_printoptions(precision=3)
 
 
@@ -41,6 +45,7 @@ def set_pub():
     
     #plt.rcParams.update({'font.size': 15})
     #plt.rcParams['axes.color_cycle'] = [ 'navy', 'forestgreen', 'darkred']
+    plt.rc('axes', prop_cycle=(cycler('color', list('rbgk')) + cycler('linestyle', ['-', '--', ':', '-.'])))
 
 
 #import SetPub

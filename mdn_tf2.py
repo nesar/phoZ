@@ -19,14 +19,14 @@ from sklearn.model_selection import train_test_split
 import tensorflow as tf
 import tensorflow_hub as hub
 
-tf.logging.set_verbosity(tf.logging.ERROR)
+#tf.logging.set_verbosity(tf.logging.ERROR)
 import tensorflow_probability as tfp
 
 tfd = tfp.distributions
 tfb = tfp.bijectors
 
 print(20*'=~')
-sess = tf.Session(config=tf.ConfigProto(log_device_placement=False))
+#sess = tf.Session(config=tf.ConfigProto(log_device_placement=False))
 # writer = tf.summary.FileWriter('./log_dir', sess.graph)
 # tf.contrib.summary.create_file_writer('./log_dir', sess.graph)
 print(20*'=~')
@@ -207,23 +207,23 @@ def ReadGalaxPy(path_program = '../../Data/fromGalaxev/photozs/datasets/', sim_o
 
     return X_train, y_train, X_test, y_test, ymax, ymin, xmax, xmin
 
-
-def evaluate(tensors):
-    """Evaluates Tensor or EagerTensor to Numpy `ndarray`s.
-    Args:
-    tensors: Object of `Tensor` or EagerTensor`s; can be `list`, `tuple`,
-      `namedtuple` or combinations thereof.
-
-    Returns:
-      ndarrays: Object with same structure as `tensors` except with `Tensor` or
-        `EagerTensor`s replaced by Numpy `ndarray`s.
-    """
-    if tf.executing_eagerly():
-        return tf.contrib.framework.nest.pack_sequence_as(
-            tensors,
-            [t.numpy() if tf.contrib.framework.is_tensor(t) else t
-             for t in tf.contrib.framework.nest.flatten(tensors)])
-    return sess.run(tensors)
+#
+#def evaluate(tensors):
+#    """Evaluates Tensor or EagerTensor to Numpy `ndarray`s.
+#    Args:
+#    tensors: Object of `Tensor` or EagerTensor`s; can be `list`, `tuple`,
+#      `namedtuple` or combinations thereof.
+#
+#    Returns:
+#      ndarrays: Object with same structure as `tensors` except with `Tensor` or
+#        `EagerTensor`s replaced by Numpy `ndarray`s.
+#    """
+#    if tf.executing_eagerly():
+#        return tf.contrib.framework.nest.pack_sequence_as(
+#            tensors,
+#            [t.numpy() if tf.contrib.framework.is_tensor(t) else t
+#             for t in tf.contrib.framework.nest.flatten(tensors)])
+#    return sess.run(tensors)
 
 def plot_normal_mix(pis, mus, sigmas, ax, label='', comp=True):
   """Plots the mixture of Normal models to axis=ax comp=True plots all
@@ -256,7 +256,9 @@ def neural_network_mod():
       logits: The probabilities of ou categorical distribution that decides
         which normal distribution our data points most probably belong to.
     """
-    X = tf.placeholder(tf.float64,name='X',shape=(None,D))
+    #X = tf.placeholder(tf.float64,name='X',shape=(None,D))
+    X = tf.random.normal(shape=(D))
+
     # 2 hidden layers with 15 hidden units
     net = tf.layers.dense(X, 32, activation=tf.nn.relu)
     net = tf.layers.dense(net, 16, activation=tf.nn.relu)
@@ -522,7 +524,7 @@ log_likelihood, train_op, logits, locs, scales  = mixture_model(X_train,y_train,
 
 train_loss = train(log_likelihood,train_op,n_epochs)
 #save network
-neural_network.export(save_mod,sess)
+#neural_network.export(save_mod,sess)
 
 pred_weights, pred_means, pred_std = get_predictions(logits, locs, scales)
 print(pred_means)
