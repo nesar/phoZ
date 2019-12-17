@@ -5,6 +5,9 @@
       <change beforePath="$PROJECT_DIR$/Testing/mdn_test-cosmos.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/mdn_test-cosmos.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mdn_hub3.py" beforeDir="false" afterPath="$PROJECT_DIR$/mdn_hub3.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/observations/src/r/gen_src_test_files.sh" beforeDir="false" afterPath="$PROJECT_DIR$/observations/src/r/gen_src_test_files.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_hubs/cosmos_Synthetic_True_lr_0.0001_dr0.01_step100_ne100_k3_nt2900/saved_model.pb" beforeDir="false" afterPath="$PROJECT_DIR$/saved_hubs/cosmos_Synthetic_True_lr_0.0001_dr0.01_step100_ne100_k3_nt2900/saved_model.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_hubs/cosmos_Synthetic_True_lr_0.0001_dr0.01_step100_ne100_k3_nt2900/variables/variables.data-00000-of-00001" beforeDir="false" afterPath="$PROJECT_DIR$/saved_hubs/cosmos_Synthetic_True_lr_0.0001_dr0.01_step100_ne100_k3_nt2900/variables/variables.data-00000-of-00001" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_hubs/cosmos_Synthetic_True_lr_0.0001_dr0.01_step100_ne100_k3_nt2900/variables/variables.index" beforeDir="false" afterPath="$PROJECT_DIR$/saved_hubs/cosmos_Synthetic_True_lr_0.0001_dr0.01_step100_ne100_k3_nt2900/variables/variables.index" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,8 +41,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mdn_hub3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="560" column="36" selection-start-line="560" selection-start-column="36" selection-end-line="560" selection-end-column="36" />
+            <state relative-caret-position="430">
+              <caret line="551" column="37" selection-end-line="626" />
+              <folding>
+                <element signature="e#0#24#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -696,8 +702,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mdn_hub3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="560" column="36" selection-start-line="560" selection-start-column="36" selection-end-line="560" selection-end-column="36" />
+        <state relative-caret-position="430">
+          <caret line="551" column="37" selection-end-line="626" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
