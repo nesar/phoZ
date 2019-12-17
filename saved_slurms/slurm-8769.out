@@ -1,0 +1,46 @@
+[0] setting up environment
+2019-10-01 18:30:27.376466: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
+2019-10-01 18:30:27.392663: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2099925000 Hz
+2019-10-01 18:30:27.398635: I tensorflow/compiler/xla/service/service.cc:150] XLA service 0x7fa37423f8b0 executing computations on platform Host. Devices:
+2019-10-01 18:30:27.398692: I tensorflow/compiler/xla/service/service.cc:158]   StreamExecutor device (0): <undefined>, <undefined>
+2019-10-01 18:30:28.123638: I tensorflow/compiler/xla/service/service.cc:150] XLA service 0x7fa3742ef120 executing computations on platform CUDA. Devices:
+2019-10-01 18:30:28.123681: I tensorflow/compiler/xla/service/service.cc:158]   StreamExecutor device (0): Tesla P100-PCIE-16GB, Compute Capability 6.0
+2019-10-01 18:30:28.123926: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1433] Found device 0 with properties: 
+name: Tesla P100-PCIE-16GB major: 6 minor: 0 memoryClockRate(GHz): 1.3285
+pciBusID: 0000:83:00.0
+totalMemory: 15.90GiB freeMemory: 15.64GiB
+2019-10-01 18:30:28.123958: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1512] Adding visible gpu devices: 0
+2019-10-01 18:30:28.127604: I tensorflow/core/common_runtime/gpu/gpu_device.cc:984] Device interconnect StreamExecutor with strength 1 edge matrix:
+2019-10-01 18:30:28.127628: I tensorflow/core/common_runtime/gpu/gpu_device.cc:990]      0 
+2019-10-01 18:30:28.127638: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1003] 0:   N 
+2019-10-01 18:30:28.127795: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1115] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 15216 MB memory) -> physical GPU (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:83:00.0, compute capability: 6.0)
+2019-10-01 18:30:32.606076: I tensorflow/stream_executor/dso_loader.cc:152] successfully opened CUDA library libcublas.so.10.0 locally
+
+WARNING: The TensorFlow contrib module will not be included in TensorFlow 2.0.
+For more information, please see:
+  * https://github.com/tensorflow/community/blob/master/rfcs/20180907-contrib-sunset.md
+  * https://github.com/tensorflow/addons
+If you depend on functionality not listed there, please file an issue.
+
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~
+(6304534, 6)
+(7237871, 6)
+(456685, 5)
+(423353, 5)
+Size of features in training data: (800000, 5)
+Size of output in training data: (800000,)
+Size of features in test data: (4999, 5)
+Size of output in test data: (4999,)
+[[0.09363944 0.50232942 0.13515936]
+ [0.09569105 0.49172183 0.14494831]
+ [0.0702027  0.47127983 0.08395711]
+ ...
+ [0.27128323 0.35714184 0.22159198]
+ [0.08256028 0.49466703 0.11636378]
+ [0.1896431  0.33952584 0.14230269]]
+[796699, 697920, 272738, 779415, 400145, 329186]
+[208, 3906, 3769, 1486, 3427, 131]
+/homes/nramachandra/anaconda3/envs/tf_gpu/lib/python3.6/site-packages/matplotlib/figure.py:445: UserWarning: Matplotlib is currently using agg, which is a non-GUI backend, so cannot show the figure.
+  % get_backend())
+[7000] End job
