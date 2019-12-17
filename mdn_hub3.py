@@ -1,5 +1,5 @@
 import matplotlib as mpl
-mpl.use('Agg')
+# mpl.use('Agg')
 
 import math
 import numpy as np
@@ -32,161 +32,225 @@ sess = tf.Session(config=tf.ConfigProto(log_device_placement=False))
 print(20*'=~')
 
 # if datafile == 'GalaxPy':
+####### THIS IS A WORKING VERSION -- with mags
+#
+#
+# def ReadGalaxPy(path_program = '../../Data/fromGalaxev/photozs/datasets/', sim_obs_combine = True):
+#     import os
+#     import sys
+#     import glob
+#     from astropy.table import Table
+#
+#     # path_program = '../../Data/fromGalaxev/photozs/datasets/'
+#
+#
+#     class Curated_sample():
+#         ''' Class to store the redshift and colors of observed galaxies,
+#             and the redshift, Mpeak, colors, and "weights" of simulated
+#             galaxies whose colors are compatible with those of observed
+#             galaxies.
+#
+#             The observed sample include galaxies from SDSS
+#             (SDSS+BOSS+eBOSS), DEEP2, and VIPERS.
+#
+#             The simulated sample was created by sampling the parameter of
+#             GALAXPY using a LH.
+#
+#             The weights of simulated galaxies are related to the number
+#             density of observed galaxies in the same region of the color
+#             space.
+#
+#             You only have to care about the method load_structure. '''
+#
+#         def __init__(self):
+#             self.arr_c = []
+#             self.arr_z = []
+#             self.arr_m = []
+#             self.arr_w = []
+#
+#         def append(self, c, z, m, w):
+#             self.arr_c.append(c)
+#             self.arr_z.append(z)
+#             self.arr_m.append(m)
+#             self.arr_w.append(w)
+#
+#         def ndarray(self):
+#             self.arr_c = np.concatenate(self.arr_c)
+#             self.arr_z = np.concatenate(self.arr_z)
+#             self.arr_m = np.concatenate(self.arr_m)
+#             self.arr_w = np.concatenate(self.arr_w)
+#
+#         def save_struct(self, name):
+#             np.save(name + 'c.npy', self.arr_c)
+#             np.save(name + 'z.npy', self.arr_z)
+#             np.save(name + 'm.npy', self.arr_m)
+#             np.save(name + 'w.npy', self.arr_w)
+#
+#         def load_struct(self, name):
+#             self.arr_c = np.load(name + 'c.npy')
+#             self.arr_z = np.load(name + 'z.npy')
+#             self.arr_m = np.load(name + 'm.npy')
+#             self.arr_w = np.load(name + 'w.npy')
+#
+#         def duplicate_data(self, zrange):
+#             aa = np.where((self.arr_w > 50)
+#                           & (self.arr_z >= zrange[0])
+#                           & (self.arr_z < zrange[1]))[0]
+#             print(aa.shape)
+#             cc = np.repeat(aa, self.arr_w[aa].astype(int))
+#             self.arr_cn = self.arr_c[cc, :]
+#             self.arr_zn = self.arr_z[cc]
+#             self.arr_mn = self.arr_m[cc]
+#
+#
+#     def read_curated_data():
+#         run_path = path_program + 'runs/run_z3/'
+#
+#         sim_q = Curated_sample()  # simulated colors quenched galaxies
+#         sim_s = Curated_sample()  # simulated colors star-forming galaxies
+#         obs_q = Curated_sample()  # observed colors quenched galaxies
+#         obs_s = Curated_sample()  # observed colors star-forming galaxies
+#
+#         obs_q.load_struct(run_path + 'str_obs_q')
+#         obs_s.load_struct(run_path + 'str_obs_s')
+#         sim_q.load_struct(run_path + 'str_sim_q')
+#         sim_s.load_struct(run_path + 'str_sim_s')
+#
+#         print(sim_q.arr_c.shape)
+#         print(sim_s.arr_c.shape)
+#         print(obs_q.arr_c.shape)
+#         print(obs_s.arr_c.shape)
+#
+#         return sim_q, sim_s, obs_q, obs_s
+#
+#
+#     sim_q, sim_s, obs_q, obs_s = read_curated_data()
+#
+#     if sim_obs_combine:
+#         train_datafile = 'GalaxPy'
+#
+#         # 2.0 ####### TRAIN USING SIMULATION, TEST OBSERVATION ####
+#
+#         Trainfiles = np.append(sim_q.arr_c, sim_s.arr_c, axis=0)
+#         TrainZ = np.append(sim_q.arr_z, sim_s.arr_z, axis=0)
+#
+#         Trainfiles = np.delete(Trainfiles, (4), axis=1)  ## deleting z-Y
+#
+#         Testfiles = np.append(obs_q.arr_c, obs_s.arr_c, axis=0)
+#         TestZ = np.append(obs_q.arr_z, obs_s.arr_z, axis=0)
+#
+#         TrainshuffleOrder = np.arange(Trainfiles.shape[0])
+#         np.random.shuffle(TrainshuffleOrder)
+#
+#         Trainfiles = Trainfiles[TrainshuffleOrder]
+#         TrainZ = TrainZ[TrainshuffleOrder]
+#
+#         TestshuffleOrder = np.arange(Testfiles.shape[0])
+#         np.random.shuffle(TestshuffleOrder)
+#
+#         Testfiles = Testfiles[TestshuffleOrder]
+#         TestZ = TestZ[TestshuffleOrder]
+#
+#         X_train = Trainfiles[:num_train]  # color mag
+#         X_test = Trainfiles[:num_test]  # color mag
+#
+#         y_train = TrainZ[:num_train]  # spec z
+#         y_test = TrainZ[:num_test]  # spec z
+#
+#     else:
+#         train_datafile = 'SDSS'
+#         # 1.1 ####### SIMULATED: QUENCHED ONLY ############
+#         # Trainfiles = sim_q.arr_c
+#         # TrainZ = sim_q.arr_z
+#
+#         # 1.2 ### SIMULATED: QUENCHED + STAR FORMATION ####
+#
+#         # Trainfiles =np.append( sim_q.arr_c, sim_s.arr_c, axis = 0)
+#         # TrainZ = np.append( sim_q.arr_z, sim_s.arr_z, axis = 0)
+#
+#         # 1.3 ####### OBSERVED: QUENCHED + STAR FORMATION ####
+#
+#         Trainfiles = np.append(obs_q.arr_c, obs_s.arr_c, axis=0)
+#         TrainZ = np.append(obs_q.arr_z, obs_s.arr_z, axis=0)
+#
+#         TrainshuffleOrder = np.arange(Trainfiles.shape[0])
+#         np.random.shuffle(TrainshuffleOrder)
+#
+#         Trainfiles = Trainfiles[TrainshuffleOrder]
+#         TrainZ = TrainZ[TrainshuffleOrder]
+#
+#         # 1 #################################
+#
+#         X_train = Trainfiles[:num_train]  # color mag
+#         X_test = Trainfiles[num_train + 1: num_train + num_test]  # color mag
+#
+#         X_train = Trainfiles[:num_train]  # color mag
+#         X_test = Trainfiles[num_train + 1: num_train + num_test]  # color mag
+#
+#         y_train = TrainZ[:num_train]  # spec z
+#         y_test = TrainZ[num_train + 1: num_train + num_test]  # spec z
+#
+#     ############## THINGS ARE SAME AFTER THIS ###########
+#
+#     ## rescaling xmax/xmin
+#     xmax = np.max([np.max(X_train, axis=0), np.max(X_test, axis=0)], axis=0)
+#     xmin = np.min([np.min(X_train, axis=0), np.min(X_test, axis=0)], axis=0)
+#
+#     X_train = (X_train - xmin) / (xmax - xmin)
+#     X_test = (X_test - xmin) / (xmax - xmin)
+#
+#     #### RESCALING X_train, X_test NOT done yet -- (g-i), (r-i) ... and i mag -->> Color/Mag issue
+#
+#     ymax = np.max([y_train.max(), y_test.max()])
+#     ymin = np.min([y_train.min(), y_test.min()])
+#
+#     y_train = (y_train - ymin) / (ymax - ymin)
+#     y_test = (y_test - ymin) / (ymax - ymin)
+#
+#     return X_train, y_train, X_test, y_test, ymax, ymin, xmax, xmin
+#
+#
+#
 
-def ReadGalaxPy(path_program = '../../Data/fromGalaxev/photozs/datasets/', sim_obs_combine = True):
-    import os
-    import sys
-    import glob
-    from astropy.table import Table
 
-    # path_program = '../../Data/fromGalaxev/photozs/datasets/'
+def ReadCosmos(path_program = '../../Data/fromGalaxev/photozs/datasets/'):
 
 
-    class Curated_sample():
-        ''' Class to store the redshift and colors of observed galaxies,
-            and the redshift, Mpeak, colors, and "weights" of simulated
-            galaxies whose colors are compatible with those of observed
-            galaxies.
+    fileIn = path_program + 'new_cosmos_sdss/all_col_cosmos.npy'
+    TrainfilesAll = np.load(fileIn)
 
-            The observed sample include galaxies from SDSS
-            (SDSS+BOSS+eBOSS), DEEP2, and VIPERS.
+    fileInZ = path_program + 'new_cosmos_sdss/redshifts.npy'
+    TrainZAll = np.load(fileInZ)
 
-            The simulated sample was created by sampling the parameter of
-            GALAXPY using a LH.
+    Trainfiles = np.empty(shape=(TrainfilesAll.shape[0]*TrainfilesAll.shape[1], TrainfilesAll.shape[2] + 1))
 
-            The weights of simulated galaxies are related to the number
-            density of observed galaxies in the same region of the color
-            space.
-
-            You only have to care about the method load_structure. '''
-
-        def __init__(self):
-            self.arr_c = []
-            self.arr_z = []
-            self.arr_m = []
-            self.arr_w = []
-
-        def append(self, c, z, m, w):
-            self.arr_c.append(c)
-            self.arr_z.append(z)
-            self.arr_m.append(m)
-            self.arr_w.append(w)
-
-        def ndarray(self):
-            self.arr_c = np.concatenate(self.arr_c)
-            self.arr_z = np.concatenate(self.arr_z)
-            self.arr_m = np.concatenate(self.arr_m)
-            self.arr_w = np.concatenate(self.arr_w)
-
-        def save_struct(self, name):
-            np.save(name + 'c.npy', self.arr_c)
-            np.save(name + 'z.npy', self.arr_z)
-            np.save(name + 'm.npy', self.arr_m)
-            np.save(name + 'w.npy', self.arr_w)
-
-        def load_struct(self, name):
-            self.arr_c = np.load(name + 'c.npy')
-            self.arr_z = np.load(name + 'z.npy')
-            self.arr_m = np.load(name + 'm.npy')
-            self.arr_w = np.load(name + 'w.npy')
-
-        def duplicate_data(self, zrange):
-            aa = np.where((self.arr_w > 50)
-                          & (self.arr_z >= zrange[0])
-                          & (self.arr_z < zrange[1]))[0]
-            print(aa.shape)
-            cc = np.repeat(aa, self.arr_w[aa].astype(int))
-            self.arr_cn = self.arr_c[cc, :]
-            self.arr_zn = self.arr_z[cc]
-            self.arr_mn = self.arr_m[cc]
+    for galID in range(TrainfilesAll.shape[0]):
+        trainfiles100 = np.append(TrainfilesAll[galID, :, :], TrainZAll[:, None], axis=1)
+        Trainfiles[galID*TrainfilesAll.shape[1]: galID*TrainfilesAll.shape[1] + TrainfilesAll.shape[1]] = trainfiles100
 
 
-    def read_curated_data():
-        run_path = path_program + 'runs/run_z3/'
-
-        sim_q = Curated_sample()  # simulated colors quenched galaxies
-        sim_s = Curated_sample()  # simulated colors star-forming galaxies
-        obs_q = Curated_sample()  # observed colors quenched galaxies
-        obs_s = Curated_sample()  # observed colors star-forming galaxies
-
-        obs_q.load_struct(run_path + 'str_obs_q')
-        obs_s.load_struct(run_path + 'str_obs_s')
-        sim_q.load_struct(run_path + 'str_sim_q')
-        sim_s.load_struct(run_path + 'str_sim_s')
-
-        print(sim_q.arr_c.shape)
-        print(sim_s.arr_c.shape)
-        print(obs_q.arr_c.shape)
-        print(obs_s.arr_c.shape)
-
-        return sim_q, sim_s, obs_q, obs_s
+    fileIn = path_program + 'new_cosmos_sdss/COSMOS_val.npy'
+    Testfiles = np.load(fileIn)
 
 
-    sim_q, sim_s, obs_q, obs_s = read_curated_data()
 
-    if sim_obs_combine:
-        train_datafile = 'GalaxPy'
+    TrainshuffleOrder = np.arange(Trainfiles.shape[0])
+    np.random.shuffle(TrainshuffleOrder)
 
-        # 2.0 ####### TRAIN USING SIMULATION, TEST OBSERVATION ####
+    Trainfiles = Trainfiles[TrainshuffleOrder]
 
-        Trainfiles = np.append(sim_q.arr_c, sim_s.arr_c, axis=0)
-        TrainZ = np.append(sim_q.arr_z, sim_s.arr_z, axis=0)
 
-        Trainfiles = np.delete(Trainfiles, (4), axis=1)  ## deleting z-Y
+    TestshuffleOrder = np.arange(Testfiles.shape[0])
+    np.random.shuffle(TestshuffleOrder)
 
-        Testfiles = np.append(obs_q.arr_c, obs_s.arr_c, axis=0)
-        TestZ = np.append(obs_q.arr_z, obs_s.arr_z, axis=0)
+    Testfiles = Testfiles[TestshuffleOrder]
 
-        TrainshuffleOrder = np.arange(Trainfiles.shape[0])
-        np.random.shuffle(TrainshuffleOrder)
 
-        Trainfiles = Trainfiles[TrainshuffleOrder]
-        TrainZ = TrainZ[TrainshuffleOrder]
+    X_train = Trainfiles[:num_train, :-2]  # color mag
+    X_test = Testfiles[:num_test, 4:-1]  # color mag
 
-        TestshuffleOrder = np.arange(Testfiles.shape[0])
-        np.random.shuffle(TestshuffleOrder)
-
-        Testfiles = Testfiles[TestshuffleOrder]
-        TestZ = TestZ[TestshuffleOrder]
-
-        X_train = Trainfiles[:num_train]  # color mag
-        X_test = Trainfiles[:num_test]  # color mag
-
-        y_train = TrainZ[:num_train]  # spec z
-        y_test = TrainZ[:num_test]  # spec z
-
-    else:
-        train_datafile = 'SDSS'
-        # 1.1 ####### SIMULATED: QUENCHED ONLY ############
-        # Trainfiles = sim_q.arr_c
-        # TrainZ = sim_q.arr_z
-
-        # 1.2 ### SIMULATED: QUENCHED + STAR FORMATION ####
-
-        # Trainfiles =np.append( sim_q.arr_c, sim_s.arr_c, axis = 0)
-        # TrainZ = np.append( sim_q.arr_z, sim_s.arr_z, axis = 0)
-
-        # 1.3 ####### OBSERVED: QUENCHED + STAR FORMATION ####
-
-        Trainfiles = np.append(obs_q.arr_c, obs_s.arr_c, axis=0)
-        TrainZ = np.append(obs_q.arr_z, obs_s.arr_z, axis=0)
-
-        TrainshuffleOrder = np.arange(Trainfiles.shape[0])
-        np.random.shuffle(TrainshuffleOrder)
-
-        Trainfiles = Trainfiles[TrainshuffleOrder]
-        TrainZ = TrainZ[TrainshuffleOrder]
-
-        # 1 #################################
-
-        X_train = Trainfiles[:num_train]  # color mag
-        X_test = Trainfiles[num_train + 1: num_train + num_test]  # color mag
-
-        X_train = Trainfiles[:num_train]  # color mag
-        X_test = Trainfiles[num_train + 1: num_train + num_test]  # color mag
-
-        y_train = TrainZ[:num_train]  # spec z
-        y_test = TrainZ[num_train + 1: num_train + num_test]  # spec z
+    y_train = Trainfiles[:num_train, -1]  # spec z
+    y_test = Testfiles[:num_test, 0] # spec z
 
     ############## THINGS ARE SAME AFTER THIS ###########
 
@@ -206,6 +270,7 @@ def ReadGalaxPy(path_program = '../../Data/fromGalaxev/photozs/datasets/', sim_o
     y_test = (y_test - ymin) / (ymax - ymin)
 
     return X_train, y_train, X_test, y_test, ymax, ymin, xmax, xmin
+
 
 
 def evaluate(tensors):
@@ -481,9 +546,9 @@ def plot_cum_sigma(pred_weights,pred_std,ymax,ymin):
 
 
 
-n_epochs = 20 #20000 #100000 #1000 #20000 #20000
+n_epochs = 19 #20000 #100000 #1000 #20000 #20000
 # N = 4000  # number of data points  -- replaced by num_trai
-D = 5 #6  # number of features  (8 for DES, 6 for COSMOS)
+D = 14 #6  # number of features  (8 for DES, 6 for COSMOS)
 K = 3 # number of mixture components
 
 
@@ -498,14 +563,14 @@ num_test = 50 #5000 #params.num_test # 32
 
 syntheticTrain = True # True # (sim_obs_combine) True -- train using GalaxyPy, False -- train using
 
-save_mod = 'hub_mod_Synthetic_'+str(syntheticTrain)+'_lr_'+str(learning_rate)+'_dr'+str(decay_rate)+'_step'+str(step)+'_ne'+str(n_epochs)+'_k'+str(K)+'_nt'+str(num_train)
+save_mod = 'cosmos_Synthetic_'+str(syntheticTrain)+'_lr_'+str(learning_rate)+'_dr'+str(decay_rate)+'_step'+str(step)+'_ne'+str(n_epochs)+'_k'+str(K)+'_nt'+str(num_train)
 
 
 
 ############training
 
 # X_train, y_train, X_test, y_test, ymax, ymin, xmax, xmin = ReadGalaxPy(path_program = '../../Data/fromGalaxev/photozs/datasets/', sim_obs_combine = syntheticTrain)
-X_train, y_train, X_test, y_test, ymax, ymin, xmax, xmin = ReadGalaxPy(path_program = '../../Data/fromGalaxev/photozs/datasets/', sim_obs_combine = syntheticTrain)
+X_train, y_train, X_test, y_test, ymax, ymin, xmax, xmin = ReadCosmos(path_program = '../../Data/fromGalaxev/photozs/datasets/')
 
 
 print("Size of features in training data: {}".format(X_train.shape))
