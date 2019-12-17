@@ -323,6 +323,7 @@ def neural_network_mod():
     """
     X = tf.placeholder(tf.float64,name='X',shape=(None,D))
     # 2 hidden layers with 15 hidden units
+    net = tf.layers.dense(X, 64, activation=tf.nn.relu)
     net = tf.layers.dense(X, 32, activation=tf.nn.relu)
     net = tf.layers.dense(net, 16, activation=tf.nn.relu)
     net = tf.layers.dense(net, 8, activation=tf.nn.relu)
@@ -546,7 +547,7 @@ def plot_cum_sigma(pred_weights,pred_std,ymax,ymin):
 
 
 
-n_epochs = 100000 #20000 #100000 #1000 #20000 #20000
+n_epochs = 100#000 #20000 #100000 #1000 #20000 #20000
 # N = 4000  # number of data points  -- replaced by num_trai
 D = 14 #6  # number of features  (8 for DES, 6 for COSMOS)
 K = 3 # number of mixture components
@@ -557,7 +558,7 @@ decay_rate= 0.01 #0.0
 step=100
 
 
-num_train = 2900000 #800000 #12000000 #800000
+num_train = 2900#000 #800000 #12000000 #800000
 num_test = 500 #5000 #params.num_test # 32
 
 
