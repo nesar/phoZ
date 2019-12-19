@@ -246,8 +246,8 @@ def ReadCosmos(path_program = '../../Data/fromGalaxev/photozs/datasets/'):
     Testfiles = Testfiles[TestshuffleOrder]
 
 
-    X_train = Trainfiles[:num_train, :-2]  # color mag
-    X_test = Testfiles[:num_test, 1:-1]  # color mag
+    X_train = Trainfiles[:num_train, :-1]  # color mag
+    X_test = Testfiles[:num_test, 1:]  # color mag
 
     y_train = Trainfiles[:num_train, -1]  # spec z
     y_test = Testfiles[:num_test, 0] # spec z

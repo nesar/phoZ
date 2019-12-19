@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7f925e6e-ecce-4da6-8fb4-3e0694de87a0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/mdn_test-cosmos-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/mdn_test-cosmos-checkpoint.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/mdn_test-cosmos.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/mdn_test-cosmos.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/mdn_test.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/mdn_test.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mdn_hub3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mdn_hub_cosmos.py" beforeDir="false" afterPath="$PROJECT_DIR$/mdn_hub_cosmos.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mdn_hub_sdss.py" beforeDir="false" afterPath="$PROJECT_DIR$/mdn_hub_sdss.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/observations/src/r/gen_src_test_files.sh" beforeDir="false" afterPath="$PROJECT_DIR$/observations/src/r/gen_src_test_files.sh" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -32,8 +29,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mdn_hub_sdss.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-688">
-              <caret line="548" column="18" selection-start-line="548" selection-start-column="18" selection-end-line="548" selection-end-column="18" />
+            <state>
+              <caret selection-end-line="580" />
               <folding>
                 <element signature="e#781#808#0" />
                 <element signature="e#9246#9858#0" />
@@ -56,11 +53,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mdn_hub_cosmos.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="549" column="16" lean-forward="true" selection-start-line="549" selection-start-column="16" selection-end-line="549" selection-end-column="16" />
+            <state relative-caret-position="391">
+              <caret line="569" selection-start-line="569" selection-end-line="581" />
               <folding>
                 <element signature="e#781#808#0" />
-                <element signature="e#7370#9215#0" />
                 <element signature="e#9246#9858#0" />
                 <element signature="e#9926#10452#0" />
                 <element signature="e#10486#11572#0" />
@@ -257,8 +253,8 @@
         <option value="$PROJECT_DIR$/colorblind.py" />
         <option value="$PROJECT_DIR$/mdn_hub2.py" />
         <option value="$PROJECT_DIR$/mdn_hub3.py" />
-        <option value="$PROJECT_DIR$/mdn_hub_cosmos.py" />
         <option value="$PROJECT_DIR$/mdn_hub_sdss.py" />
+        <option value="$PROJECT_DIR$/mdn_hub_cosmos.py" />
       </list>
     </option>
   </component>
@@ -430,7 +426,7 @@
     <frame x="42" y="65" width="1322" height="764" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15733737" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15733737" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Event Log" order="0" side_tool="true" />
@@ -447,7 +443,7 @@
       <window_info anchor="right" id="Commander" order="1" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
-      <window_info anchor="right" id="Python Console" internal_type="SLIDING" order="4" visible="true" weight="0.27836612" />
+      <window_info anchor="right" id="Python Console" internal_type="SLIDING" order="4" weight="0.52723145" />
       <window_info anchor="right" id="R Graphics" order="5" />
       <window_info anchor="right" id="R Packages" order="6" />
     </layout>
@@ -741,8 +737,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mdn_hub_sdss.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-688">
-          <caret line="548" column="18" selection-start-line="548" selection-start-column="18" selection-end-line="548" selection-end-column="18" />
+        <state>
+          <caret selection-end-line="580" />
           <folding>
             <element signature="e#781#808#0" />
             <element signature="e#9246#9858#0" />
@@ -763,11 +759,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mdn_hub_cosmos.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="549" column="16" lean-forward="true" selection-start-line="549" selection-start-column="16" selection-end-line="549" selection-end-column="16" />
+        <state relative-caret-position="391">
+          <caret line="569" selection-start-line="569" selection-end-line="581" />
           <folding>
             <element signature="e#781#808#0" />
-            <element signature="e#7370#9215#0" />
             <element signature="e#9246#9858#0" />
             <element signature="e#9926#10452#0" />
             <element signature="e#10486#11572#0" />
