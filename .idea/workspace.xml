@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7f925e6e-ecce-4da6-8fb4-3e0694de87a0" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/mdn_test-cosmos-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/mdn_test-cosmos-checkpoint.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Testing/mdn_test-cosmos.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/mdn_test-cosmos.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mdn_hub3.py" beforeDir="false" afterPath="$PROJECT_DIR$/mdn_hub3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/mdn_test.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/mdn_test.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mdn_hub3.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/observations/src/r/gen_src_test_files.sh" beforeDir="false" afterPath="$PROJECT_DIR$/observations/src/r/gen_src_test_files.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/saved_hubs/cosmos_Synthetic_True_lr_0.0001_dr0.01_step100_ne100_k3_nt2900/saved_model.pb" beforeDir="false" afterPath="$PROJECT_DIR$/saved_hubs/cosmos_Synthetic_True_lr_0.0001_dr0.01_step100_ne100_k3_nt2900/saved_model.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/saved_hubs/cosmos_Synthetic_True_lr_0.0001_dr0.01_step100_ne100_k3_nt2900/variables/variables.data-00000-of-00001" beforeDir="false" afterPath="$PROJECT_DIR$/saved_hubs/cosmos_Synthetic_True_lr_0.0001_dr0.01_step100_ne100_k3_nt2900/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/saved_hubs/cosmos_Synthetic_True_lr_0.0001_dr0.01_step100_ne100_k3_nt2900/variables/variables.index" beforeDir="false" afterPath="$PROJECT_DIR$/saved_hubs/cosmos_Synthetic_True_lr_0.0001_dr0.01_step100_ne100_k3_nt2900/variables/variables.index" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,18 +18,9 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mdn_hub_board.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5760">
-              <caret line="389" column="14" selection-start-line="389" selection-start-column="14" selection-end-line="389" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mdn_hub2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="158">
+            <state relative-caret-position="2">
               <caret line="471" column="10" selection-start-line="471" selection-start-column="10" selection-end-line="471" selection-end-column="10" />
               <folding>
                 <element signature="e#6964#7576#0" />
@@ -38,13 +29,52 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/mdn_hub3.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mdn_hub_sdss.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="430">
-              <caret line="551" column="37" selection-end-line="626" />
+            <state relative-caret-position="-688">
+              <caret line="548" column="18" selection-start-line="548" selection-start-column="18" selection-end-line="548" selection-end-column="18" />
               <folding>
-                <element signature="e#0#24#0" expanded="true" />
+                <element signature="e#781#808#0" />
+                <element signature="e#9246#9858#0" />
+                <element signature="e#9926#10452#0" />
+                <element signature="e#10486#11572#0" />
+                <element signature="e#11658#13049#0" />
+                <element signature="e#13099#13552#0" />
+                <element signature="e#13802#14587#0" />
+                <element signature="e#14677#15796#0" />
+                <element signature="e#15886#16949#0" />
+                <element signature="e#17041#18048#0" />
+                <element signature="e#18122#18657#0" />
+                <element signature="e#18693#18954#0" />
+                <element signature="e#19013#19448#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/mdn_hub_cosmos.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="114">
+              <caret line="549" column="16" lean-forward="true" selection-start-line="549" selection-start-column="16" selection-end-line="549" selection-end-column="16" />
+              <folding>
+                <element signature="e#781#808#0" />
+                <element signature="e#7370#9215#0" />
+                <element signature="e#9246#9858#0" />
+                <element signature="e#9926#10452#0" />
+                <element signature="e#10486#11572#0" />
+                <element signature="e#11658#13049#0" />
+                <element signature="e#13099#13552#0" />
+                <element signature="e#13600#13730#0" />
+                <element signature="e#13802#14587#0" />
+                <element signature="e#14677#15796#0" />
+                <element signature="e#15886#16949#0" />
+                <element signature="e#17041#18048#0" />
+                <element signature="e#18122#18657#0" />
+                <element signature="e#18693#18954#0" />
+                <element signature="e#19013#19448#0" />
+                <element signature="e#19452#19489#0" />
               </folding>
             </state>
           </provider>
@@ -227,6 +257,8 @@
         <option value="$PROJECT_DIR$/colorblind.py" />
         <option value="$PROJECT_DIR$/mdn_hub2.py" />
         <option value="$PROJECT_DIR$/mdn_hub3.py" />
+        <option value="$PROJECT_DIR$/mdn_hub_cosmos.py" />
+        <option value="$PROJECT_DIR$/mdn_hub_sdss.py" />
       </list>
     </option>
   </component>
@@ -398,7 +430,7 @@
     <frame x="42" y="65" width="1322" height="764" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15733737" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15733737" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Event Log" order="0" side_tool="true" />
@@ -690,9 +722,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/mdn_hub3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="131">
+          <caret line="590" column="36" selection-start-line="590" selection-start-column="36" selection-end-line="590" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/mdn_hub2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
+        <state relative-caret-position="2">
           <caret line="471" column="10" selection-start-line="471" selection-start-column="10" selection-end-line="471" selection-end-column="10" />
           <folding>
             <element signature="e#6964#7576#0" />
@@ -700,12 +739,49 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mdn_hub3.py">
+    <entry file="file://$PROJECT_DIR$/mdn_hub_sdss.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="430">
-          <caret line="551" column="37" selection-end-line="626" />
+        <state relative-caret-position="-688">
+          <caret line="548" column="18" selection-start-line="548" selection-start-column="18" selection-end-line="548" selection-end-column="18" />
           <folding>
-            <element signature="e#0#24#0" expanded="true" />
+            <element signature="e#781#808#0" />
+            <element signature="e#9246#9858#0" />
+            <element signature="e#9926#10452#0" />
+            <element signature="e#10486#11572#0" />
+            <element signature="e#11658#13049#0" />
+            <element signature="e#13099#13552#0" />
+            <element signature="e#13802#14587#0" />
+            <element signature="e#14677#15796#0" />
+            <element signature="e#15886#16949#0" />
+            <element signature="e#17041#18048#0" />
+            <element signature="e#18122#18657#0" />
+            <element signature="e#18693#18954#0" />
+            <element signature="e#19013#19448#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mdn_hub_cosmos.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="549" column="16" lean-forward="true" selection-start-line="549" selection-start-column="16" selection-end-line="549" selection-end-column="16" />
+          <folding>
+            <element signature="e#781#808#0" />
+            <element signature="e#7370#9215#0" />
+            <element signature="e#9246#9858#0" />
+            <element signature="e#9926#10452#0" />
+            <element signature="e#10486#11572#0" />
+            <element signature="e#11658#13049#0" />
+            <element signature="e#13099#13552#0" />
+            <element signature="e#13600#13730#0" />
+            <element signature="e#13802#14587#0" />
+            <element signature="e#14677#15796#0" />
+            <element signature="e#15886#16949#0" />
+            <element signature="e#17041#18048#0" />
+            <element signature="e#18122#18657#0" />
+            <element signature="e#18693#18954#0" />
+            <element signature="e#19013#19448#0" />
+            <element signature="e#19452#19489#0" />
           </folding>
         </state>
       </provider>
