@@ -1,0 +1,45 @@
+[0] setting up environment
+2019-12-19 23:10:49.408164: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
+2019-12-19 23:10:49.429154: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2099925000 Hz
+2019-12-19 23:10:49.434335: I tensorflow/compiler/xla/service/service.cc:150] XLA service 0x7f38ecea8ac0 executing computations on platform Host. Devices:
+2019-12-19 23:10:49.434409: I tensorflow/compiler/xla/service/service.cc:158]   StreamExecutor device (0): <undefined>, <undefined>
+2019-12-19 23:10:50.162372: I tensorflow/compiler/xla/service/service.cc:150] XLA service 0x7f38ecf58360 executing computations on platform CUDA. Devices:
+2019-12-19 23:10:50.162441: I tensorflow/compiler/xla/service/service.cc:158]   StreamExecutor device (0): Tesla P100-PCIE-16GB, Compute Capability 6.0
+2019-12-19 23:10:50.162772: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1433] Found device 0 with properties: 
+name: Tesla P100-PCIE-16GB major: 6 minor: 0 memoryClockRate(GHz): 1.3285
+pciBusID: 0000:83:00.0
+totalMemory: 15.90GiB freeMemory: 15.64GiB
+2019-12-19 23:10:50.162804: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1512] Adding visible gpu devices: 0
+2019-12-19 23:10:50.166561: I tensorflow/core/common_runtime/gpu/gpu_device.cc:984] Device interconnect StreamExecutor with strength 1 edge matrix:
+2019-12-19 23:10:50.166587: I tensorflow/core/common_runtime/gpu/gpu_device.cc:990]      0 
+2019-12-19 23:10:50.166598: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1003] 0:   N 
+2019-12-19 23:10:50.166776: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1115] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 15216 MB memory) -> physical GPU (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:83:00.0, compute capability: 6.0)
+
+WARNING: The TensorFlow contrib module will not be included in TensorFlow 2.0.
+For more information, please see:
+  * https://github.com/tensorflow/community/blob/master/rfcs/20180907-contrib-sunset.md
+  * https://github.com/tensorflow/addons
+If you depend on functionality not listed there, please file an issue.
+
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~
+Size of features in training data: (2900000, 15)
+Size of output in training data: (2900000,)
+Size of features in test data: (500, 15)
+Size of output in test data: (500,)
+Traceback (most recent call last):
+  File "mdn_hub_cosmos.py", line 587, in <module>
+    log_likelihood, train_op, logits, locs, scales  = mixture_model(X_train,y_train,learning_rate=learning_rate,decay_rate=decay_rate)
+  File "mdn_hub_cosmos.py", line 341, in mixture_model
+    dict = neural_network(tf.convert_to_tensor(X),as_dict=True)
+  File "/homes/nramachandra/anaconda3/envs/tf_gpu/lib/python3.6/site-packages/tensorflow_hub/module.py", line 250, in __call__
+    tags=self._tags))
+  File "/homes/nramachandra/anaconda3/envs/tf_gpu/lib/python3.6/site-packages/tensorflow_hub/module.py", line 452, in _convert_dict_inputs
+    tensor_info_map)
+  File "/homes/nramachandra/anaconda3/envs/tf_gpu/lib/python3.6/site-packages/tensorflow_hub/tensor_info.py", line 150, in convert_dict_to_compatible_tensor
+    value, targets[key], error_prefix="Can't convert %r" % key)
+  File "/homes/nramachandra/anaconda3/envs/tf_gpu/lib/python3.6/site-packages/tensorflow_hub/tensor_info.py", line 129, in _convert_to_compatible_tensor
+    (error_prefix, tensor.get_shape(), target.get_shape()))
+TypeError: Can't convert 'default': Shape TensorShape([Dimension(2900000), Dimension(15)]) is incompatible with TensorShape([Dimension(None), Dimension(14)])
+srun: error: cp1-p: task 0: Exited with exit code 1
+[15] End job
