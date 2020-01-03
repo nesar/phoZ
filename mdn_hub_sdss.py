@@ -546,14 +546,14 @@ def plot_cum_sigma(pred_weights,pred_std,ymax,ymin):
 
 
 
-n_epochs = 100003 #000 #20000 #100000 #1000 #20000 #20000
+n_epochs = 100004 #000 #20000 #100000 #1000 #20000 #20000
 # N = 4000  # number of data points  -- replaced by num_trai
 D = 4 #6  # number of features  (8 for DES, 6 for COSMOS)
 K = 3 # number of mixture components
 
 
-learning_rate = 5e-3 #5e-3
-decay_rate= 0.01 #0.0
+learning_rate = 1e-2 #5e-3
+decay_rate= 0.1 #0.0
 step=100
 
 
