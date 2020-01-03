@@ -28,10 +28,9 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mdn_hub_cosmos.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="559" lean-forward="true" selection-start-line="559" selection-end-line="559" />
+            <state relative-caret-position="289">
+              <caret line="557" column="7" selection-start-line="557" selection-start-column="7" selection-end-line="557" selection-end-column="7" />
               <folding>
-                <element signature="e#0#24#0" expanded="true" />
                 <element signature="e#781#808#0" />
                 <element signature="e#7370#9213#0" />
                 <element signature="e#9244#9856#0" />
@@ -419,7 +418,7 @@
       <window_info anchor="right" id="Commander" order="1" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
-      <window_info anchor="right" id="Python Console" internal_type="SLIDING" order="4" weight="0.31467474" />
+      <window_info anchor="right" id="Python Console" internal_type="SLIDING" order="4" visible="true" weight="0.31467474" />
       <window_info anchor="right" id="R Graphics" order="5" />
       <window_info anchor="right" id="R Packages" order="6" />
     </layout>
@@ -735,10 +734,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mdn_hub_cosmos.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="559" lean-forward="true" selection-start-line="559" selection-end-line="559" />
+        <state relative-caret-position="289">
+          <caret line="557" column="7" selection-start-line="557" selection-start-column="7" selection-end-line="557" selection-end-column="7" />
           <folding>
-            <element signature="e#0#24#0" expanded="true" />
             <element signature="e#781#808#0" />
             <element signature="e#7370#9213#0" />
             <element signature="e#9244#9856#0" />

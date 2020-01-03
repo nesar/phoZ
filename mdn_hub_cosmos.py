@@ -1,5 +1,5 @@
 import matplotlib as mpl
-# mpl.use('Agg')
+mpl.use('Agg')
 
 import math
 import numpy as np
@@ -547,7 +547,7 @@ def plot_cum_sigma(pred_weights,pred_std,ymax,ymin):
 
 
 
-n_epochs = 100#005 #20000 #100000 #1000 #20000 #20000
+n_epochs = 100006 #20000 #100000 #1000 #20000 #20000
 # N = 4000  # number of data points  -- replaced by num_trai
 D = 15 #6  # number of features  (8 for DES, 6 for COSMOS)
 K = 3 # number of mixture components
@@ -555,7 +555,7 @@ K = 3 # number of mixture components
 
 learning_rate = 1e-2 #5e-3
 decay_rate= 0.1 #0.0
-step=10#0
+step=100
 
 
 num_train = 2900000#00 #800000 #12000000 #800000
