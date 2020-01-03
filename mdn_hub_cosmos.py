@@ -350,9 +350,9 @@ def mixture_model(X,Y,learning_rate=1e-3,decay_rate=.95,step=1000,train=True):
     y = tfd.Mixture(cat=cat, components=components)
     #define loss function
     log_likelihood = y.log_prob(Y)
-    # log_likelihood = -tf.reduce_sum(log_likelihood/(1. + y_train)**2 )
-    y_mean = np.median(Y)
-    log_likelihood = -tf.reduce_sum(log_likelihood)
+    # log_likelihood = -tf.reduce_sum(log_likelihood)
+    log_likelihood = -tf.reduce_sum(log_likelihood/(1. + y_train))
+    # y_mean = np.median(Y)
     #log_likelihood = -tf.reduce_sum(log_likelihood*(y_mean-y_train)**4 )
     if train:
         global_step = tf.Variable(0, trainable=False)
@@ -547,13 +547,13 @@ def plot_cum_sigma(pred_weights,pred_std,ymax,ymin):
 
 
 
-n_epochs = 100003 #20000 #100000 #1000 #20000 #20000
+n_epochs = 100#004 #20000 #100000 #1000 #20000 #20000
 # N = 4000  # number of data points  -- replaced by num_trai
 D = 15 #6  # number of features  (8 for DES, 6 for COSMOS)
 K = 3 # number of mixture components
 
 
-learning_rate = 5e-3 #5e-3
+learning_rate = 1e-2 #5e-3
 decay_rate= 0.01 #0.0
 step=100
 
