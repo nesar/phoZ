@@ -15,3 +15,40 @@ totalMemory: 15.90GiB freeMemory: 15.64GiB
 2020-01-03 21:44:41.057081: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1003] 0:   N 
 2020-01-03 21:44:41.057254: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1115] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 15216 MB memory) -> physical GPU (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:83:00.0, compute capability: 6.0)
 2020-01-03 21:44:48.614122: I tensorflow/stream_executor/dso_loader.cc:152] successfully opened CUDA library libcublas.so.10.0 locally
+
+WARNING: The TensorFlow contrib module will not be included in TensorFlow 2.0.
+For more information, please see:
+  * https://github.com/tensorflow/community/blob/master/rfcs/20180907-contrib-sunset.md
+  * https://github.com/tensorflow/addons
+If you depend on functionality not listed there, please file an issue.
+
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~
+(6304534, 6)
+(7237871, 6)
+(456685, 5)
+(423353, 5)
+Size of features in training data: (800000, 5)
+Size of output in training data: (800000,)
+Size of features in test data: (500, 5)
+Size of output in test data: (500,)
+Traceback (most recent call last):
+  File "mdn_hub2.py", line 525, in <module>
+    neural_network.export(save_mod,sess)
+  File "/homes/nramachandra/anaconda3/envs/tf_gpu/lib/python3.6/site-packages/tensorflow_hub/module.py", line 319, in export
+    self._impl.export(path, session)
+  File "/homes/nramachandra/anaconda3/envs/tf_gpu/lib/python3.6/site-packages/tensorflow_hub/native_module.py", line 586, in export
+    self._spec._export(path, variables_saver)  # pylint: disable=protected-access
+  File "/homes/nramachandra/anaconda3/envs/tf_gpu/lib/python3.6/site-packages/tensorflow_hub/native_module.py", line 358, in _export
+    overwrite=False)
+  File "/homes/nramachandra/anaconda3/envs/tf_gpu/lib/python3.6/site-packages/tensorflow_hub/tf_utils.py", line 67, in atomic_write_string_to_file
+    tf_v1.gfile.Rename(temp_pathname, filename, overwrite)
+  File "/homes/nramachandra/anaconda3/envs/tf_gpu/lib/python3.6/site-packages/tensorflow/python/lib/io/file_io.py", line 508, in rename
+    rename_v2(oldname, newname, overwrite)
+  File "/homes/nramachandra/anaconda3/envs/tf_gpu/lib/python3.6/site-packages/tensorflow/python/lib/io/file_io.py", line 526, in rename_v2
+    compat.as_bytes(src), compat.as_bytes(dst), overwrite, status)
+  File "/homes/nramachandra/anaconda3/envs/tf_gpu/lib/python3.6/site-packages/tensorflow/python/framework/errors_impl.py", line 528, in __exit__
+    c_api.TF_GetCode(self.status.status))
+tensorflow.python.framework.errors_impl.AlreadyExistsError: file already exists
+srun: error: cp4-p: task 0: Exited with exit code 1
+[6925] End job

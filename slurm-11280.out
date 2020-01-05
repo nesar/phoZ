@@ -15,3 +15,59 @@ totalMemory: 15.90GiB freeMemory: 15.64GiB
 2020-01-03 21:38:28.453364: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1003] 0:   N 
 2020-01-03 21:38:28.453518: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1115] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 15216 MB memory) -> physical GPU (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:83:00.0, compute capability: 6.0)
 2020-01-03 21:38:56.855604: I tensorflow/stream_executor/dso_loader.cc:152] successfully opened CUDA library libcublas.so.10.0 locally
+/homes/nramachandra/anaconda3/envs/tf_gpu/lib/python3.6/site-packages/matplotlib/figure.py:445: UserWarning: Matplotlib is currently using agg, which is a non-GUI backend, so cannot show the figure.
+  % get_backend())
+
+WARNING: The TensorFlow contrib module will not be included in TensorFlow 2.0.
+For more information, please see:
+  * https://github.com/tensorflow/community/blob/master/rfcs/20180907-contrib-sunset.md
+  * https://github.com/tensorflow/addons
+If you depend on functionality not listed there, please file an issue.
+
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~
+Size of features in training data: (2900000, 15)
+Size of output in training data: (2900000,)
+Size of features in test data: (500, 15)
+Size of output in test data: (500,)
+[[0.03229951 0.68481109 0.04088117]
+ [0.52592146 0.83419608 0.50215092]
+ [0.01036273 0.73181159 0.01797847]
+ ...
+ [0.59902526 0.76731945 0.58455223]
+ [0.02127125 0.78001    0.03026964]
+ [0.16097443 0.14483201 0.16885988]]
+[2778888, 2329428, 2545332, 2842148, 326734, 409483]
+Traceback (most recent call last):
+  File "/homes/nramachandra/anaconda3/envs/tf_gpu/lib/python3.6/site-packages/tensorflow/python/framework/ops.py", line 1659, in _create_c_op
+    c_op = c_api.TF_FinishOperation(op_desc)
+tensorflow.python.framework.errors_impl.InvalidArgumentError: Dimensions must be equal, but are 500 and 2900000 for 'truediv_1' (op: 'RealDiv') with input shapes: [500], [2900000].
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "mdn_hub_cosmos.py", line 615, in <module>
+    test_weights, test_means, test_std = testing(X_test,y_test)
+  File "mdn_hub_cosmos.py", line 511, in testing
+    log_likelihood,  logits, locs, scales = mixture_model(X_test,y_test,train=False)
+  File "mdn_hub_cosmos.py", line 354, in mixture_model
+    # log_likelihood = -tf.reduce_sum(log_likelihood/(1. + y_train))
+  File "/homes/nramachandra/anaconda3/envs/tf_gpu/lib/python3.6/site-packages/tensorflow/python/ops/math_ops.py", line 824, in binary_op_wrapper
+    return func(x, y, name=name)
+  File "/homes/nramachandra/anaconda3/envs/tf_gpu/lib/python3.6/site-packages/tensorflow/python/ops/math_ops.py", line 920, in _truediv_python3
+    return gen_math_ops.real_div(x, y, name=name)
+  File "/homes/nramachandra/anaconda3/envs/tf_gpu/lib/python3.6/site-packages/tensorflow/python/ops/gen_math_ops.py", line 6897, in real_div
+    "RealDiv", x=x, y=y, name=name)
+  File "/homes/nramachandra/anaconda3/envs/tf_gpu/lib/python3.6/site-packages/tensorflow/python/framework/op_def_library.py", line 788, in _apply_op_helper
+    op_def=op_def)
+  File "/homes/nramachandra/anaconda3/envs/tf_gpu/lib/python3.6/site-packages/tensorflow/python/util/deprecation.py", line 507, in new_func
+    return func(*args, **kwargs)
+  File "/homes/nramachandra/anaconda3/envs/tf_gpu/lib/python3.6/site-packages/tensorflow/python/framework/ops.py", line 3300, in create_op
+    op_def=op_def)
+  File "/homes/nramachandra/anaconda3/envs/tf_gpu/lib/python3.6/site-packages/tensorflow/python/framework/ops.py", line 1823, in __init__
+    control_input_ops)
+  File "/homes/nramachandra/anaconda3/envs/tf_gpu/lib/python3.6/site-packages/tensorflow/python/framework/ops.py", line 1662, in _create_c_op
+    raise ValueError(str(e))
+ValueError: Dimensions must be equal, but are 500 and 2900000 for 'truediv_1' (op: 'RealDiv') with input shapes: [500], [2900000].
+srun: error: cp2-p: task 0: Exited with exit code 1
+[30299] End job
