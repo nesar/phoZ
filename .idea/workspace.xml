@@ -2,8 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7f925e6e-ecce-4da6-8fb4-3e0694de87a0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/mdn_hub_cosmos.py" beforeDir="false" afterPath="$PROJECT_DIR$/mdn_hub_cosmos.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sNMAD_compare.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/checkpoint" beforeDir="false" afterPath="$PROJECT_DIR$/Model/checkpoint" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SetPub.py" beforeDir="false" afterPath="$PROJECT_DIR$/SetPub.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mdn_galaxpy_customLoss.py" beforeDir="false" afterPath="$PROJECT_DIR$/mdn_galaxpy_customLoss.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mdn_galaxpy_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/mdn_galaxpy_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mdn_galaxpy_test_combine.py" beforeDir="false" afterPath="$PROJECT_DIR$/mdn_galaxpy_test_combine.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mixture_density_network.ipynb" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/observations/src/r/gen_src_test_files.sh" beforeDir="false" afterPath="$PROJECT_DIR$/observations/src/r/gen_src_test_files.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phoz_compare.png" beforeDir="false" afterPath="$PROJECT_DIR$/phoz_compare.png" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,8 +36,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mdn_hub_cosmos.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="557" column="7" selection-start-line="557" selection-start-column="7" selection-end-line="557" selection-end-column="7" />
+            <state relative-caret-position="229">
+              <caret line="553" selection-start-line="553" selection-end-line="553" />
               <folding>
                 <element signature="e#781#808#0" />
                 <element signature="e#7370#9213#0" />
@@ -234,8 +242,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="42" />
-    <option name="y" value="65" />
+    <option name="x" value="34" />
+    <option name="y" value="55" />
     <option name="width" value="1322" />
     <option name="height" value="764" />
   </component>
@@ -398,7 +406,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="42" y="65" width="1322" height="764" extended-state="0" />
+    <frame x="34" y="55" width="1322" height="764" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15733737" />
@@ -734,8 +742,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mdn_hub_cosmos.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="557" column="7" selection-start-line="557" selection-start-column="7" selection-end-line="557" selection-end-column="7" />
+        <state relative-caret-position="229">
+          <caret line="553" selection-start-line="553" selection-end-line="553" />
           <folding>
             <element signature="e#781#808#0" />
             <element signature="e#7370#9213#0" />
