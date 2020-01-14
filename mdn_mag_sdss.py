@@ -221,8 +221,6 @@ def ReadCosmosDraw(path_program = '../../Data/fromGalaxev/photozs/datasets/', nu
     TrainfilesColors = np.load(fileInColors)
     TrainfilesMagI = np.load(fileInMagI)
 
-    TrainfilesColors = TrainfilesColors[:13, :, :]
-    TrainfilesMagI = TrainfilesMagI[:13, :, :]
 
     magI_low = 15
     magI_high = 23
@@ -570,9 +568,9 @@ def plot_cum_sigma(pred_weights,pred_std,ymax,ymin):
 
 
 
-n_epochs = 111 #000 #20000 #100000 #1000 #20000 #20000
+n_epochs = 11 #000 #20000 #100000 #1000 #20000 #20000
 # N = 4000  # number of data points  -- replaced by num_trai
-D = 4 #6  # number of features  (8 for DES, 6 for COSMOS)
+D = 5 #6  # number of features  (8 for DES, 6 for COSMOS)
 K = 3 # number of mixture components
 
 
@@ -594,7 +592,7 @@ save_mod = 'saved_hubs/'+'sdss_colmag_synthetic_'+str(syntheticTrain)+'_lr_'+str
 ############training
 
 # X_train, y_train, X_test, y_test, ymax, ymin, xmax, xmin = ReadGalaxPy(path_program = '../../Data/fromGalaxev/photozs/datasets/', sim_obs_combine = syntheticTrain)
-X_train, y_train, X_test, y_test, ymax, ymin, xmax, xmin = ReadCosmosDraw(path_program = '../../Data/fromGalaxev/photozs/datasets/')
+X_train, y_train, X_test, y_test, ymax, ymin, xmax, xmin = ReadCosmosDraw(path_program = '../../Data/fromGalaxev/photozs/datasets/', num_magI_draws=4)
 
 
 print("Size of features in training data: {}".format(X_train.shape))
