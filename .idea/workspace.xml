@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7f925e6e-ecce-4da6-8fb4-3e0694de87a0" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/mdn_test-best-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/mdn_test-best-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/mdn_test-checkpoint.ipynb" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Testing/mdn_test-best.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/mdn_test-best.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/mdn_test.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/mdn_test.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/mdn_test.ipynb" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/mdn_mag_sdss.py" beforeDir="false" afterPath="$PROJECT_DIR$/mdn_mag_sdss.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/observations/src/r/gen_src_test_files.sh" beforeDir="false" afterPath="$PROJECT_DIR$/observations/src/r/gen_src_test_files.sh" afterDir="false" />
     </list>
@@ -46,8 +48,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mdn_mag_sdss.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="251">
-              <caret line="223" selection-start-line="223" selection-end-line="223" />
+            <state relative-caret-position="558">
+              <caret line="594" column="149" selection-start-line="594" selection-start-column="149" selection-end-line="594" selection-end-column="149" />
               <folding>
                 <element signature="e#781#808#0" />
                 <element signature="e#9240#9852#0" />
@@ -425,7 +427,7 @@
       <window_info anchor="right" id="Commander" order="1" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
-      <window_info active="true" anchor="right" id="Python Console" internal_type="SLIDING" order="4" visible="true" weight="0.290469" />
+      <window_info anchor="right" id="Python Console" internal_type="SLIDING" order="4" visible="true" weight="0.290469" />
       <window_info anchor="right" id="R Graphics" order="5" />
       <window_info anchor="right" id="R Packages" order="6" />
     </layout>
@@ -744,8 +746,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mdn_mag_sdss.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="223" selection-start-line="223" selection-end-line="223" />
+        <state relative-caret-position="558">
+          <caret line="594" column="149" selection-start-line="594" selection-start-column="149" selection-end-line="594" selection-end-column="149" />
           <folding>
             <element signature="e#781#808#0" />
             <element signature="e#9240#9852#0" />
