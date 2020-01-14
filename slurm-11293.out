@@ -15,3 +15,28 @@ totalMemory: 15.90GiB freeMemory: 15.64GiB
 2020-01-10 17:35:48.485119: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1003] 0:   N 
 2020-01-10 17:35:48.485276: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1115] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 15216 MB memory) -> physical GPU (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:83:00.0, compute capability: 6.0)
 2020-01-10 17:35:58.574864: I tensorflow/stream_executor/dso_loader.cc:152] successfully opened CUDA library libcublas.so.10.0 locally
+
+WARNING: The TensorFlow contrib module will not be included in TensorFlow 2.0.
+For more information, please see:
+  * https://github.com/tensorflow/community/blob/master/rfcs/20180907-contrib-sunset.md
+  * https://github.com/tensorflow/addons
+If you depend on functionality not listed there, please file an issue.
+
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~
+Size of features in training data: (2900000, 4)
+Size of output in training data: (2900000,)
+Size of features in test data: (500, 4)
+Size of output in test data: (500,)
+[[0.08102703 0.4147622  0.01873669]
+ [0.08102703 0.4147622  0.01873669]
+ [0.08102703 0.4147622  0.01873669]
+ ...
+ [0.08102703 0.4147622  0.01873669]
+ [0.08102703 0.4147622  0.01873669]
+ [0.08102703 0.4147622  0.01873669]]
+[2792706, 1093222, 762378, 1177397, 863209, 2527003]
+[101, 277, 90, 92, 70, 188]
+/homes/nramachandra/anaconda3/envs/tf_gpu/lib/python3.6/site-packages/matplotlib/figure.py:445: UserWarning: Matplotlib is currently using agg, which is a non-GUI backend, so cannot show the figure.
+  % get_backend())
+[30236] End job
