@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7f925e6e-ecce-4da6-8fb4-3e0694de87a0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/mdn_test-best-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/mdn_test-best-checkpoint.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/mdn_test-checkpoint.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/mdn_test-best.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/mdn_test-best.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/mdn_test.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mdn_mag_sdss.py" beforeDir="false" afterPath="$PROJECT_DIR$/mdn_mag_sdss.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mdn_mag_cosmos.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/observations/src/r/gen_src_test_files.sh" beforeDir="false" afterPath="$PROJECT_DIR$/observations/src/r/gen_src_test_files.sh" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -48,8 +45,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mdn_mag_sdss.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="558">
-              <caret line="594" column="149" selection-start-line="594" selection-start-column="149" selection-end-line="594" selection-end-column="149" />
+            <state relative-caret-position="2102">
+              <caret line="574" lean-forward="true" selection-start-line="574" selection-end-line="574" />
               <folding>
                 <element signature="e#781#808#0" />
                 <element signature="e#9240#9852#0" />
@@ -65,6 +62,31 @@
                 <element signature="e#18115#18650#0" />
                 <element signature="e#18686#18947#0" />
                 <element signature="e#19006#19441#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mdn_mag_cosmos.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="440">
+              <caret line="254" lean-forward="true" selection-start-line="254" selection-end-line="254" />
+              <folding>
+                <element signature="e#781#808#0" />
+                <element signature="e#11272#11884#0" />
+                <element signature="e#11952#12478#0" />
+                <element signature="e#12511#13597#0" />
+                <element signature="e#13683#15074#0" />
+                <element signature="e#15124#15577#0" />
+                <element signature="e#15625#15755#0" />
+                <element signature="e#15827#16612#0" />
+                <element signature="e#16702#17821#0" />
+                <element signature="e#17911#18974#0" />
+                <element signature="e#19066#20073#0" />
+                <element signature="e#20147#20682#0" />
+                <element signature="e#20718#20979#0" />
+                <element signature="e#21038#21473#0" />
               </folding>
             </state>
           </provider>
@@ -239,6 +261,7 @@
         <option value="$PROJECT_DIR$/mdn_hub_sdss.py" />
         <option value="$PROJECT_DIR$/mdn_hub_cosmos.py" />
         <option value="$PROJECT_DIR$/mdn_mag_sdss.py" />
+        <option value="$PROJECT_DIR$/mdn_mag_cosmos.py" />
       </list>
     </option>
   </component>
@@ -427,7 +450,7 @@
       <window_info anchor="right" id="Commander" order="1" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
-      <window_info anchor="right" id="Python Console" internal_type="SLIDING" order="4" visible="true" weight="0.290469" />
+      <window_info active="true" anchor="right" id="Python Console" internal_type="SLIDING" order="4" visible="true" weight="0.290469" />
       <window_info anchor="right" id="R Graphics" order="5" />
       <window_info anchor="right" id="R Packages" order="6" />
     </layout>
@@ -744,10 +767,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/mdn_mag_cosmos.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="254" lean-forward="true" selection-start-line="254" selection-end-line="254" />
+          <folding>
+            <element signature="e#781#808#0" />
+            <element signature="e#11272#11884#0" />
+            <element signature="e#11952#12478#0" />
+            <element signature="e#12511#13597#0" />
+            <element signature="e#13683#15074#0" />
+            <element signature="e#15124#15577#0" />
+            <element signature="e#15625#15755#0" />
+            <element signature="e#15827#16612#0" />
+            <element signature="e#16702#17821#0" />
+            <element signature="e#17911#18974#0" />
+            <element signature="e#19066#20073#0" />
+            <element signature="e#20147#20682#0" />
+            <element signature="e#20718#20979#0" />
+            <element signature="e#21038#21473#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/mdn_mag_sdss.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="558">
-          <caret line="594" column="149" selection-start-line="594" selection-start-column="149" selection-end-line="594" selection-end-column="149" />
+        <state relative-caret-position="2102">
+          <caret line="574" lean-forward="true" selection-start-line="574" selection-end-line="574" />
           <folding>
             <element signature="e#781#808#0" />
             <element signature="e#9240#9852#0" />
