@@ -574,9 +574,9 @@ D = 5 #6  # number of features  (8 for DES, 6 for COSMOS)
 K = 3 # number of mixture components
 
 
-learning_rate = 5e-2 #5e-3
-decay_rate= 0.1 #0.0
-step=10
+learning_rate = 1e-3 #5e-3
+decay_rate= 0.01 #0.0
+step=100
 
 
 num_train = 800000 #000#00 #800000 #12000000 #800000
