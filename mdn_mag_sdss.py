@@ -579,7 +579,7 @@ decay_rate= 0.01 #0.0
 step=100
 
 
-num_train = 800000 #000#00 #800000 #12000000 #800000
+num_train = 12000000 #000#00 #800000 #12000000 #800000
 num_test = 500 #5000 #params.num_test # 32
 
 
@@ -592,7 +592,7 @@ save_mod = 'saved_hubs/'+'sdss_colmag_synthetic_'+str(syntheticTrain)+'_lr_'+str
 ############training
 
 # X_train, y_train, X_test, y_test, ymax, ymin, xmax, xmin = ReadGalaxPy(path_program = '../../Data/fromGalaxev/photozs/datasets/', sim_obs_combine = syntheticTrain)
-X_train, y_train, X_test, y_test, ymax, ymin, xmax, xmin = ReadCosmosDraw(path_program = '../../Data/fromGalaxev/photozs/datasets/', num_magI_draws=4)
+X_train, y_train, X_test, y_test, ymax, ymin, xmax, xmin = ReadCosmosDraw(path_program = '../../Data/fromGalaxev/photozs/datasets/', num_magI_draws=6)
 
 
 print("Size of features in training data: {}".format(X_train.shape))
