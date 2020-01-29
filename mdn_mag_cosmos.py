@@ -215,7 +215,7 @@ print(20*'=~')
 
 def ReadCosmosDraw(path_program = '../../Data/fromGalaxev/photozs/datasets/', num_magI_draws = 4):
 
-    fileInMagI = path_program + 'new_cosmos_sdss/all_prior_mag_cosmos.npy'
+    fileInMagI = path_program + 'new_cosmos_sdss/all_prior_mag_sdss.npy' # same for cosmos
     fileInColors = path_program + 'new_cosmos_sdss/all_col_cosmos.npy'
 
     TrainfilesColors = np.load(fileInColors)
@@ -568,9 +568,9 @@ def plot_cum_sigma(pred_weights,pred_std,ymax,ymin):
 
 
 
-n_epochs = 10 #000 #20000 #100000 #1000 #20000 #20000
+n_epochs = 15 #000 #20000 #100000 #1000 #20000 #20000
 # N = 4000  # number of data points  -- replaced by num_trai
-D = 5 #6  # number of features  (8 for DES, 6 for COSMOS)
+D = 16 #6  # number of features  (8 for DES, 6 for COSMOS)
 K = 3 # number of mixture components
 
 
