@@ -1,0 +1,37 @@
+[0] setting up environment
+2020-01-29 22:15:30.031139: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
+2020-01-29 22:15:30.045456: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2099925000 Hz
+2020-01-29 22:15:30.050535: I tensorflow/compiler/xla/service/service.cc:150] XLA service 0x7f8833da7820 executing computations on platform Host. Devices:
+2020-01-29 22:15:30.050591: I tensorflow/compiler/xla/service/service.cc:158]   StreamExecutor device (0): <undefined>, <undefined>
+2020-01-29 22:15:30.692823: I tensorflow/compiler/xla/service/service.cc:150] XLA service 0x7f8833e570a0 executing computations on platform CUDA. Devices:
+2020-01-29 22:15:30.692867: I tensorflow/compiler/xla/service/service.cc:158]   StreamExecutor device (0): Tesla P100-PCIE-16GB, Compute Capability 6.0
+2020-01-29 22:15:30.693085: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1433] Found device 0 with properties: 
+name: Tesla P100-PCIE-16GB major: 6 minor: 0 memoryClockRate(GHz): 1.3285
+pciBusID: 0000:83:00.0
+totalMemory: 15.90GiB freeMemory: 15.64GiB
+2020-01-29 22:15:30.693106: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1512] Adding visible gpu devices: 0
+2020-01-29 22:15:30.696277: I tensorflow/core/common_runtime/gpu/gpu_device.cc:984] Device interconnect StreamExecutor with strength 1 edge matrix:
+2020-01-29 22:15:30.696300: I tensorflow/core/common_runtime/gpu/gpu_device.cc:990]      0 
+2020-01-29 22:15:30.696310: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1003] 0:   N 
+2020-01-29 22:15:30.696468: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1115] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 15216 MB memory) -> physical GPU (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:83:00.0, compute capability: 6.0)
+
+WARNING: The TensorFlow contrib module will not be included in TensorFlow 2.0.
+For more information, please see:
+  * https://github.com/tensorflow/community/blob/master/rfcs/20180907-contrib-sunset.md
+  * https://github.com/tensorflow/addons
+If you depend on functionality not listed there, please file an issue.
+
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~
+Traceback (most recent call last):
+  File "mdn_mag_cosmos.py", line 595, in <module>
+    X_train, y_train, X_test, y_test, ymax, ymin, xmax, xmin = ReadCosmosDraw(path_program = '../../Data/fromGalaxev/photozs/datasets/', num_magI_draws=4)
+  File "mdn_mag_cosmos.py", line 302, in ReadCosmosDraw
+    xmax = np.max([np.max(X_train, axis=0), np.max(X_test, axis=0)], axis=0)
+  File "/homes/nramachandra/anaconda3/envs/tf_gpu/lib/python3.6/site-packages/numpy/core/fromnumeric.py", line 2505, in amax
+    initial=initial)
+  File "/homes/nramachandra/anaconda3/envs/tf_gpu/lib/python3.6/site-packages/numpy/core/fromnumeric.py", line 86, in _wrapreduction
+    return ufunc.reduce(obj, axis, dtype, out, **passkwargs)
+ValueError: zero-size array to reduction operation maximum which has no identity
+srun: error: cp1-p: task 0: Exited with exit code 1
+[13] End job

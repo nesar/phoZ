@@ -8,7 +8,7 @@ echo [$SECONDS] setting up environment
 #srun -p cp100 python mdn_hub2.py
 #srun -p cp100 python mdn_hub_sdss.py
 #srun -p cp100 python mdn_hub_cosmos.py
-srun -p cp100 python mdn_mag_sdss.py
-#srun -p cp100 python mdn_mag_cosmos.py
+#srun -p cp100 python mdn_mag_sdss.py
+srun -p cp100 python mdn_mag_cosmos.py
 
 echo [$SECONDS] End job 
