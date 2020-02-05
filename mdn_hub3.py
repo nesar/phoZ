@@ -213,41 +213,152 @@ print(20*'=~')
 #
 
 
-def ReadCosmosDraw(path_program = '../../Data/fromGalaxev/photozs/datasets/', num_magI_draws = 4):
+# def ReadCosmosDraw(path_program = '../../Data/fromGalaxev/photozs/datasets/', num_magI_draws = 4):
 
-    fileInMagI = path_program + 'new_cosmos_sdss/all_prior_mag_sdss.npy'
-    fileInColors = path_program + 'new_cosmos_sdss/all_col_sdss.npy'
+#     fileInMagI = path_program + 'new_cosmos_sdss/all_prior_mag_sdss.npy'
+#     fileInColors = path_program + 'new_cosmos_sdss/all_col_sdss.npy'
 
-    TrainfilesColors = np.load(fileInColors)
-    TrainfilesMagI = np.load(fileInMagI)
+#     TrainfilesColors = np.load(fileInColors)
+#     TrainfilesMagI = np.load(fileInMagI)
 
 
-    magI_low = 15
-    magI_high = 23
+#     magI_low = 15
+#     magI_high = 23
 
-    fileInZ = path_program + 'new_cosmos_sdss/redshifts.npy'
-    TrainZAll = np.load(fileInZ)
+#     fileInZ = path_program + 'new_cosmos_sdss/redshifts.npy'
+#     TrainZAll = np.load(fileInZ)
 
-    Trainfiles = np.zeros(shape=(num_magI_draws*TrainfilesColors.shape[0]*TrainfilesColors.shape[1], TrainfilesColors.shape[2] + 2))
+#     Trainfiles = np.zeros(shape=(num_magI_draws*TrainfilesColors.shape[0]*TrainfilesColors.shape[1], TrainfilesColors.shape[2] + 2))
+
+#     for galID in range(TrainfilesColors.shape[0]):
+
+#         TrainfilesMagI[galID, :, 1][TrainfilesMagI[galID, :, 1] < magI_low] = magI_low
+#         TrainfilesMagI[galID, :, 0][TrainfilesMagI[galID, :, 0] > magI_high] = magI_high
+
+#         imag = np.random.uniform(low=TrainfilesMagI[galID, :, 0], high=TrainfilesMagI[galID, :, 1], size=(num_magI_draws, np.shape(TrainfilesMagI[galID, :, 1])[0])).T
+
+#         for mag_degen in range(num_magI_draws):
+#             colors_mag = np.append(TrainfilesColors[galID, :, :], imag[:, mag_degen][:, None], axis=1)
+#             trainfiles100 = np.append(colors_mag, TrainZAll[:, None], axis=1)
+
+#             train_ind_start = galID*TrainfilesColors.shape[1] + mag_degen*TrainfilesColors.shape[0]*TrainfilesColors.shape[1]
+#             train_ind_end = galID*TrainfilesColors.shape[1] + mag_degen*TrainfilesColors.shape[0]*TrainfilesColors.shape[1] + TrainfilesColors.shape[1]
+
+#             Trainfiles[train_ind_start: train_ind_end] = trainfiles100
+
+#     fileIn = path_program + 'new_cosmos_sdss/SDSS_val.npy'
+#     Testfiles = np.load(fileIn)
+
+
+#     TrainshuffleOrder = np.arange(Trainfiles.shape[0])
+#     np.random.shuffle(TrainshuffleOrder)
+
+#     Trainfiles = Trainfiles[TrainshuffleOrder]
+
+
+#     TestshuffleOrder = np.arange(Testfiles.shape[0])
+#     np.random.shuffle(TestshuffleOrder)
+
+#     Testfiles = Testfiles[TestshuffleOrder]
+
+#     #
+#     # X_train = Trainfiles[:num_train, :-1]  # color mag
+#     # X_test = Testfiles[:num_test, 1:]  # color mag
+#     #
+#     # y_train = Trainfiles[:num_train, -1]  # spec z
+#     # y_test = Testfiles[:num_test, 0] # spec z
+#     #
+#     # ############## THINGS ARE SAME AFTER THIS ###########
+#     #
+#     # ## rescaling xmax/xmin
+#     # xmax = np.max([np.max(X_train, axis=0), np.max(X_test, axis=0)], axis=0)
+#     # xmin = np.min([np.min(X_train, axis=0), np.min(X_test, axis=0)], axis=0)
+#     #
+#     # X_train = (X_train - xmin) / (xmax - xmin)
+#     # X_test = (X_test - xmin) / (xmax - xmin)
+#     #
+#     # #### RESCALING X_train, X_test NOT done yet -- (g-i), (r-i) ... and i mag -->> Color/Mag issue
+#     #
+#     # ymax = np.max([y_train.max(), y_test.max()])
+#     # ymin = np.min([y_train.min(), y_test.min()])
+#     #
+#     # y_train = (y_train - ymin) / (ymax - ymin)
+#     # y_test = (y_test - ymin) / (ymax - ymin)
+#     #
+#     # return X_train, y_train, X_test, y_test, ymax, ymin, xmax, xmin
+#     #
+#     # ############# THINGS ARE SAME AFTER THIS ###########
+
+#     X_train = Trainfiles[:num_train, :-1]  # color mag
+#     X_test = Trainfiles[num_train + 1: num_train + num_test, :-1]  # color mag
+
+
+#     y_train = Trainfiles[:num_train, -1]   # spec z
+#     y_test = Trainfiles[num_train + 1: num_train + num_test, -1]  # spec z
+
+#     ############## THINGS ARE SAME AFTER THIS ###########
+
+#     ## rescaling xmax/xmin
+#     xmax = np.max([np.max(X_train, axis=0), np.max(X_test, axis=0)], axis=0)
+#     xmin = np.min([np.min(X_train, axis=0), np.min(X_test, axis=0)], axis=0)
+
+#     X_train = (X_train - xmin) / (xmax - xmin)
+#     X_test = (X_test - xmin) / (xmax - xmin)
+
+#     #### RESCALING X_train, X_test NOT done yet -- (g-i), (r-i) ... and i mag -->> Color/Mag issue
+
+#     ymax = np.max([y_train.max(), y_test.max()])
+#     ymin = np.min([y_train.min(), y_test.min()])
+
+#     y_train = (y_train - ymin) / (ymax - ymin)
+#     y_test = (y_test - ymin) / (ymax - ymin)
+
+#     return X_train, y_train, X_test, y_test, ymax, ymin, xmax, xmin
+
+
+def ReadCosmosDraw_UM(path_program = '../../Data/fromGalaxev/photozs/datasets/', num_magI_draws = 4):
+
+    fileIn = path_program + 'Training_data_UM_random/all_finite_col_mag_sdss.npy'
+    #fileInColors = path_program + 'new_cosmos_sdss/all_col_sdss.npy'
+
+    TrainfilesColors = np.load(fileIn)
+    #TrainfilesMagI = np.load(fileInMagI)
+
+
+    #magI_low = 15
+    #magI_high = 23
+
+    fileInZ = path_program + 'Training_data_UM_random/redshifts.npy'
+    TrainZ = np.load(fileInZ)
+
+    # print(TrainfilesCol.shape, TrainZ.shape)
+    
+    # Trainfiles = np.append(TrainfilesCol, TrainZ[:, None], axis=1) 
+
+    Trainfiles = np.zeros(shape=(TrainfilesColors.shape[0]*TrainfilesColors.shape[1], TrainfilesColors.shape[2] + 1))
 
     for galID in range(TrainfilesColors.shape[0]):
 
-        TrainfilesMagI[galID, :, 1][TrainfilesMagI[galID, :, 1] < magI_low] = magI_low
-        TrainfilesMagI[galID, :, 0][TrainfilesMagI[galID, :, 0] > magI_high] = magI_high
+    #     TrainfilesMagI[galID, :, 1][TrainfilesMagI[galID, :, 1] < magI_low] = magI_low
+    #     TrainfilesMagI[galID, :, 0][TrainfilesMagI[galID, :, 0] > magI_high] = magI_high
 
-        imag = np.random.uniform(low=TrainfilesMagI[galID, :, 0], high=TrainfilesMagI[galID, :, 1], size=(num_magI_draws, np.shape(TrainfilesMagI[galID, :, 1])[0])).T
+    #     imag = np.random.uniform(low=TrainfilesMagI[galID, :, 0], high=TrainfilesMagI[galID, :, 1], size=(num_magI_draws, np.shape(TrainfilesMagI[galID, :, 1])[0])).T
 
-        for mag_degen in range(num_magI_draws):
-            colors_mag = np.append(TrainfilesColors[galID, :, :], imag[:, mag_degen][:, None], axis=1)
-            trainfiles100 = np.append(colors_mag, TrainZAll[:, None], axis=1)
+        # for mag_degen in range(num_magI_draws):
+            # colors_mag = np.append(TrainfilesColors[galID, :, :], imag[:, mag_degen][:, None], axis=1)
+            trainfiles100 = np.append(TrainfilesColors[galID, :, :] , TrainZ[:, None], axis=1)
 
-            train_ind_start = galID*TrainfilesColors.shape[1] + mag_degen*TrainfilesColors.shape[0]*TrainfilesColors.shape[1]
-            train_ind_end = galID*TrainfilesColors.shape[1] + mag_degen*TrainfilesColors.shape[0]*TrainfilesColors.shape[1] + TrainfilesColors.shape[1]
+            train_ind_start = galID*TrainfilesColors.shape[1]
+            train_ind_end = galID*TrainfilesColors.shape[1] + TrainfilesColors.shape[1]
+
+            # print(train_ind_start, train_ind_end)
 
             Trainfiles[train_ind_start: train_ind_end] = trainfiles100
 
     fileIn = path_program + 'new_cosmos_sdss/SDSS_val.npy'
     Testfiles = np.load(fileIn)
+
+
 
 
     TrainshuffleOrder = np.arange(Trainfiles.shape[0])
@@ -568,7 +679,7 @@ def plot_cum_sigma(pred_weights,pred_std,ymax,ymin):
 
 
 
-n_epochs = 100027 #000 #20000 #100000 #1000 #20000 #20000
+n_epochs = 30030 #000 #20000 #100000 #1000 #20000 #20000
 # N = 4000  # number of data points  -- replaced by num_trai
 D = 5 #6  # number of features  (8 for DES, 6 for COSMOS)
 K = 3 # number of mixture components
@@ -579,20 +690,20 @@ decay_rate= 0.01 #0.0
 step=1000
 
 
-num_train = 12000000 #000#00 #800000 #12000000 #800000
+num_train = 2900000 #000#00 #800000 #12000000 #800000
 num_test = 500 #5000 #params.num_test # 32
 
 
 syntheticTrain = True # True # (sim_obs_combine) True -- train using GalaxyPy, False -- train using
 
-save_mod = 'saved_hubs/'+'sdss_colmag_synthetic_'+str(syntheticTrain)+'_lr_'+str(learning_rate)+'_dr'+str(decay_rate)+'_step'+str(step)+'_ne'+str(n_epochs)+'_k'+str(K)+'_nt'+str(num_train)
+save_mod = 'saved_hubs/'+'sdss_colmagUM_synthetic_'+str(syntheticTrain)+'_lr_'+str(learning_rate)+'_dr'+str(decay_rate)+'_step'+str(step)+'_ne'+str(n_epochs)+'_k'+str(K)+'_nt'+str(num_train)
 
 
 
 ############training
 
 # X_train, y_train, X_test, y_test, ymax, ymin, xmax, xmin = ReadGalaxPy(path_program = '../../Data/fromGalaxev/photozs/datasets/', sim_obs_combine = syntheticTrain)
-X_train, y_train, X_test, y_test, ymax, ymin, xmax, xmin = ReadCosmosDraw(path_program = '../../Data/fromGalaxev/photozs/datasets/', num_magI_draws=6)
+X_train, y_train, X_test, y_test, ymax, ymin, xmax, xmin = ReadCosmosDraw_UM(path_program = '../../Data/fromGalaxev/photozs/datasets/', num_magI_draws=6)
 
 
 print("Size of features in training data: {}".format(X_train.shape))
