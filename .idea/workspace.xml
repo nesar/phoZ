@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7f925e6e-ecce-4da6-8fb4-3e0694de87a0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/mdn_mag-sdss-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/mdn_mag-sdss-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/mdn_mag-cosmos.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/mdn_mag-cosmos.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Testing/mdn_mag-sdss.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/mdn_mag-sdss.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mdn_mag_cosmos.py" beforeDir="false" afterPath="$PROJECT_DIR$/mdn_mag_cosmos.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/observations/src/r/gen_src_test_files.sh" beforeDir="false" afterPath="$PROJECT_DIR$/observations/src/r/gen_src_test_files.sh" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -58,8 +58,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mdn_mag_cosmos.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="612">
-              <caret line="595" selection-start-line="595" selection-end-line="595" />
+            <state relative-caret-position="152">
+              <caret line="531" lean-forward="true" selection-start-line="531" selection-end-line="531" />
               <folding>
                 <element signature="e#781#808#0" />
               </folding>
@@ -229,8 +229,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="34" />
-    <option name="y" value="55" />
+    <option name="x" value="58" />
+    <option name="y" value="93" />
     <option name="width" value="1322" />
     <option name="height" value="764" />
   </component>
@@ -393,7 +393,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="34" y="55" width="1322" height="764" extended-state="0" />
+    <frame x="58" y="93" width="1322" height="764" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15733737" />
@@ -742,8 +742,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mdn_mag_cosmos.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="595" selection-start-line="595" selection-end-line="595" />
+        <state relative-caret-position="152">
+          <caret line="531" lean-forward="true" selection-start-line="531" selection-end-line="531" />
           <folding>
             <element signature="e#781#808#0" />
           </folding>
