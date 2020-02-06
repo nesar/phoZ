@@ -15,3 +15,26 @@ totalMemory: 15.90GiB freeMemory: 15.64GiB
 2020-02-05 21:41:38.742791: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1003] 0:   N 
 2020-02-05 21:41:38.742944: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1115] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 15216 MB memory) -> physical GPU (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:83:00.0, compute capability: 6.0)
 2020-02-05 21:41:50.588991: I tensorflow/stream_executor/dso_loader.cc:152] successfully opened CUDA library libcublas.so.10.0 locally
+
+WARNING: The TensorFlow contrib module will not be included in TensorFlow 2.0.
+For more information, please see:
+  * https://github.com/tensorflow/community/blob/master/rfcs/20180907-contrib-sunset.md
+  * https://github.com/tensorflow/addons
+If you depend on functionality not listed there, please file an issue.
+
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~
+=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~
+Size of features in training data: (2900000, 5)
+Size of output in training data: (2900000,)
+Size of features in test data: (499, 5)
+Size of output in test data: (499,)
+[[ 0.94340991  0.20019531  0.18018319]
+ [ 0.24705818  0.03231759  0.01092209]
+ [ 0.62860974  0.16947257  0.19529916]
+ ...
+ [ 0.25919798  0.02683296  0.01105583]
+ [-0.00528434  0.01117339  0.00315212]
+ [ 0.56784876  0.19543853  0.20191868]]
+[175646, 31242, 1247110, 270081, 310411, 1883471]
+[421, 327, 31, 36, 147, 58]
+[9200] End job
