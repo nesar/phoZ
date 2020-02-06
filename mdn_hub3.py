@@ -316,7 +316,7 @@ print(20*'=~')
 #     return X_train, y_train, X_test, y_test, ymax, ymin, xmax, xmin
 
 
-def ReadCosmosDraw_UM(path_program = '../../Data/fromGalaxev/photozs/datasets/', num_magI_draws = 4):
+def ReadCosmosDraw_UM(path_program = '../../Data/fromGalaxev/photozs/datasets/'):
 
     fileIn = path_program + 'Training_data_UM_random/all_finite_col_mag_sdss.npy'
     #fileInColors = path_program + 'new_cosmos_sdss/all_col_sdss.npy'
@@ -703,7 +703,7 @@ save_mod = 'saved_hubs/'+'sdss_colmagUM_synthetic_'+str(syntheticTrain)+'_lr_'+s
 ############training
 
 # X_train, y_train, X_test, y_test, ymax, ymin, xmax, xmin = ReadGalaxPy(path_program = '../../Data/fromGalaxev/photozs/datasets/', sim_obs_combine = syntheticTrain)
-X_train, y_train, X_test, y_test, ymax, ymin, xmax, xmin = ReadCosmosDraw_UM(path_program = '../../Data/fromGalaxev/photozs/datasets/', num_magI_draws=6)
+X_train, y_train, X_test, y_test, ymax, ymin, xmax, xmin = ReadCosmosDraw_UM(path_program = '../../Data/fromGalaxev/photozs/datasets/')
 
 
 print("Size of features in training data: {}".format(X_train.shape))
