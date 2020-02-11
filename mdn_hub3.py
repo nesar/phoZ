@@ -687,7 +687,7 @@ def plot_cum_sigma(pred_weights,pred_std,ymax,ymin):
 
 np.random.seed(12345)
 
-n_epochs = 40000 #3030030 #000 #20000 #100000 #1000 #20000 #20000
+n_epochs = 400000 #3030030 #000 #20000 #100000 #1000 #20000 #20000
 # N = 4000  # number of data points  -- replaced by num_trai
 D = 5 #6  # number of features  (8 for DES, 6 for COSMOS)
 K = 3 # number of mixture components
@@ -698,7 +698,7 @@ decay_rate= 0.01 #0.0
 step=1000
 
 
-num_train = 1000000 #2900000 #000#00 #800000 #12000000 #800000
+num_train = 1100000 #2900000 #000#00 #800000 #12000000 #800000
 num_test = 500 #5000 #params.num_test # 32
 
 
