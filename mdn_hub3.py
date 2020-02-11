@@ -685,7 +685,7 @@ def plot_cum_sigma(pred_weights,pred_std,ymax,ymin):
     plt.xlabel('Sigma')
     plt.show()
 
-
+np.random.seed(12345)
 
 n_epochs = 40000 #3030030 #000 #20000 #100000 #1000 #20000 #20000
 # N = 4000  # number of data points  -- replaced by num_trai
