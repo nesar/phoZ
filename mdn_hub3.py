@@ -324,9 +324,17 @@ def ReadCosmosDraw_UM(path_program = '../../Data/fromGalaxev/photozs/datasets/')
     TrainfilesColors = np.load(fileIn)
     #TrainfilesMagI = np.load(fileInMagI)
 
+    min_col = -5
+    max_col = 5
+    max_max = 25
+    for ii in range(TrainfilesColors.shape[1]):
+        aa = np.alltrue(np.isfinite(TrainfilesColors[:, ii, :]), axis=1)
+        bb = (TrainfilesColors[:,ii,-1] < max_max) & (aa == True)
+        cc = np.alltrue(TrainfilesColors[:, ii, :-1] < max_col, axis=1) & (bb == True)
+        mask = np.alltrue(TrainfilesColors[:, ii, :-1] > min_col, axis=1)  & (cc == True)
 
-    #magI_low = 15
-    #magI_high = 23
+    TrainfilesColors = TrainfilesColors[mask]
+    print(TrainfilesColors.shape)
 
     fileInZ = path_program + 'Training_data_UM_random/redshifts.npy'
     TrainZ = np.load(fileInZ)
@@ -679,7 +687,7 @@ def plot_cum_sigma(pred_weights,pred_std,ymax,ymin):
 
 
 
-n_epochs = 3030030 #000 #20000 #100000 #1000 #20000 #20000
+n_epochs = 40000 #3030030 #000 #20000 #100000 #1000 #20000 #20000
 # N = 4000  # number of data points  -- replaced by num_trai
 D = 5 #6  # number of features  (8 for DES, 6 for COSMOS)
 K = 3 # number of mixture components
@@ -690,7 +698,7 @@ decay_rate= 0.01 #0.0
 step=1000
 
 
-num_train = 2900000 #000#00 #800000 #12000000 #800000
+num_train = 1000000 #2900000 #000#00 #800000 #12000000 #800000
 num_test = 500 #5000 #params.num_test # 32
 
 
