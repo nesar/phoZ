@@ -15,3 +15,8 @@ totalMemory: 15.90GiB freeMemory: 15.64GiB
 2020-02-06 05:23:21.405704: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1003] 0:   N 
 2020-02-06 05:23:21.405865: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1115] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 15216 MB memory) -> physical GPU (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:83:00.0, compute capability: 6.0)
 2020-02-06 05:23:33.319943: I tensorflow/stream_executor/dso_loader.cc:152] successfully opened CUDA library libcublas.so.10.0 locally
+srun: got SIGCONT
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** JOB 11597 ON cp1-p CANCELLED AT 2020-02-11T22:43:20 ***
+slurmstepd: error: *** STEP 11597.0 ON cp1-p CANCELLED AT 2020-02-11T22:43:20 ***
+srun: forcing job termination
