@@ -1,4 +1,4 @@
 {
-    "python.pythonPath": "/homes/nramachandra/anaconda3/envs/tf_gpu/bin/python",
+    "python.pythonPath": "/Users/nramachandra/anaconda3/envs/env_py37/bin/python",
     "python.dataScience.jupyterServerURI": "local"
 }
