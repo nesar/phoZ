@@ -749,8 +749,8 @@ n_epochs = 50000 #3030030 #000 #20000 #100000 #1000 #20000 #20000
 D = 5 #6  # number of features  (8 for DES, 6 for COSMOS)
 K = 3 # number of mixture components
 
-learning_rate = 1e-2 #5e-3 #5e-3
-decay_rate= 0.01 #0.0
+learning_rate = 5e-3 #5e-3 #5e-3
+decay_rate= 0.001 #0.0
 step=1000
 
 num_train = 1100000 #2900000 #000#00 #800000 #12000000 #800000
