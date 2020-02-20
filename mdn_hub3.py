@@ -326,6 +326,7 @@ def ReadCosmosDraw_UM(path_program = '../../Data/fromGalaxev/photozs/datasets/')
 
     TrainfilesColors = np.load(fileIn)
     #TrainfilesMagI = np.load(fileInMagI)
+    print('Train files shape', TrainfilesColors.shape)
 
     min_col = -5
     max_col = 5
@@ -338,6 +339,10 @@ def ReadCosmosDraw_UM(path_program = '../../Data/fromGalaxev/photozs/datasets/')
 
     TrainfilesColors = TrainfilesColors[mask]
     print(TrainfilesColors.shape)
+
+
+    #magI_low = 15
+    #magI_high = 23
 
     fileInZ = path_program + 'Training_data_UM_random/redshifts.npy'
     TrainZ = np.load(fileInZ)
@@ -366,30 +371,41 @@ def ReadCosmosDraw_UM(path_program = '../../Data/fromGalaxev/photozs/datasets/')
 
             Trainfiles[train_ind_start: train_ind_end] = trainfiles100
 
-    fileIn = path_program + 'new_cosmos_sdss/SDSS_val.npy'
-    Testfiles = np.load(fileIn)
-
-
+    print('Train files shape (with z)', Trainfiles.shape)
 
 
     TrainshuffleOrder = np.arange(Trainfiles.shape[0])
     np.random.shuffle(TrainshuffleOrder)
-
     Trainfiles = Trainfiles[TrainshuffleOrder]
 
+    Test_VAL = False
+    if Test_VAL: 
 
-    TestshuffleOrder = np.arange(Testfiles.shape[0])
-    np.random.shuffle(TestshuffleOrder)
+        fileIn = path_program + 'new_cosmos_sdss/SDSS_val.npy'
+        Testfiles = np.load(fileIn)
+        print('Test files shape:', Testfiles.shape)
 
-    Testfiles = Testfiles[TestshuffleOrder]
 
-    #
-    # X_train = Trainfiles[:num_train, :-1]  # color mag
-    # X_test = Testfiles[:num_test, 1:]  # color mag
-    #
-    # y_train = Trainfiles[:num_train, -1]  # spec z
-    # y_test = Testfiles[:num_test, 0] # spec z
-    #
+        # min_col = -5
+        # max_col = 5
+        # max_max = 25
+        # for ii in range(Testfiles.shape[1]):
+        #     aa = np.alltrue(np.isfinite(Testfiles[:, ii, :]), axis=1)
+        #     bb = (Testfiles[:,ii,-1] < max_max) & (aa == True)
+        #     cc = np.alltrue(Testfiles[:, ii, :-1] < max_col, axis=1) & (bb == True)
+        #     mask = np.alltrue(Testfiles[:, ii, :-1] > min_col, axis=1)  & (cc == True)
+
+
+        TestshuffleOrder = np.arange(Testfiles.shape[0])
+        np.random.shuffle(TestshuffleOrder)
+
+        Testfiles = Testfiles[TestshuffleOrder]
+        X_train = Trainfiles[:num_train, :-1]  # color mag
+        X_test = Testfiles[:num_test, 1:]  # color mag
+        
+        y_train = Trainfiles[:num_train, -1]  # spec z
+        y_test = Testfiles[:num_test, 0] # spec z
+
     # ############## THINGS ARE SAME AFTER THIS ###########
     #
     # ## rescaling xmax/xmin
@@ -411,14 +427,52 @@ def ReadCosmosDraw_UM(path_program = '../../Data/fromGalaxev/photozs/datasets/')
     #
     # ############# THINGS ARE SAME AFTER THIS ###########
 
-    X_train = Trainfiles[:num_train, :-1]  # color mag
-    X_test = Trainfiles[num_train + 1: num_train + num_test, :-1]  # color mag
+    TestSynth = False
+    if TestSynth:
+
+        X_train = Trainfiles[:num_train, :-1]  # color mag
+        X_test = Trainfiles[num_train + 1: num_train + num_test, :-1]  # color mag
 
 
-    y_train = Trainfiles[:num_train, -1]   # spec z
-    y_test = Trainfiles[num_train + 1: num_train + num_test, -1]  # spec z
+        y_train = Trainfiles[:num_train, -1]   # spec z
+        y_test = Trainfiles[num_train + 1: num_train + num_test, -1]  # spec z
 
+
+    ##################################################
+    ##################################################
+
+    TestSDSS = True
+    if TestSDSS:
+
+        #     fileIn = path_program + 'new_cosmos_sdss/SDSS_val.npy'
+        fileIn = path_program + 'Data_from_observations_new/SDSS_cols.npy'
+        TestfilesColors = np.load(fileIn)
+        fileIn = path_program + 'Data_from_observations_new/SDSS_iband.npy'
+        TestfilesMag = np.load(fileIn)   
+        
+        Testfiles = np.append(TestfilesColors, TestfilesMag[:, None], axis=1)
+
+
+        # TrainshuffleOrder = np.arange(Trainfiles.shape[0])
+        # np.random.shuffle(TrainshuffleOrder)
+
+        # Trainfiles = Trainfiles[TrainshuffleOrder]
+
+        TestshuffleOrder = np.arange(Testfiles.shape[0])
+        np.random.shuffle(TestshuffleOrder)
+
+        Testfiles = Testfiles[TestshuffleOrder]
+
+        X_train = Trainfiles[:num_train, :-1]  # color mag
+        X_test = Testfiles[:num_test, 1:]  # color mag
+        y_train = Trainfiles[:num_train, -1]  # spec z
+        y_test = Testfiles[:num_test, 0] # spec z
+
+
+    ############################################################
     ############## THINGS ARE SAME AFTER THIS ###########
+
+
 
     ## rescaling xmax/xmin
     xmax = np.max([np.max(X_train, axis=0), np.max(X_test, axis=0)], axis=0)
@@ -436,6 +490,7 @@ def ReadCosmosDraw_UM(path_program = '../../Data/fromGalaxev/photozs/datasets/')
     y_test = (y_test - ymin) / (ymax - ymin)
 
     return X_train, y_train, X_test, y_test, ymax, ymin, xmax, xmin
+
 
 def evaluate(tensors):
     """Evaluates Tensor or EagerTensor to Numpy `ndarray`s.
@@ -689,7 +744,7 @@ def plot_cum_sigma(pred_weights,pred_std,ymax,ymin):
     plt.show()
 
 
-n_epochs = 400000 #3030030 #000 #20000 #100000 #1000 #20000 #20000
+n_epochs = 5000 #3030030 #000 #20000 #100000 #1000 #20000 #20000
 # N = 4000  # number of data points  -- replaced by num_trai
 D = 5 #6  # number of features  (8 for DES, 6 for COSMOS)
 K = 3 # number of mixture components
