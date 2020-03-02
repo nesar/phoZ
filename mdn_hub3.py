@@ -1,5 +1,5 @@
-import matplotlib as mpl
-mpl.use('Agg')
+# import matplotlib as mpl
+# mpl.use('Agg')
 
 import math
 import numpy as np
@@ -28,296 +28,11 @@ tfb = tfp.bijectors
 np.random.seed(12)
 
 
-print(20*'=~')
+print(30*'=~')
 sess = tf.Session(config=tf.ConfigProto(log_device_placement=False))
 # writer = tf.summary.FileWriter('./log_dir', sess.graph)
 # tf.contrib.summary.create_file_writer('./log_dir', sess.graph)
-print(20*'=~')
-
-# if datafile == 'GalaxPy':
-####### THIS IS A WORKING VERSION -- with mags
-#
-#
-# def ReadGalaxPy(path_program = '../../Data/fromGalaxev/photozs/datasets/', sim_obs_combine = True):
-#     import os
-#     import sys
-#     import glob
-#     from astropy.table import Table
-#
-#     # path_program = '../../Data/fromGalaxev/photozs/datasets/'
-#
-#
-#     class Curated_sample():
-#         ''' Class to store the redshift and colors of observed galaxies,
-#             and the redshift, Mpeak, colors, and "weights" of simulated
-#             galaxies whose colors are compatible with those of observed
-#             galaxies.
-#
-#             The observed sample include galaxies from SDSS
-#             (SDSS+BOSS+eBOSS), DEEP2, and VIPERS.
-#
-#             The simulated sample was created by sampling the parameter of
-#             GALAXPY using a LH.
-#
-#             The weights of simulated galaxies are related to the number
-#             density of observed galaxies in the same region of the color
-#             space.
-#
-#             You only have to care about the method load_structure. '''
-#
-#         def __init__(self):
-#             self.arr_c = []
-#             self.arr_z = []
-#             self.arr_m = []
-#             self.arr_w = []
-#
-#         def append(self, c, z, m, w):
-#             self.arr_c.append(c)
-#             self.arr_z.append(z)
-#             self.arr_m.append(m)
-#             self.arr_w.append(w)
-#
-#         def ndarray(self):
-#             self.arr_c = np.concatenate(self.arr_c)
-#             self.arr_z = np.concatenate(self.arr_z)
-#             self.arr_m = np.concatenate(self.arr_m)
-#             self.arr_w = np.concatenate(self.arr_w)
-#
-#         def save_struct(self, name):
-#             np.save(name + 'c.npy', self.arr_c)
-#             np.save(name + 'z.npy', self.arr_z)
-#             np.save(name + 'm.npy', self.arr_m)
-#             np.save(name + 'w.npy', self.arr_w)
-#
-#         def load_struct(self, name):
-#             self.arr_c = np.load(name + 'c.npy')
-#             self.arr_z = np.load(name + 'z.npy')
-#             self.arr_m = np.load(name + 'm.npy')
-#             self.arr_w = np.load(name + 'w.npy')
-#
-#         def duplicate_data(self, zrange):
-#             aa = np.where((self.arr_w > 50)
-#                           & (self.arr_z >= zrange[0])
-#                           & (self.arr_z < zrange[1]))[0]
-#             print(aa.shape)
-#             cc = np.repeat(aa, self.arr_w[aa].astype(int))
-#             self.arr_cn = self.arr_c[cc, :]
-#             self.arr_zn = self.arr_z[cc]
-#             self.arr_mn = self.arr_m[cc]
-#
-#
-#     def read_curated_data():
-#         run_path = path_program + 'runs/run_z3/'
-#
-#         sim_q = Curated_sample()  # simulated colors quenched galaxies
-#         sim_s = Curated_sample()  # simulated colors star-forming galaxies
-#         obs_q = Curated_sample()  # observed colors quenched galaxies
-#         obs_s = Curated_sample()  # observed colors star-forming galaxies
-#
-#         obs_q.load_struct(run_path + 'str_obs_q')
-#         obs_s.load_struct(run_path + 'str_obs_s')
-#         sim_q.load_struct(run_path + 'str_sim_q')
-#         sim_s.load_struct(run_path + 'str_sim_s')
-#
-#         print(sim_q.arr_c.shape)
-#         print(sim_s.arr_c.shape)
-#         print(obs_q.arr_c.shape)
-#         print(obs_s.arr_c.shape)
-#
-#         return sim_q, sim_s, obs_q, obs_s
-#
-#
-#     sim_q, sim_s, obs_q, obs_s = read_curated_data()
-#
-#     if sim_obs_combine:
-#         train_datafile = 'GalaxPy'
-#
-#         # 2.0 ####### TRAIN USING SIMULATION, TEST OBSERVATION ####
-#
-#         Trainfiles = np.append(sim_q.arr_c, sim_s.arr_c, axis=0)
-#         TrainZ = np.append(sim_q.arr_z, sim_s.arr_z, axis=0)
-#
-#         Trainfiles = np.delete(Trainfiles, (4), axis=1)  ## deleting z-Y
-#
-#         Testfiles = np.append(obs_q.arr_c, obs_s.arr_c, axis=0)
-#         TestZ = np.append(obs_q.arr_z, obs_s.arr_z, axis=0)
-#
-#         TrainshuffleOrder = np.arange(Trainfiles.shape[0])
-#         np.random.shuffle(TrainshuffleOrder)
-#
-#         Trainfiles = Trainfiles[TrainshuffleOrder]
-#         TrainZ = TrainZ[TrainshuffleOrder]
-#
-#         TestshuffleOrder = np.arange(Testfiles.shape[0])
-#         np.random.shuffle(TestshuffleOrder)
-#
-#         Testfiles = Testfiles[TestshuffleOrder]
-#         TestZ = TestZ[TestshuffleOrder]
-#
-#         X_train = Trainfiles[:num_train]  # color mag
-#         X_test = Trainfiles[:num_test]  # color mag
-#
-#         y_train = TrainZ[:num_train]  # spec z
-#         y_test = TrainZ[:num_test]  # spec z
-#
-#     else:
-#         train_datafile = 'SDSS'
-#         # 1.1 ####### SIMULATED: QUENCHED ONLY ############
-#         # Trainfiles = sim_q.arr_c
-#         # TrainZ = sim_q.arr_z
-#
-#         # 1.2 ### SIMULATED: QUENCHED + STAR FORMATION ####
-#
-#         # Trainfiles =np.append( sim_q.arr_c, sim_s.arr_c, axis = 0)
-#         # TrainZ = np.append( sim_q.arr_z, sim_s.arr_z, axis = 0)
-#
-#         # 1.3 ####### OBSERVED: QUENCHED + STAR FORMATION ####
-#
-#         Trainfiles = np.append(obs_q.arr_c, obs_s.arr_c, axis=0)
-#         TrainZ = np.append(obs_q.arr_z, obs_s.arr_z, axis=0)
-#
-#         TrainshuffleOrder = np.arange(Trainfiles.shape[0])
-#         np.random.shuffle(TrainshuffleOrder)
-#
-#         Trainfiles = Trainfiles[TrainshuffleOrder]
-#         TrainZ = TrainZ[TrainshuffleOrder]
-#
-#         # 1 #################################
-#
-#         X_train = Trainfiles[:num_train]  # color mag
-#         X_test = Trainfiles[num_train + 1: num_train + num_test]  # color mag
-#
-#         X_train = Trainfiles[:num_train]  # color mag
-#         X_test = Trainfiles[num_train + 1: num_train + num_test]  # color mag
-#
-#         y_train = TrainZ[:num_train]  # spec z
-#         y_test = TrainZ[num_train + 1: num_train + num_test]  # spec z
-#
-#     ############## THINGS ARE SAME AFTER THIS ###########
-#
-#     ## rescaling xmax/xmin
-#     xmax = np.max([np.max(X_train, axis=0), np.max(X_test, axis=0)], axis=0)
-#     xmin = np.min([np.min(X_train, axis=0), np.min(X_test, axis=0)], axis=0)
-#
-#     X_train = (X_train - xmin) / (xmax - xmin)
-#     X_test = (X_test - xmin) / (xmax - xmin)
-#
-#     #### RESCALING X_train, X_test NOT done yet -- (g-i), (r-i) ... and i mag -->> Color/Mag issue
-#
-#     ymax = np.max([y_train.max(), y_test.max()])
-#     ymin = np.min([y_train.min(), y_test.min()])
-#
-#     y_train = (y_train - ymin) / (ymax - ymin)
-#     y_test = (y_test - ymin) / (ymax - ymin)
-#
-#     return X_train, y_train, X_test, y_test, ymax, ymin, xmax, xmin
-#
-#
-#
-
-
-# def ReadCosmosDraw(path_program = '../../Data/fromGalaxev/photozs/datasets/', num_magI_draws = 4):
-
-#     fileInMagI = path_program + 'new_cosmos_sdss/all_prior_mag_sdss.npy'
-#     fileInColors = path_program + 'new_cosmos_sdss/all_col_sdss.npy'
-
-#     TrainfilesColors = np.load(fileInColors)
-#     TrainfilesMagI = np.load(fileInMagI)
-
-
-#     magI_low = 15
-#     magI_high = 23
-
-#     fileInZ = path_program + 'new_cosmos_sdss/redshifts.npy'
-#     TrainZAll = np.load(fileInZ)
-
-#     Trainfiles = np.zeros(shape=(num_magI_draws*TrainfilesColors.shape[0]*TrainfilesColors.shape[1], TrainfilesColors.shape[2] + 2))
-
-#     for galID in range(TrainfilesColors.shape[0]):
-
-#         TrainfilesMagI[galID, :, 1][TrainfilesMagI[galID, :, 1] < magI_low] = magI_low
-#         TrainfilesMagI[galID, :, 0][TrainfilesMagI[galID, :, 0] > magI_high] = magI_high
-
-#         imag = np.random.uniform(low=TrainfilesMagI[galID, :, 0], high=TrainfilesMagI[galID, :, 1], size=(num_magI_draws, np.shape(TrainfilesMagI[galID, :, 1])[0])).T
-
-#         for mag_degen in range(num_magI_draws):
-#             colors_mag = np.append(TrainfilesColors[galID, :, :], imag[:, mag_degen][:, None], axis=1)
-#             trainfiles100 = np.append(colors_mag, TrainZAll[:, None], axis=1)
-
-#             train_ind_start = galID*TrainfilesColors.shape[1] + mag_degen*TrainfilesColors.shape[0]*TrainfilesColors.shape[1]
-#             train_ind_end = galID*TrainfilesColors.shape[1] + mag_degen*TrainfilesColors.shape[0]*TrainfilesColors.shape[1] + TrainfilesColors.shape[1]
-
-#             Trainfiles[train_ind_start: train_ind_end] = trainfiles100
-
-#     fileIn = path_program + 'new_cosmos_sdss/SDSS_val.npy'
-#     Testfiles = np.load(fileIn)
-
-
-#     TrainshuffleOrder = np.arange(Trainfiles.shape[0])
-#     np.random.shuffle(TrainshuffleOrder)
-
-#     Trainfiles = Trainfiles[TrainshuffleOrder]
-
-
-#     TestshuffleOrder = np.arange(Testfiles.shape[0])
-#     np.random.shuffle(TestshuffleOrder)
-
-#     Testfiles = Testfiles[TestshuffleOrder]
-
-#     #
-#     # X_train = Trainfiles[:num_train, :-1]  # color mag
-#     # X_test = Testfiles[:num_test, 1:]  # color mag
-#     #
-#     # y_train = Trainfiles[:num_train, -1]  # spec z
-#     # y_test = Testfiles[:num_test, 0] # spec z
-#     #
-#     # ############## THINGS ARE SAME AFTER THIS ###########
-#     #
-#     # ## rescaling xmax/xmin
-#     # xmax = np.max([np.max(X_train, axis=0), np.max(X_test, axis=0)], axis=0)
-#     # xmin = np.min([np.min(X_train, axis=0), np.min(X_test, axis=0)], axis=0)
-#     #
-#     # X_train = (X_train - xmin) / (xmax - xmin)
-#     # X_test = (X_test - xmin) / (xmax - xmin)
-#     #
-#     # #### RESCALING X_train, X_test NOT done yet -- (g-i), (r-i) ... and i mag -->> Color/Mag issue
-#     #
-#     # ymax = np.max([y_train.max(), y_test.max()])
-#     # ymin = np.min([y_train.min(), y_test.min()])
-#     #
-#     # y_train = (y_train - ymin) / (ymax - ymin)
-#     # y_test = (y_test - ymin) / (ymax - ymin)
-#     #
-#     # return X_train, y_train, X_test, y_test, ymax, ymin, xmax, xmin
-#     #
-#     # ############# THINGS ARE SAME AFTER THIS ###########
-
-#     X_train = Trainfiles[:num_train, :-1]  # color mag
-#     X_test = Trainfiles[num_train + 1: num_train + num_test, :-1]  # color mag
-
-
-#     y_train = Trainfiles[:num_train, -1]   # spec z
-#     y_test = Trainfiles[num_train + 1: num_train + num_test, -1]  # spec z
-
-#     ############## THINGS ARE SAME AFTER THIS ###########
-
-#     ## rescaling xmax/xmin
-#     xmax = np.max([np.max(X_train, axis=0), np.max(X_test, axis=0)], axis=0)
-#     xmin = np.min([np.min(X_train, axis=0), np.min(X_test, axis=0)], axis=0)
-
-#     X_train = (X_train - xmin) / (xmax - xmin)
-#     X_test = (X_test - xmin) / (xmax - xmin)
-
-#     #### RESCALING X_train, X_test NOT done yet -- (g-i), (r-i) ... and i mag -->> Color/Mag issue
-
-#     ymax = np.max([y_train.max(), y_test.max()])
-#     ymin = np.min([y_train.min(), y_test.min()])
-
-#     y_train = (y_train - ymin) / (ymax - ymin)
-#     y_test = (y_test - ymin) / (ymax - ymin)
-
-#     return X_train, y_train, X_test, y_test, ymax, ymin, xmax, xmin
-
+print(30*'=~')
 
 def ReadCosmosDraw_UM(path_program = '../../Data/fromGalaxev/photozs/datasets/'):
 
@@ -428,6 +143,7 @@ def ReadCosmosDraw_UM(path_program = '../../Data/fromGalaxev/photozs/datasets/')
     # ############# THINGS ARE SAME AFTER THIS ###########
 
     TestSynth = False
+
     if TestSynth:
 
         X_train = Trainfiles[:num_train, :-1]  # color mag
@@ -442,6 +158,7 @@ def ReadCosmosDraw_UM(path_program = '../../Data/fromGalaxev/photozs/datasets/')
     ##################################################
 
     TestSDSS = True
+
     if TestSDSS:
 
         #     fileIn = path_program + 'new_cosmos_sdss/SDSS_val.npy'
@@ -491,7 +208,6 @@ def ReadCosmosDraw_UM(path_program = '../../Data/fromGalaxev/photozs/datasets/')
 
     return X_train, y_train, X_test, y_test, ymax, ymin, xmax, xmin
 
-
 def evaluate(tensors):
     """Evaluates Tensor or EagerTensor to Numpy `ndarray`s.
     Args:
@@ -525,7 +241,6 @@ def plot_normal_mix(pis, mus, sigmas, ax, label='', comp=True):
   ax.legend(fontsize=13)
   return final
 
-
 def neural_network_mod():
     """
     loc, scale, logits = NN(x; theta)
@@ -552,7 +267,6 @@ def neural_network_mod():
     hub.add_signature(inputs=X,outputs=outdict)
 
     return locs, scales, logits
-
 
 def mixture_model(X,Y,learning_rate=1e-3,decay_rate=.95,step=1000,train=True):
     if train:
@@ -597,7 +311,6 @@ def train(log_likelihood,train_op,n_epoch):
     plt.plot(np.arange(n_epoch), -train_loss / len(X_train), label='Train Loss')
     # plt.savefig('../Plots/T_loss_function.pdf')
     return train_loss
-
 
 def get_predictions(logits,locs,scales):
     pred_weights, pred_means, pred_std = evaluate([tf.nn.softmax(logits), locs, scales])
@@ -707,7 +420,6 @@ def plot_pred_weight(pred_means,pred_weights,pred_std,ymax,ymin,y_train,select='
     plt.tight_layout()
     plt.show()
 
-
 def per_stats(pred_means,pred_weights,pred_std,ymax,ymin,y_train):
     y_pred = np.sum(pred_means*pred_weights, axis = 1)
     y_pred_std = np.sum(pred_std*pred_weights, axis = 1)
@@ -722,7 +434,6 @@ def per_stats(pred_means,pred_weights,pred_std,ymax,ymin,y_train):
     med_sigma = np.median(y_pred_std)
     std_sigma = np.std(y_pred_std)
     return mean_diff, med_diff, std_diff, mean_sigma, med_sigma, std_sigma
-
 
 def testing(X_test,y_test):
 
@@ -744,13 +455,13 @@ def plot_cum_sigma(pred_weights,pred_std,ymax,ymin):
     plt.show()
 
 
-n_epochs = 50000 #3030030 #000 #20000 #100000 #1000 #20000 #20000
+n_epochs = 302 #3030030 #000 #20000 #100000 #1000 #20000 #20000
 # N = 4000  # number of data points  -- replaced by num_trai
 D = 5 #6  # number of features  (8 for DES, 6 for COSMOS)
 K = 3 # number of mixture components
 
-learning_rate = 5e-3 #5e-3 #5e-3
-decay_rate= 0.001 #0.0
+learning_rate = 1e-3
+decay_rate= 0.01 #0.0
 step=1000
 
 num_train = 1100000 #2900000 #000#00 #800000 #12000000 #800000
@@ -809,7 +520,7 @@ neural_network_t = hub.Module(save_mod)
 
 ##testing
 
-
+print(20*'='+' Testing ' + 20*'=')
 test_weights, test_means, test_std = testing(X_test,y_test)
 plot_pdfs(test_means,test_weights,test_std,train=False)
 
@@ -822,6 +533,8 @@ test_mean_diff, test_med_diff, test_std_diff, test_mean_sigma, test_med_sigma, t
 plot_pred_peak(test_means,test_weights,test_std,ymax,ymin,y_test)
 plot_pred_weight(test_means,test_weights,test_std,ymax,ymin,y_test)
 
+print(20*'=')
 plt.figure(1222)
 plt.plot(train_loss)
 plt.savefig(save_mod + '/loss.png')
+plt.show()
