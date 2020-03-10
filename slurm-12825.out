@@ -1,0 +1,172 @@
+[0] setting up environment
+
+CommandNotFoundError: Your shell has not been properly configured to use 'conda activate'.
+To initialize your shell, run
+
+    $ conda init <SHELL_NAME>
+
+Currently supported shells are:
+  - bash
+  - fish
+  - tcsh
+  - xonsh
+  - zsh
+  - powershell
+
+See 'conda init --help' for more information and options.
+
+IMPORTANT: You may need to close and restart your shell after running 'conda init'.
+
+
+2020-03-09 22:47:51.135993: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcuda.so.1
+2020-03-09 22:47:51.635703: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1640] Found device 0 with properties: 
+name: Tesla P100-PCIE-16GB major: 6 minor: 0 memoryClockRate(GHz): 1.3285
+pciBusID: 0000:83:00.0
+2020-03-09 22:47:51.636796: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcudart.so.10.0
+2020-03-09 22:47:51.638864: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcublas.so.10.0
+2020-03-09 22:47:51.641100: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcufft.so.10.0
+2020-03-09 22:47:51.641937: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcurand.so.10.0
+2020-03-09 22:47:51.644790: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcusolver.so.10.0
+2020-03-09 22:47:51.646888: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcusparse.so.10.0
+2020-03-09 22:47:51.651299: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcudnn.so.7
+2020-03-09 22:47:51.653754: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1763] Adding visible gpu devices: 0
+2020-03-09 22:47:51.654371: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
+2020-03-09 22:47:51.664299: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2099925000 Hz
+2020-03-09 22:47:51.667904: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x7f74b0987660 executing computations on platform Host. Devices:
+2020-03-09 22:47:51.667937: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): <undefined>, <undefined>
+2020-03-09 22:47:51.775627: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x7f74b09e6100 executing computations on platform CUDA. Devices:
+2020-03-09 22:47:51.775659: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): Tesla P100-PCIE-16GB, Compute Capability 6.0
+2020-03-09 22:47:51.777965: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1640] Found device 0 with properties: 
+name: Tesla P100-PCIE-16GB major: 6 minor: 0 memoryClockRate(GHz): 1.3285
+pciBusID: 0000:83:00.0
+2020-03-09 22:47:51.778033: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcudart.so.10.0
+2020-03-09 22:47:51.778061: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcublas.so.10.0
+2020-03-09 22:47:51.778084: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcufft.so.10.0
+2020-03-09 22:47:51.778107: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcurand.so.10.0
+2020-03-09 22:47:51.778129: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcusolver.so.10.0
+2020-03-09 22:47:51.778151: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcusparse.so.10.0
+2020-03-09 22:47:51.778173: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcudnn.so.7
+2020-03-09 22:47:51.782406: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1763] Adding visible gpu devices: 0
+2020-03-09 22:47:51.782458: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcudart.so.10.0
+2020-03-09 22:47:51.785815: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1181] Device interconnect StreamExecutor with strength 1 edge matrix:
+2020-03-09 22:47:51.785839: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1187]      0 
+2020-03-09 22:47:51.785857: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1200] 0:   N 
+2020-03-09 22:47:51.789997: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1326] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 15216 MB memory) -> physical GPU (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:83:00.0, compute capability: 6.0)
+/homes/nramachandra/anaconda3/envs/tf_gpu_14/lib/python3.6/site-packages/matplotlib/axes/_axes.py:6521: MatplotlibDeprecationWarning: 
+The 'normed' kwarg was deprecated in Matplotlib 2.1 and will be removed in 3.1. Use 'density' instead.
+  alternative="'density'", removal="3.1")
+WARNING: Logging before flag parsing goes to stderr.
+W0309 22:47:52.968830 140139062630208 deprecation.py:323] From /homes/nramachandra/anaconda3/envs/tf_gpu_14/lib/python3.6/site-packages/tensorflow_probability/python/internal/distribution_util.py:493: add_dispatch_support.<locals>.wrapper (from tensorflow.python.ops.array_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.where in 2.0, which has the same broadcast rule as np.where
+2020-03-09 22:47:54.139883: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcublas.so.10.0
+(6304534, 6)
+(7237871, 6)
+(456685, 5)
+(423353, 5)
+Size of features in training data: (12000000, 5)
+Size of output in training data: (12000000,)
+Size of features in test data: (10000, 5)
+Size of output in test data: (10000,)
+Model: "sequential"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+dense (Dense)                (None, 128)               768       
+_________________________________________________________________
+dense_1 (Dense)              (None, 128)               16512     
+_________________________________________________________________
+dense_2 (Dense)              (None, 64)                8256      
+_________________________________________________________________
+dense_3 (Dense)              (None, 32)                2080      
+_________________________________________________________________
+dense_4 (Dense)              (None, 9)                 297       
+_________________________________________________________________
+mixture_normal (MixtureNorma ((None, 1), (None, 1))    0         
+=================================================================
+Total params: 27,913
+Trainable params: 27,913
+Non-trainable params: 0
+_________________________________________________________________
+Train on 12000000 samples, validate on 10000 samples
+Epoch 1/20
+12000000/12000000 - 34s - loss: -1.8085e+00 - val_loss: -1.2734e+00
+Epoch 2/20
+12000000/12000000 - 37s - loss: -2.1374e+00 - val_loss: -1.0488e+00
+Epoch 3/20
+12000000/12000000 - 37s - loss: -2.2561e+00 - val_loss: -1.9081e-01
+Epoch 4/20
+12000000/12000000 - 34s - loss: -2.3332e+00 - val_loss: -6.7648e-01
+Epoch 5/20
+12000000/12000000 - 35s - loss: -2.3896e+00 - val_loss: -7.4982e-01
+Epoch 6/20
+12000000/12000000 - 33s - loss: -2.6369e+00 - val_loss: 0.1566
+Epoch 7/20
+12000000/12000000 - 37s - loss: -2.6689e+00 - val_loss: 0.2236
+Epoch 8/20
+12000000/12000000 - 34s - loss: -2.6932e+00 - val_loss: 0.3220
+Epoch 9/20
+12000000/12000000 - 38s - loss: -2.7151e+00 - val_loss: 0.2854
+Epoch 10/20
+12000000/12000000 - 37s - loss: -2.7386e+00 - val_loss: 0.4944
+Epoch 11/20
+12000000/12000000 - 34s - loss: -2.7598e+00 - val_loss: 0.4881
+Epoch 12/20
+12000000/12000000 - 33s - loss: -2.7767e+00 - val_loss: 0.6343
+Epoch 13/20
+12000000/12000000 - 34s - loss: -2.7911e+00 - val_loss: 0.5670
+Epoch 14/20
+12000000/12000000 - 32s - loss: -2.8044e+00 - val_loss: 0.8223
+Epoch 15/20
+12000000/12000000 - 32s - loss: -2.8166e+00 - val_loss: 0.9308
+Epoch 16/20
+12000000/12000000 - 38s - loss: -2.8275e+00 - val_loss: 0.8979
+Epoch 17/20
+12000000/12000000 - 39s - loss: -2.8379e+00 - val_loss: 1.0490
+Epoch 18/20
+12000000/12000000 - 38s - loss: -2.8479e+00 - val_loss: 1.1655
+Epoch 19/20
+12000000/12000000 - 36s - loss: -2.8575e+00 - val_loss: 1.1265
+Epoch 20/20
+12000000/12000000 - 37s - loss: -2.8666e+00 - val_loss: 1.1606
+W0309 22:59:42.284184 140139062630208 legend.py:1289] No handles with labels found to put in legend.
+W0309 22:59:42.287331 140139062630208 legend.py:1289] No handles with labels found to put in legend.
+W0309 22:59:42.320442 140139062630208 legend.py:1289] No handles with labels found to put in legend.
+W0309 22:59:42.323481 140139062630208 legend.py:1289] No handles with labels found to put in legend.
+/homes/nramachandra/anaconda3/envs/tf_gpu_14/lib/python3.6/site-packages/matplotlib/figure.py:98: MatplotlibDeprecationWarning: 
+Adding an axes using the same arguments as a previous axes currently reuses the earlier instance.  In a future version, a new instance will always be created and returned.  Meanwhile, this warning can be suppressed, and the future behavior ensured, by passing a unique label to each axes instance.
+  "Adding an axes using the same arguments as a previous axes "
+W0309 22:59:42.374976 140139062630208 legend.py:1289] No handles with labels found to put in legend.
+[4, 18, 81]
+0
+1
+2
+[4, 18, 81]
+0
+1
+2
+/homes/nramachandra/anaconda3/envs/tf_gpu_14/lib/python3.6/site-packages/matplotlib/axes/_axes.py:6521: MatplotlibDeprecationWarning: 
+The 'normed' kwarg was deprecated in Matplotlib 2.1 and will be removed in 3.1. Use 'density' instead.
+  alternative="'density'", removal="3.1")
+mdn_4_tf2.py:828: RuntimeWarning: divide by zero encountered in true_divide
+  plt.plot(x, np.exp(logps[:,-i])/prior.pdf(x), label='posterior under flat prior')
+mdn_4_tf2.py:828: RuntimeWarning: invalid value encountered in true_divide
+  plt.plot(x, np.exp(logps[:,-i])/prior.pdf(x), label='posterior under flat prior')
+/homes/nramachandra/anaconda3/envs/tf_gpu_14/lib/python3.6/site-packages/matplotlib/pyplot.py:1479: UserWarning: Attempted to set non-positive bottom ylim on a log-scaled axis.
+Invalid limit will be ignored.
+  ret = ax.set_ylim(*args, **kwargs)
+/homes/nramachandra/anaconda3/envs/tf_gpu_14/lib/python3.6/site-packages/matplotlib/axes/_base.py:4371: UserWarning: aspect is not supported for Axes with xscale=linear, yscale=log
+  self.apply_aspect()
+/homes/nramachandra/anaconda3/envs/tf_gpu_14/lib/python3.6/site-packages/matplotlib/axes/_base.py:2575: UserWarning: aspect is not supported for Axes with xscale=linear, yscale=log
+  self.apply_aspect()
+/homes/nramachandra/anaconda3/envs/tf_gpu_14/lib/python3.6/site-packages/matplotlib/axes/_base.py:848: UserWarning: aspect is not supported for Axes with xscale=linear, yscale=log
+  self.apply_aspect()
+mdn_4_tf2.py:902: RuntimeWarning: divide by zero encountered in true_divide
+  corrected_posterior = np.exp(logps)/(prior.pdf(x).reshape((-1,1)))
+mdn_4_tf2.py:902: RuntimeWarning: invalid value encountered in true_divide
+  corrected_posterior = np.exp(logps)/(prior.pdf(x).reshape((-1,1)))
+mdn_4_tf2.py:904: RuntimeWarning: invalid value encountered in true_divide
+  y_pred_prior_mean = simps(x.reshape((-1,1))*corrected_posterior, x,axis=0)/simps(corrected_posterior,x,axis=0 )
+/homes/nramachandra/anaconda3/envs/tf_gpu_14/lib/python3.6/site-packages/numpy/lib/function_base.py:3826: RuntimeWarning: Invalid value encountered in percentile
+  interpolation=interpolation)
+[752] End job

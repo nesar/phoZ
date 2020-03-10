@@ -377,9 +377,9 @@ def ReadGalaxPy(path_program = '../../Data/fromGalaxev/photozs/datasets/', sim_o
 
 
 # %%
-n_epochs = 20 
+n_epochs = 1000 
 D = 5 #6  # number of features  (8 for DES, 6 for COSMOS)
-K = 3 #16 # number of mixture components
+K = 32 #16 # number of mixture components
 
 learning_rate = 1e-4
 decay_rate= 0.0 
@@ -438,7 +438,7 @@ plt.show()
 
 
 # %%
-int_select 
+# int_select 
 
 
 # %%
@@ -519,7 +519,7 @@ y_pred_mode = y_pred.components_distribution.mode()
 
 
 # %%
-y_pred_mean[:, :, 0].shape
+# y_pred_mean[:, :, 0].shape
 
 
 # %%
@@ -620,7 +620,7 @@ plot_pdfs(test_means,test_weights,test_std, y_test, num=nrows, label = 'Training
 
 
 # %%
-y_pred_mean_best
+# y_pred_mean_best
 
 
 # %%
@@ -949,9 +949,9 @@ plt.savefig('phoz_compare1.pdf', bbox_inches='tight')
 plt.show()
 
 
-# %%
-y_test, 
-                y_pred_prior_mean
+# # %%
+# y_test, 
+#                 y_pred_prior_mean
 
 
 # %%
