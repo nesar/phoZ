@@ -377,7 +377,7 @@ def ReadGalaxPy(path_program = '../../Data/fromGalaxev/photozs/datasets/', sim_o
 
 
 # %%
-n_epochs = 1000 
+n_epochs = 2000 
 D = 5 #6  # number of features  (8 for DES, 6 for COSMOS)
 K = 32 #16 # number of mixture components
 
