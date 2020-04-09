@@ -1,5 +1,5 @@
-import matplotlib as mpl
-mpl.use('Agg')
+# import matplotlib as mpl
+# mpl.use('Agg')
 
 
 import math
@@ -964,7 +964,7 @@ def plot_cum_sigma(pred_weights,pred_std,ymax,ymin):
 
 
 # %%
-n_epochs = 11
+n_epochs = 1111
 D = 5 #6  # number of features  (8 for DES, 6 for COSMOS)
 K = 16 # number of mixture components
 
@@ -987,6 +987,7 @@ print(save_mod)# --- synthetic 1 mil run
 
 # %%
 train_mode = True
+
 
 if train_mode:
 
