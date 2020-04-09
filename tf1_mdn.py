@@ -986,7 +986,8 @@ print(save_mod)# --- synthetic 1 mil run
 
 
 # %%
-train_mode = True
+train_mode = False
+
 
 
 if train_mode:
